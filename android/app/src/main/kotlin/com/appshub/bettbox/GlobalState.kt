@@ -1,10 +1,13 @@
 package com.appshub.bettbox
 
+import android.content.ComponentName
 import android.os.SystemClock
+import android.service.quicksettings.TileService
 import com.appshub.bettbox.plugins.AppPlugin
 import com.appshub.bettbox.plugins.ServicePlugin
 import com.appshub.bettbox.plugins.TilePlugin
 import com.appshub.bettbox.plugins.VpnPlugin
+import com.appshub.bettbox.services.BettboxTileService
 import io.flutter.FlutterInjector
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.dart.DartExecutor
@@ -64,20 +67,47 @@ object GlobalState {
 
     @Volatile
     var currentProfileName: String = ""
+        set(value) {
+            if (field != value) {
+                field = value
+                requestTileUpdate()
+            }
+        }
 
     @Volatile
     var isSpeedNotificationEnabled: Boolean = false
+        set(value) {
+            if (field != value) {
+                field = value
+                requestTileUpdate()
+            }
+        }
 
     @Volatile
     var isNotificationHighPriority: Boolean = false
 
     fun updateRunState(newState: RunState) {
+        if (currentRunState == newState) return
+
         if (newState != RunState.PENDING) {
             pendingTimeoutJob?.cancel()
             pendingTimeoutJob = null
         }
         currentRunState = newState
         _runState.value = newState
+        requestTileUpdate()
+    }
+
+    fun requestTileUpdate() {
+        runCatching {
+            val context = BettboxApplication.getAppContext()
+            TileService.requestListeningState(
+                context,
+                ComponentName(context, BettboxTileService::class.java)
+            )
+        }.onFailure {
+            android.util.Log.w("GlobalState", "requestTileUpdate failed: ${it.message}")
+        }
     }
 
     private fun startPendingTimeout() {
