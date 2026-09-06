@@ -640,11 +640,7 @@ class _EmojiStyleDialog extends StatelessWidget {
                               children: [
                                 Text(
                                   style.label,
-                                  style: context.textTheme.bodyMedium?.copyWith(
-                                    fontWeight: currentStyle == style
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                  ),
+                                  style: context.textTheme.bodyMedium,
                                 ),
                                 const SizedBox(height: 3),
                                 Row(

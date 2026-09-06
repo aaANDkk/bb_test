@@ -107,14 +107,19 @@ class EmojiText extends StatelessWidget {
   Widget build(BuildContext context) {
     final defaultStyle = DefaultTextStyle.of(context).style;
 
-    return RichText(
-      textAlign: textAlign ?? TextAlign.start,
-      textScaler: MediaQuery.of(context).textScaler,
-      maxLines: maxLines,
-      overflow: overflow ?? TextOverflow.clip,
-      text: TextSpan(
-        children: _buildTextSpans(text, defaultStyle),
-      ),
+    return ValueListenableBuilder<EmojiStyle>(
+      valueListenable: EmojiManager.emojiStyleNotifier,
+      builder: (_, __, ___) {
+        return RichText(
+          textAlign: textAlign ?? TextAlign.start,
+          textScaler: MediaQuery.of(context).textScaler,
+          maxLines: maxLines,
+          overflow: overflow ?? TextOverflow.clip,
+          text: TextSpan(
+            children: _buildTextSpans(text, defaultStyle),
+          ),
+        );
+      },
     );
   }
 }

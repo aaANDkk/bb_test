@@ -1055,10 +1055,7 @@ class _RuleTargetSelectionDialogState extends State<RuleTargetSelectionDialog> {
                   children: [
                     EmojiText(
                       name,
-                      style: context.textTheme.bodyMedium?.copyWith(
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.normal,
-                      ),
+                      style: context.textTheme.bodyMedium,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
