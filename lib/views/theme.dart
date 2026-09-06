@@ -487,17 +487,11 @@ class _CustomFontItem extends ConsumerWidget {
                     ref.read(themeSettingProvider.notifier).updateState(
                       (state) => state.copyWith(useHarmonyFont: true),
                     );
-                    globalState.showNotifier(
-                      appLocalizations.customFontApplied,
-                    );
                   } else {
                     final picked = await FontManager.pickAndApplyFont(context);
                     if (picked) {
                       ref.read(themeSettingProvider.notifier).updateState(
                         (state) => state.copyWith(useHarmonyFont: true),
-                      );
-                      globalState.showNotifier(
-                        appLocalizations.customFontApplied,
                       );
                     }
                   }
@@ -507,9 +501,6 @@ class _CustomFontItem extends ConsumerWidget {
                     ref.read(themeSettingProvider.notifier).updateState(
                       (state) => state.copyWith(useHarmonyFont: true),
                     );
-                    globalState.showNotifier(
-                      appLocalizations.customFontApplied,
-                    );
                   }
                 }
               } else {
@@ -517,9 +508,6 @@ class _CustomFontItem extends ConsumerWidget {
                   (state) => state.copyWith(useHarmonyFont: false),
                 );
                 FontManager.disableFont();
-                globalState.showNotifier(
-                  appLocalizations.customFontDisabled,
-                );
               }
             },
           ),
@@ -561,9 +549,6 @@ class _SelectCustomFontItem extends ConsumerWidget {
             if (picked) {
               ref.read(themeSettingProvider.notifier).updateState(
                 (state) => state.copyWith(useHarmonyFont: true),
-              );
-              globalState.showNotifier(
-                appLocalizations.customFontApplied,
               );
             }
           },
@@ -682,7 +667,7 @@ class _TextScaleFactorItem extends ConsumerWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.max,

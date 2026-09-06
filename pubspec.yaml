@@ -1,7 +1,7 @@
 name: bett_box
 description: A multi-platform proxy client based on Mihomo, simple and easy to use, open-source and ad-free.
 publish_to: 'none'
-version: 1.19.1+2026090517
+version: 1.19.1+2026090618
 environment:
   sdk: '>=3.9.0 <4.0.0'
 
@@ -109,9 +109,6 @@ flutter:
     - family: Icons
       fonts:
         - asset: assets/fonts/Icons.ttf
-    - family: Sleek
-      fonts:
-        - asset: assets/fonts/sleek.ttf
 ffigen:
   name: "ClashFFI"
   output: 'lib/clash/generated/clash_ffi.dart'
