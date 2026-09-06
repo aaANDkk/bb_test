@@ -219,6 +219,7 @@ class TunnelListView extends ConsumerWidget {
     );
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: tunnels.isEmpty
           ? Center(child: NullStatus(label: appLocalizations.noData))
           : ListView(

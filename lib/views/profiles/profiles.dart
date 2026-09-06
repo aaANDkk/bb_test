@@ -166,6 +166,7 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
   Widget build(BuildContext context) {
     ref.watch(appSettingProvider.select((state) => state.locale));
     return CommonScaffold(
+      resizeToAvoidBottomInset: false,
       title: appLocalizations.profiles,
       floatingActionButton: _buildFAB(),
       actions: _buildActions(),

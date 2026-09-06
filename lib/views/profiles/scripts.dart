@@ -430,6 +430,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _handleImport();

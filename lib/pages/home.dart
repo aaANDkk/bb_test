@@ -373,8 +373,8 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
       if (_pageController.hasClients) {
         await _pageController.animateToPage(
           index,
-          duration: kTabScrollDuration,
-          curve: Curves.easeOut,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeOutCubic,
         );
       }
     } else {
