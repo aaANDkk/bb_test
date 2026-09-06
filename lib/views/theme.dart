@@ -544,7 +544,6 @@ class _SelectCustomFontItem extends ConsumerWidget {
               color: context.colorScheme.onSurfaceVariant.withOpacity(0.7),
             ),
           ),
-          trailing: const Icon(Icons.chevron_right),
           onTap: () async {
             final picked = await FontManager.pickAndApplyFont(context);
             if (picked) {
@@ -582,7 +581,6 @@ class _EmojiStyleItem extends StatelessWidget {
               color: context.colorScheme.onSurfaceVariant.withOpacity(0.7),
             ),
           ),
-          trailing: const Icon(Icons.chevron_right),
           onTap: () {
             globalState.showCommonDialog(
               child: const _EmojiStyleDialog(),
@@ -653,13 +651,13 @@ class _EmojiStyleDialog extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     for (final emoji in const [
-                                      '🌈',
-                                      '🌸',
+                                      '🪷',
+                                      '🫧',
                                       '😋',
-                                      '🐱',
-                                      '🇭🇰',
-                                      '🇬🇧',
+                                      '🐸',
+                                      '🇨🇳',
                                       '🇺🇸',
+                                      '🇺🇳',
                                     ])
                                       SizedBox(
                                         width: 25,
