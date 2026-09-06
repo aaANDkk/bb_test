@@ -649,12 +649,27 @@ class _EmojiStyleDialog extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 2),
-                                Text(
-                                  '🌸 😀 🐱 🇭🇰 🇺🇸',
-                                  style: TextStyle(
-                                    fontFamily: style.family,
-                                    fontSize: 14,
-                                  ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    for (final emoji in const [
+                                      '🌸',
+                                      '😀',
+                                      '🐱',
+                                      '🇭🇰',
+                                      '🇺🇸'
+                                    ]) ...[
+                                      Text(
+                                        emoji,
+                                        style: TextStyle(
+                                          fontFamily: style.family,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      if (emoji != '🇺🇸')
+                                        const SizedBox(width: 4),
+                                    ],
+                                  ],
                                 ),
                               ],
                             ),
