@@ -308,11 +308,13 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
   late PageController _pageController;
   late final ProviderSubscription<PageLabel> _pageLabelSubscription;
   int _currentPageIndex = 0;
+  int _previousPageIndex = 0;
 
   @override
   initState() {
     super.initState();
     _currentPageIndex = _pageIndex < 0 ? 0 : _pageIndex;
+    _previousPageIndex = _currentPageIndex;
     _pageController = PageController(initialPage: _currentPageIndex);
     _pageLabelSubscription = ref.listenManual(currentPageLabelProvider, (
       prev,
@@ -356,12 +358,14 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
       FocusManager.instance.primaryFocus?.unfocus();
     }
 
-    final isAnimateToPage = ref.read(appSettingProvider).isAnimateToPage;
     final isMobile = ref.read(isMobileViewProvider);
 
-    _currentPageIndex = index;
+    if (index != _currentPageIndex) {
+      _previousPageIndex = _currentPageIndex;
+      _currentPageIndex = index;
+    }
 
-    if (isMobile && !isAnimateToPage) {
+    if (isMobile) {
       if (_pageController.hasClients) {
         _pageController.jumpToPage(index);
       }
@@ -369,15 +373,7 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
       return;
     }
 
-    if (isAnimateToPage && isMobile && !ignoreAnimateTo) {
-      await _pageController.animateToPage(
-        index,
-        duration: kTabScrollDuration,
-        curve: Curves.easeOut,
-      );
-    } else {
-      _pageController.jumpToPage(index);
-    }
+    _pageController.jumpToPage(index);
   }
 
   void _updatePageController() {
@@ -399,21 +395,60 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
       appSettingProvider.select((state) => state.isAnimateToPage),
     );
 
-    if (isMobile && !isAnimateToPage) {
+    if (isMobile) {
       final targetIndex = (_currentPageIndex >= 0 &&
               _currentPageIndex < widget.navigationItems.length)
           ? _currentPageIndex
           : (_pageIndex < 0 ? 0 : _pageIndex);
-      return AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        switchInCurve: Curves.easeOutCubic,
-        switchOutCurve: Curves.easeInCubic,
-        transitionBuilder: (child, animation) {
-          return FadeTransition(opacity: animation, child: child);
-        },
-        child: KeyedSubtree(
-          key: ValueKey(widget.navigationItems[targetIndex].label),
-          child: widget.pageBuilder(context, targetIndex),
+
+      return ClipRect(
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          switchInCurve: Curves.easeOutCubic,
+          switchOutCurve: Curves.easeOutCubic,
+          layoutBuilder: (Widget? currentChild, List<Widget> previousChildren) {
+            return Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                ...previousChildren,
+                if (currentChild != null) currentChild,
+              ],
+            );
+          },
+          transitionBuilder: (child, animation) {
+            if (!isAnimateToPage) {
+              return FadeTransition(opacity: animation, child: child);
+            }
+
+            final isForward = _currentPageIndex >= _previousPageIndex;
+            final isIncoming = child.key ==
+                ValueKey(widget.navigationItems[targetIndex].label);
+
+            final Offset beginOffset;
+            if (isIncoming) {
+              beginOffset = isForward
+                  ? const Offset(1.0, 0.0)
+                  : const Offset(-1.0, 0.0);
+            } else {
+              beginOffset = isForward
+                  ? const Offset(-1.0, 0.0)
+                  : const Offset(1.0, 0.0);
+            }
+
+            final offsetAnimation = Tween<Offset>(
+              begin: beginOffset,
+              end: Offset.zero,
+            ).animate(animation);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+          child: KeyedSubtree(
+            key: ValueKey(widget.navigationItems[targetIndex].label),
+            child: widget.pageBuilder(context, targetIndex),
+          ),
         ),
       );
     }

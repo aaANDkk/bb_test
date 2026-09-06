@@ -564,7 +564,7 @@
   "navBarHapticFeedback": "触感反馈",
   "navBarHapticFeedbackDesc": "底部导航栏切换震动反馈",
   "tabAnimation": "选项卡动画",
-  "tabAnimationDesc": "开启使用平移动画，关闭使用淡入淡出动画（仅在移动视图有效）",
+  "tabAnimationDesc": "仅在移动视图有效",
   "saveTip": "确定要保存吗？",
   "colorSchemes": "配色方案",
   "palette": "调色板",

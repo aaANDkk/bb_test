@@ -489,9 +489,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "底部导航栏切换震动反馈",
     ),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("选项卡动画"),
-    "tabAnimationDesc": MessageLookupByLibrary.simpleMessage(
-      "开启使用平移动画，关闭使用淡入淡出动画（仅在移动视图有效）",
-    ),
+    "tabAnimationDesc": MessageLookupByLibrary.simpleMessage("仅在移动视图有效"),
     "navConnections": MessageLookupByLibrary.simpleMessage("连接"),
     "navTools": MessageLookupByLibrary.simpleMessage("更多"),
     "network": MessageLookupByLibrary.simpleMessage("网络"),

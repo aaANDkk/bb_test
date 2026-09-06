@@ -714,7 +714,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("Анимация вкладок"),
     "tabAnimationDesc": MessageLookupByLibrary.simpleMessage(
-      "Включите для анимации скольжения, выключите для затухания (только для мобильных устройств)",
+      "Действует только в мобильном режиме",
     ),
     "navConnections": MessageLookupByLibrary.simpleMessage("Соединения"),
     "navTools": MessageLookupByLibrary.simpleMessage("Еще"),

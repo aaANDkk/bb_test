@@ -499,9 +499,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "底部導覽列切換震動回饋",
     ),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("選項卡動畫"),
-    "tabAnimationDesc": MessageLookupByLibrary.simpleMessage(
-      "開啟使用平移動畫，關閉使用淡入淡出動畫（僅在移動視圖有效）",
-    ),
+    "tabAnimationDesc": MessageLookupByLibrary.simpleMessage("僅在行動視圖有效"),
     "navConnections": MessageLookupByLibrary.simpleMessage("連線"),
     "navTools": MessageLookupByLibrary.simpleMessage("更多"),
     "network": MessageLookupByLibrary.simpleMessage("網路"),

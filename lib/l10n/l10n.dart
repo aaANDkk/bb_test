@@ -4649,10 +4649,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Enable slide animation, disable to use fade animation (mobile view only)`
+  /// `Only valid in mobile view`
   String get tabAnimationDesc {
     return Intl.message(
-      'Enable slide animation, disable to use fade animation (mobile view only)',
+      'Only valid in mobile view',
       name: 'tabAnimationDesc',
       desc: '',
       args: [],

@@ -546,7 +546,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("タブアニメーション"),
     "tabAnimationDesc": MessageLookupByLibrary.simpleMessage(
-      "スライドアニメーションを有効化、無効化時はフェードアニメーションを使用（モバイル表示でのみ有効）",
+      "モバイル表示でのみ有効",
     ),
     "navConnections": MessageLookupByLibrary.simpleMessage("接続"),
     "navTools": MessageLookupByLibrary.simpleMessage("ツール"),

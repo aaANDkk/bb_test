@@ -564,7 +564,7 @@
   "navBarHapticFeedback": "觸覺回饋",
   "navBarHapticFeedbackDesc": "底部導覽列切換震動回饋",
   "tabAnimation": "選項卡動畫",
-  "tabAnimationDesc": "開啟使用平移動畫，關閉使用淡入淡出動畫（僅在移動視圖有效）",
+  "tabAnimationDesc": "僅在行動視圖有效",
   "saveTip": "確定要儲存嗎？",
   "colorSchemes": "配色方案",
   "palette": "調色盤",
