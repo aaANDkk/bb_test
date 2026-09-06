@@ -305,27 +305,15 @@ class _HomePageView extends ConsumerStatefulWidget {
 }
 
 class _HomePageViewState extends ConsumerState<_HomePageView> {
-  late PageController _forwardController;
-  late PageController _reverseController;
-  late PageController _desktopController;
-  late PageController _activeMobileController;
+  late PageController _pageController;
   late final ProviderSubscription<PageLabel> _pageLabelSubscription;
-
   int _currentPageIndex = 0;
-  List<int> _activeIndices = [0];
-  bool _isAnimating = false;
-  int _navGeneration = 0;
 
   @override
   void initState() {
     super.initState();
     _currentPageIndex = _pageIndex < 0 ? 0 : _pageIndex;
-    _activeIndices = [_currentPageIndex];
-    _forwardController = PageController(initialPage: 0);
-    _reverseController = PageController(initialPage: 1);
-    _desktopController = PageController(initialPage: _currentPageIndex);
-    _activeMobileController = _forwardController;
-
+    _pageController = PageController(initialPage: _currentPageIndex);
     _pageLabelSubscription = ref.listenManual(currentPageLabelProvider, (
       prev,
       next,
@@ -360,7 +348,7 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
     final index = widget.navigationItems.indexWhere(
       (item) => item.label == pageLabel,
     );
-    if (index == -1 || index == _currentPageIndex) {
+    if (index == -1) {
       return;
     }
 
@@ -371,81 +359,27 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
     final isAnimateToPage = ref.read(appSettingProvider).isAnimateToPage;
     final isMobile = ref.read(isMobileViewProvider);
 
-    if (!isMobile) {
-      _currentPageIndex = index;
-      _activeIndices = [index];
-      _desktopController.jumpToPage(index);
-      setState(() {});
-      return;
-    }
+    _currentPageIndex = index;
 
-    if (!isAnimateToPage || ignoreAnimateTo) {
-      _currentPageIndex = index;
-      _activeIndices = [index];
-      if (_forwardController.hasClients) {
-        _forwardController.jumpToPage(0);
+    if (isMobile && !isAnimateToPage) {
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(index);
       }
       setState(() {});
       return;
     }
 
-    final from = _currentPageIndex;
-    final to = index;
-    final isForward = to > from;
-    final currentGen = ++_navGeneration;
-    _isAnimating = true;
-
-    if (isForward) {
-      _activeMobileController = _forwardController;
-      _activeIndices = [from, to];
-      if (_forwardController.hasClients) {
-        _forwardController.jumpToPage(0);
-      }
-      setState(() {});
-
-      await _forwardController.animateToPage(
-        1,
-        duration: kTabScrollDuration,
-        curve: Curves.easeOutCubic,
-      );
-
-      if (!mounted || _navGeneration != currentGen) return;
-
-      setState(() {
-        _currentPageIndex = to;
-        _activeIndices = [to];
-        _isAnimating = false;
-      });
-      if (_forwardController.hasClients) {
-        _forwardController.jumpToPage(0);
+    if (isAnimateToPage && isMobile && !ignoreAnimateTo) {
+      if (_pageController.hasClients) {
+        await _pageController.animateToPage(
+          index,
+          duration: kTabScrollDuration,
+          curve: Curves.easeOut,
+        );
       }
     } else {
-      _activeMobileController = _reverseController;
-      _activeIndices = [to, from];
-      if (_reverseController.hasClients) {
-        _reverseController.jumpToPage(1);
-      }
-      setState(() {});
-
-      await _reverseController.animateToPage(
-        0,
-        duration: kTabScrollDuration,
-        curve: Curves.easeOutCubic,
-      );
-
-      if (!mounted || _navGeneration != currentGen) return;
-
-      if (_reverseController.hasClients) {
-        _reverseController.jumpToPage(1);
-      }
-      _activeMobileController = _forwardController;
-      setState(() {
-        _currentPageIndex = to;
-        _activeIndices = [to];
-        _isAnimating = false;
-      });
-      if (_forwardController.hasClients) {
-        _forwardController.jumpToPage(0);
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(index);
       }
     }
   }
@@ -458,9 +392,7 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
   @override
   void dispose() {
     _pageLabelSubscription.close();
-    _forwardController.dispose();
-    _reverseController.dispose();
-    _desktopController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -471,40 +403,28 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
       appSettingProvider.select((state) => state.isAnimateToPage),
     );
 
-    if (isMobile) {
-      if (!isAnimateToPage) {
-        final targetIndex = (_currentPageIndex >= 0 &&
-                _currentPageIndex < widget.navigationItems.length)
-            ? _currentPageIndex
-            : (_pageIndex < 0 ? 0 : _pageIndex);
+    if (isMobile && !isAnimateToPage) {
+      final targetIndex = (_currentPageIndex >= 0 &&
+              _currentPageIndex < widget.navigationItems.length)
+          ? _currentPageIndex
+          : (_pageIndex < 0 ? 0 : _pageIndex);
 
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
-          switchInCurve: Curves.easeOutCubic,
-          switchOutCurve: Curves.easeInCubic,
-          transitionBuilder: (child, animation) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-          child: KeyedSubtree(
-            key: ValueKey(widget.navigationItems[targetIndex].label),
-            child: widget.pageBuilder(context, targetIndex),
-          ),
-        );
-      }
-
-      return PageView.builder(
-        controller: _activeMobileController,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: _activeIndices.length,
-        itemBuilder: (context, index) {
-          final realIndex = _activeIndices[index];
-          return widget.pageBuilder(context, realIndex);
+      return AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        switchInCurve: Curves.easeOutCubic,
+        switchOutCurve: Curves.easeInCubic,
+        transitionBuilder: (child, animation) {
+          return FadeTransition(opacity: animation, child: child);
         },
+        child: KeyedSubtree(
+          key: ValueKey(widget.navigationItems[targetIndex].label),
+          child: widget.pageBuilder(context, targetIndex),
+        ),
       );
     }
 
     return PageView.builder(
-      controller: _desktopController,
+      controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.navigationItems.length,
       findChildIndexCallback: (key) {
