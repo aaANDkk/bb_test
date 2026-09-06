@@ -712,6 +712,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "navBarHapticFeedbackDesc": MessageLookupByLibrary.simpleMessage(
       "Вибрация при переключении нижней панели навигации",
     ),
+    "tabAnimation": MessageLookupByLibrary.simpleMessage("Анимация вкладок"),
+    "tabAnimationDesc": MessageLookupByLibrary.simpleMessage(
+      "Включите для анимации скольжения, выключите для затухания (только для мобильных устройств)",
+    ),
     "navConnections": MessageLookupByLibrary.simpleMessage("Соединения"),
     "navTools": MessageLookupByLibrary.simpleMessage("Еще"),
     "network": MessageLookupByLibrary.simpleMessage("Сеть"),

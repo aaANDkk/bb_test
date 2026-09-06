@@ -563,6 +563,8 @@
   "findProcessModeDesc": "Enable process matching",
   "navBarHapticFeedback": "Haptic Feedback",
   "navBarHapticFeedbackDesc": "Vibrate on navigation tab switch",
+  "tabAnimation": "Tab Animation",
+  "tabAnimationDesc": "Enable slide animation, disable to use fade animation (mobile view only)",
   "saveTip": "Are you sure you want to save?",
   "colorSchemes": "Color Schemes",
   "palette": "Palette",

@@ -4639,6 +4639,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Tab Animation`
+  String get tabAnimation {
+    return Intl.message(
+      'Tab Animation',
+      name: 'tabAnimation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable slide animation, disable to use fade animation (mobile view only)`
+  String get tabAnimationDesc {
+    return Intl.message(
+      'Enable slide animation, disable to use fade animation (mobile view only)',
+      name: 'tabAnimationDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to save?`
   String get saveTip {
     return Intl.message(

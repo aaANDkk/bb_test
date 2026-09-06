@@ -691,6 +691,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "navBarHapticFeedbackDesc": MessageLookupByLibrary.simpleMessage(
       "Vibrate on navigation tab switch",
     ),
+    "tabAnimation": MessageLookupByLibrary.simpleMessage("Tab Animation"),
+    "tabAnimationDesc": MessageLookupByLibrary.simpleMessage(
+      "Enable slide animation, disable to use fade animation (mobile view only)",
+    ),
     "navConnections": MessageLookupByLibrary.simpleMessage("Active"),
     "navTools": MessageLookupByLibrary.simpleMessage("More"),
     "network": MessageLookupByLibrary.simpleMessage("Network"),

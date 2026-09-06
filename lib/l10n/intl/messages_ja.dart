@@ -544,6 +544,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "navBarHapticFeedbackDesc": MessageLookupByLibrary.simpleMessage(
       "ボトムナビゲーション切り替え時の振動フィードバック",
     ),
+    "tabAnimation": MessageLookupByLibrary.simpleMessage("タブアニメーション"),
+    "tabAnimationDesc": MessageLookupByLibrary.simpleMessage(
+      "スライドアニメーションを有効化、無効化時はフェードアニメーションを使用（モバイル表示でのみ有効）",
+    ),
     "navConnections": MessageLookupByLibrary.simpleMessage("接続"),
     "navTools": MessageLookupByLibrary.simpleMessage("ツール"),
     "network": MessageLookupByLibrary.simpleMessage("ネットワーク"),
