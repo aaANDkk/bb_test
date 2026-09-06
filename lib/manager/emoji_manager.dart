@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 enum EmojiStyle {
   openMoji(
     family: 'OpenMoji',
-    label: 'OpenMoji',
+    label: 'Openmoji',
   ),
   twEmoji(
     family: 'Twemoji',
     label: 'Twemoji',
   ),
-  notoColorEmoji(
-    family: 'NotoColorEmoji',
-    label: 'Noto Color Emoji',
+  blobmoji(
+    family: 'Blobmoji',
+    label: 'Blobmoji',
   );
 
   final String family;

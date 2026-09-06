@@ -109,9 +109,9 @@ flutter:
     - family: Twemoji
       fonts:
         - asset: assets/fonts/twemoji.ttf
-    - family: NotoColorEmoji
+    - family: Blobmoji
       fonts:
-        - asset: assets/fonts/noto_emoji.ttf
+        - asset: assets/fonts/blobmoji.ttf
     - family: Icons
       fonts:
         - asset: assets/fonts/Icons.ttf

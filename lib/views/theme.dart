@@ -648,27 +648,33 @@ class _EmojiStyleDialog extends StatelessWidget {
                                         : FontWeight.normal,
                                   ),
                                 ),
-                                const SizedBox(height: 2),
+                                const SizedBox(height: 3),
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     for (final emoji in const [
+                                      '🌈',
                                       '🌸',
-                                      '😀',
+                                      '🧑',
                                       '🐱',
                                       '🇭🇰',
-                                      '🇺🇸'
-                                    ]) ...[
-                                      Text(
-                                        emoji,
-                                        style: TextStyle(
-                                          fontFamily: style.family,
-                                          fontSize: 14,
+                                      '🇬🇧',
+                                      '🇺🇸',
+                                    ])
+                                      SizedBox(
+                                        width: 25,
+                                        height: 22,
+                                        child: Center(
+                                          child: Text(
+                                            emoji,
+                                            style: TextStyle(
+                                              fontFamily: style.family,
+                                              fontSize: 15,
+                                              height: 1.0,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      if (emoji != '🇺🇸')
-                                        const SizedBox(width: 4),
-                                    ],
                                   ],
                                 ),
                               ],
