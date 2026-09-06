@@ -13,6 +13,14 @@ enum EmojiStyle {
   blobmoji(
     family: 'Blobmoji',
     label: 'Blobmoji',
+  ),
+  tossFace(
+    family: 'TossFace',
+    label: 'TossFace',
+  ),
+  emojiOne(
+    family: 'EmojiOne',
+    label: 'EmojiOne',
   );
 
   final String family;

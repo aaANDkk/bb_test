@@ -647,13 +647,12 @@ class _EmojiStyleDialog extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     for (final emoji in const [
-                                      '🪷',
-                                      '🫧',
-                                      '😋',
+                                      '✨',
                                       '🐸',
+                                      '😋',
                                       '🇨🇳',
+                                      '🇬🇧',
                                       '🇺🇸',
-                                      '🇺🇳',
                                     ])
                                       SizedBox(
                                         width: 25,

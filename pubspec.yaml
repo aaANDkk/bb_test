@@ -112,6 +112,12 @@ flutter:
     - family: Blobmoji
       fonts:
         - asset: assets/fonts/blobmoji.ttf
+    - family: TossFace
+      fonts:
+        - asset: assets/fonts/tossface.ttf
+    - family: EmojiOne
+      fonts:
+        - asset: assets/fonts/emojione.ttf
     - family: Icons
       fonts:
         - asset: assets/fonts/Icons.ttf
