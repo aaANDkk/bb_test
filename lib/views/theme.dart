@@ -650,10 +650,10 @@ class _EmojiStyleDialog extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  '😀 🚀 🇯🇵 🐱 🌟 💡 🔥',
+                                  '🌸 😀 🐱 🇭🇰 🇺🇸',
                                   style: TextStyle(
                                     fontFamily: style.family,
-                                    fontSize: 13,
+                                    fontSize: 14,
                                   ),
                                 ),
                               ],
