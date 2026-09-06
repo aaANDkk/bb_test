@@ -392,6 +392,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "goDownload": MessageLookupByLibrary.simpleMessage("前往下載"),
     "harmonyFont": MessageLookupByLibrary.simpleMessage("自訂字體"),
     "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("預設系統字體，開啟後可載入自訂字體檔案"),
+    "emojiStyle": MessageLookupByLibrary.simpleMessage("Emoji 風格"),
+    "emojiStyleDesc": MessageLookupByLibrary.simpleMessage("選擇應用程式內顯示的 Emoji 風格"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage("是否快取修改"),
     "healthCheckTimeout": MessageLookupByLibrary.simpleMessage("超時時間"),
     "healthCheckTimeoutDesc": MessageLookupByLibrary.simpleMessage(

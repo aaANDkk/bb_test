@@ -1,5 +1,6 @@
 import 'package:bett_box/common/common.dart';
 import 'package:bett_box/enum/enum.dart';
+import 'package:bett_box/manager/manager.dart';
 import 'package:bett_box/models/models.dart';
 import 'package:bett_box/state.dart';
 import 'package:bett_box/widgets/widgets.dart';
@@ -98,9 +99,9 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                                   .titleMedium
                                   ?.toLight
                                   .copyWith(
-                                    fontFamily: FontFamily.openMoji.value,
+                                    fontFamily: EmojiManager.currentFamily,
                                     fontFamilyFallback: [
-                                      FontFamily.openMoji.value,
+                                      EmojiManager.currentFamily,
                                     ],
                                   ),
                             )

@@ -430,6 +430,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "goDownload": MessageLookupByLibrary.simpleMessage("ダウンロードへ"),
     "harmonyFont": MessageLookupByLibrary.simpleMessage("カスタムフォント"),
     "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("デフォルトはシステムフォント、有効にしてカスタムフォントを読み込む"),
+    "emojiStyle": MessageLookupByLibrary.simpleMessage("絵文字スタイル"),
+    "emojiStyleDesc": MessageLookupByLibrary.simpleMessage("アプリ内で表示する絵文字のスタイルを選択"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage("変更をキャッシュしますか？"),
     "healthCheckTimeout": MessageLookupByLibrary.simpleMessage("タイムアウト時間"),
     "healthCheckTimeoutDesc": MessageLookupByLibrary.simpleMessage(

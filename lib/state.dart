@@ -154,6 +154,7 @@ class GlobalState {
         themeProps: config.themeProps.copyWith(useHarmonyFont: false),
       );
     }
+    await EmojiManager.init();
   }
 
   bool get isAndroidTV => _isAndroidTV ?? false;

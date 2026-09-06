@@ -1,5 +1,6 @@
 import 'package:emoji_regex/emoji_regex.dart';
 import 'package:bett_box/enum/enum.dart';
+import 'package:bett_box/manager/manager.dart';
 import 'package:flutter/material.dart';
 
 import '../state.dart';
@@ -85,8 +86,8 @@ class EmojiText extends StatelessWidget {
           text: match.group(0),
           style: effectiveStyle.merge(
             TextStyle(
-              fontFamily: FontFamily.openMoji.value,
-              fontFamilyFallback: [FontFamily.openMoji.value],
+              fontFamily: EmojiManager.currentFamily,
+              fontFamilyFallback: [EmojiManager.currentFamily],
             ),
           ),
         ),

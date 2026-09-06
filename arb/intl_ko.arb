@@ -591,6 +591,8 @@
   "darkIconDesc": "앱 아이콘을 어두운 색계열로 전환",
   "harmonyFont": "사용자 정의 글꼴",
   "harmonyFontDesc": "기본 시스템 글꼴, 사용자 정의 글꼴을 로드하려면 활성화",
+  "emojiStyle": "이모지 스타일",
+  "emojiStyleDesc": "앱 내에서 표시할 이모지 스타일 선택",
   "internet": "인터넷",
   "systemApp": "시스템 앱",
   "noNetworkApp": "네트워크 미사용 앱",

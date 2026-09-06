@@ -535,6 +535,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "goDownload": MessageLookupByLibrary.simpleMessage("رفتن به دانلود"),
     "harmonyFont": MessageLookupByLibrary.simpleMessage("فونت سفارشی"),
     "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("به طور پیش فرض فونت سیستم، برای بارگیری فونت سفارشی فعال کنید"),
+    "emojiStyle": MessageLookupByLibrary.simpleMessage("سبک ایموجی"),
+    "emojiStyleDesc": MessageLookupByLibrary.simpleMessage("سبک ایموجی نمایش داده شده در برنامه را انتخاب کنید"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage(
       "آیا تغییرات ذخیره شوند؟",
     ),

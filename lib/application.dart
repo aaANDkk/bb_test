@@ -203,13 +203,17 @@ class ApplicationState extends ConsumerState<Application>
             return ValueListenableBuilder<String?>(
               valueListenable: FontManager.fontFamilyNotifier,
               builder: (_, customFontFamily, _) {
-                final fontFamily = (themeProps.useHarmonyFont &&
-                        customFontFamily != null &&
-                        customFontFamily.isNotEmpty)
-                    ? customFontFamily
-                    : null;
+                return ValueListenableBuilder<EmojiStyle>(
+                  valueListenable: EmojiManager.emojiStyleNotifier,
+                  builder: (_, emojiStyle, _) {
+                    final fontFamily = (themeProps.useHarmonyFont &&
+                            customFontFamily != null &&
+                            customFontFamily.isNotEmpty)
+                        ? customFontFamily
+                        : null;
+                    final emojiFamily = emojiStyle.family;
 
-                return MaterialApp(
+                    return MaterialApp(
               debugShowCheckedModeBanner: false,
               navigatorKey: globalState.navigatorKey,
               localizationsDelegates: const [
@@ -252,6 +256,7 @@ class ApplicationState extends ConsumerState<Application>
                   primaryColor: themeProps.primaryColor,
                 ),
                 fontFamily: fontFamily,
+                fontFamilyFallback: [emojiFamily],
                 floatingActionButtonTheme: FloatingActionButtonThemeData(
                   shape: RoundedSuperellipseBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -329,6 +334,7 @@ class ApplicationState extends ConsumerState<Application>
                     color: Colors.white,
                     fontSize: 12,
                     fontFamily: fontFamily,
+                    fontFamilyFallback: [emojiFamily],
                   ),
                 ),
               ),
@@ -340,6 +346,7 @@ class ApplicationState extends ConsumerState<Application>
                   primaryColor: themeProps.primaryColor,
                 ).toPureBlack(themeProps.pureBlack),
                 fontFamily: fontFamily,
+                fontFamilyFallback: [emojiFamily],
                 floatingActionButtonTheme: FloatingActionButtonThemeData(
                   shape: RoundedSuperellipseBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -429,6 +436,7 @@ class ApplicationState extends ConsumerState<Application>
                     color: Colors.white,
                     fontSize: 12,
                     fontFamily: fontFamily,
+                    fontFamilyFallback: [emojiFamily],
                   ),
                 ),
               ),
@@ -437,8 +445,10 @@ class ApplicationState extends ConsumerState<Application>
           },
         );
       },
-      child: const HomePage(),
-    ),
+    );
+  },
+  child: const HomePage(),
+),
       ),
     );
   }

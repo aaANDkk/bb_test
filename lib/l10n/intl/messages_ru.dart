@@ -558,6 +558,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "goDownload": MessageLookupByLibrary.simpleMessage("Перейти к загрузке"),
     "harmonyFont": MessageLookupByLibrary.simpleMessage("Пользовательский шрифт"),
     "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("По умолчанию системный шрифт, включите для загрузки своего"),
+    "emojiStyle": MessageLookupByLibrary.simpleMessage("Стиль эмодзи"),
+    "emojiStyleDesc": MessageLookupByLibrary.simpleMessage("Выберите стиль эмодзи в приложении"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage(
       "Кэшировать изменения?",
     ),

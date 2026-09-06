@@ -592,6 +592,8 @@
   "darkIconDesc": "Manually switch dark app icon",
   "harmonyFont": "Custom Font",
   "harmonyFontDesc": "Use system font by default, enable to load custom font",
+  "emojiStyle": "Emoji Style",
+  "emojiStyleDesc": "Select the Emoji style displayed in the app",
   "internet": "Internet",
   "systemApp": "System App",
   "noNetworkApp": "No Network App",

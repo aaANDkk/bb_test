@@ -541,6 +541,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "goDownload": MessageLookupByLibrary.simpleMessage("Download Now"),
     "harmonyFont": MessageLookupByLibrary.simpleMessage("Custom Font"),
     "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("Use system font by default, enable to load custom font"),
+    "emojiStyle": MessageLookupByLibrary.simpleMessage("Emoji Style"),
+    "emojiStyleDesc": MessageLookupByLibrary.simpleMessage("Select the Emoji style displayed in the app"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage(
       "Cache modifications?",
     ),

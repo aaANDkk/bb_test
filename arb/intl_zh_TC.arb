@@ -593,6 +593,8 @@
   "darkIconDesc": "手動切換深色系桌面應用程式圖示",
   "harmonyFont": "自訂字體",
   "harmonyFontDesc": "預設系統字體，開啟後可載入自訂字體檔案",
+  "emojiStyle": "Emoji 風格",
+  "emojiStyleDesc": "選擇應用程式內顯示的 Emoji 風格",
   "internet": "網際網路",
   "systemApp": "系統應用程式",
   "noNetworkApp": "無網路應用程式",

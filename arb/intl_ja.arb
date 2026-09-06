@@ -591,6 +591,8 @@
   "darkIconDesc": "アプリアイコンをダーク系に切り替え",
   "harmonyFont": "カスタムフォント",
   "harmonyFontDesc": "デフォルトはシステムフォント、有効にしてカスタムフォントを読み込む",
+  "emojiStyle": "絵文字スタイル",
+  "emojiStyleDesc": "アプリ内で表示する絵文字のスタイルを選択",
   "internet": "インターネット",
   "systemApp": "システムアプリ",
   "noNetworkApp": "非通信アプリ",

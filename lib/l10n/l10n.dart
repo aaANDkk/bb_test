@@ -4874,6 +4874,21 @@ class AppLocalizations {
     );
   }
 
+  /// `Emoji Style`
+  String get emojiStyle {
+    return Intl.message('Emoji Style', name: 'emojiStyle', desc: '', args: []);
+  }
+
+  /// `Select the Emoji style displayed in the app`
+  String get emojiStyleDesc {
+    return Intl.message(
+      'Select the Emoji style displayed in the app',
+      name: 'emojiStyleDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Internet`
   String get internet {
     return Intl.message('Internet', name: 'internet', desc: '', args: []);

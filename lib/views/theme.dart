@@ -51,6 +51,7 @@ class ThemeView extends ConsumerWidget {
       _TextScaleFactorItem(),
       const _CustomFontItem(),
       if (useHarmonyFont) const _SelectCustomFontItem(),
+      const _EmojiStyleItem(),
     ];
 
     final items = [
@@ -558,6 +559,118 @@ class _SelectCustomFontItem extends ConsumerWidget {
   }
 }
 
+class _EmojiStyleItem extends StatelessWidget {
+  const _EmojiStyleItem();
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<EmojiStyle>(
+      valueListenable: EmojiManager.emojiStyleNotifier,
+      builder: (context, currentStyle, _) {
+        return ListItem(
+          leading: const Icon(Icons.sentiment_satisfied_alt_outlined),
+          horizontalTitleGap: 12,
+          title: Text(
+            appLocalizations.emojiStyle,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              color: context.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          subtitle: Text(
+            currentStyle.label,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: context.colorScheme.onSurfaceVariant.withOpacity(0.7),
+            ),
+          ),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () {
+            globalState.showCommonDialog(
+              child: const _EmojiStyleDialog(),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class _EmojiStyleDialog extends StatelessWidget {
+  const _EmojiStyleDialog();
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<EmojiStyle>(
+      valueListenable: EmojiManager.emojiStyleNotifier,
+      builder: (context, currentStyle, _) {
+        return CommonDialog(
+          title: appLocalizations.emojiStyle,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final style in EmojiStyle.values)
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () async {
+                      await EmojiManager.setStyle(style);
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            currentStyle == style
+                                ? Icons.check_circle_rounded
+                                : Icons.circle_outlined,
+                            size: 21,
+                            color: currentStyle == style
+                                ? context.colorScheme.primary
+                                : context.colorScheme.onSurfaceVariant.withOpacity(0.6),
+                          ),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  style.label,
+                                  style: context.textTheme.bodyMedium?.copyWith(
+                                    fontWeight: currentStyle == style
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  '😀 🚀 🇯🇵 🐱 🌟 💡 🔥',
+                                  style: TextStyle(
+                                    fontFamily: style.family,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
 
 class _DarkIconItem extends ConsumerWidget {
   const _DarkIconItem();
