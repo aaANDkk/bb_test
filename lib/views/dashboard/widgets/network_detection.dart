@@ -174,6 +174,36 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
   }
 }
 
+class _SharpCircleBorderPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+  final double diameter;
+
+  const _SharpCircleBorderPainter({
+    required this.color,
+    required this.strokeWidth,
+    required this.diameter,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..isAntiAlias = true;
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = (diameter - strokeWidth) / 2;
+    canvas.drawCircle(center, radius, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _SharpCircleBorderPainter oldDelegate) =>
+      oldDelegate.color != color ||
+      oldDelegate.strokeWidth != strokeWidth ||
+      oldDelegate.diameter != diameter;
+}
+
 class _CountryFlagIcon extends StatelessWidget {
   final String countryCode;
 
@@ -182,13 +212,13 @@ class _CountryFlagIcon extends StatelessWidget {
   });
 
   // 与 NTP 小部件 (Icons.access_time) 视觉重量与间距像素级精确对齐：
-  // 整体最外径锁定 17.2dp，左右各留 2.0dp 边距 (总宽 21.2dp)
-  // 采用底置同心实心衬底包边方案：
-  // 1. 黑圈完全处于国旗内容外围 (厚度 1.15dp)，100% 杜绝侵占/遮挡国旗内部任何元素；
-  // 2. 底衬严丝合缝承托国旗，抗锯齿无缝融合，绝对 0 空隙 0 白边。
-  static const double _totalDiameter = 17.2;
-  static const double _borderWidth = 1.15;
-  static const double _flagDiameter = _totalDiameter - (_borderWidth * 2);
+  // 1. 整体最外径锁定 17.4dp，线宽 1.2dp；
+  // 2. 纯净独立矢量 Stroke 硬件绘制：彻底根除 Container/BoxDecoration 复合图层造成的边缘发虚与粗糙感，线条如原生 Icon 般极致锐利纯净；
+  // 3. 国旗 15.2dp 居中，黑边内径 15.0dp，仅在边缘 0.1dp 处微重叠封死抗锯齿，国旗内部元素 100% 完整展示不被遮挡，且绝对 0 空隙；
+  // 4. 外层总宽 21.4dp (左右各留 2.0dp 边距)，与标准 24dp Material Icon 视觉边缘严格对齐。
+  static const double _totalDiameter = 17.4;
+  static const double _strokeWidth = 1.2;
+  static const double _flagDiameter = 15.2;
 
   static const Set<String> _flagCodes = {'ac', 'ad', 'ae', 'af-emirate', 'af', 'ag', 'ai', 'al', 'am', 'an', 'ao', 'aq-true_south', 'aq', 'ar', 'artsakh', 'as', 'at', 'au-aboriginal', 'au-act', 'au-nsw', 'au-nt', 'au-qld', 'au-sa', 'au-tas', 'au-torres_strait_islands', 'au-vic', 'au-wa', 'au', 'aw', 'ax', 'az', 'ba', 'bb', 'bd', 'be', 'bf', 'bg', 'bh', 'bi', 'bj', 'bl', 'bm', 'bn', 'bo', 'bq-bo', 'bq-sa', 'bq-se', 'bq', 'br', 'bs', 'bt', 'bv', 'bw', 'by-historical', 'by', 'bz', 'ca-bc', 'ca-qc', 'ca', 'cc', 'cd', 'cf', 'cg', 'ch-gr', 'ch', 'ci', 'ck', 'cl', 'cm', 'cn-hk', 'cn-xj', 'cn-xz', 'cn', 'co', 'cp', 'cq', 'cr', 'cu', 'cv', 'cw', 'cx', 'cy', 'cz', 'de', 'dg', 'dj', 'dk', 'dm', 'do', 'dz', 'ea', 'easter_island', 'east_african_federation', 'ec-w', 'ec', 'ee', 'eg', 'eh', 'er', 'es-ar', 'es-ce', 'es-cn', 'es-ct', 'es-ga', 'es-ib', 'es-ml', 'es-pv', 'es-variant', 'es-vc', 'es', 'et-af', 'et-am', 'et-be', 'et-ga', 'et-ha', 'et-or', 'et-si', 'et-sn', 'et-so', 'et-sw', 'et-ti', 'et', 'eu', 'european_union', 'ewe', 'fi', 'fj', 'fk', 'fm', 'fo', 'fr-20r', 'fr-bre', 'fr-cp', 'fr', 'fx', 'ga', 'gb-con', 'gb-eng', 'gb-nir', 'gb-ork', 'gb-sct', 'gb-wls', 'gb', 'gd', 'ge-ab', 'ge', 'gf', 'gg', 'gh', 'gi', 'gl', 'gm', 'gn', 'gp', 'gq', 'gr', 'gs', 'gt', 'gu', 'guarani', 'gw', 'gy', 'hausa', 'hk', 'hm', 'hmong', 'hn', 'hr', 'ht', 'hu', 'ic', 'id-jb', 'id-jt', 'id', 'ie', 'il', 'im', 'in-as', 'in-gj', 'in-ka', 'in-mn', 'in-mz', 'in-or', 'in-tg', 'in-tn', 'in', 'io', 'iq-kr', 'iq', 'ir', 'is', 'it-21', 'it-23', 'it-25', 'it-32', 'it-34', 'it-36', 'it-42', 'it-45', 'it-52', 'it-55', 'it-57', 'it-62', 'it-65', 'it-67', 'it-72', 'it-75', 'it-77', 'it-78', 'it-82', 'it-88', 'it', 'je', 'jm', 'jo', 'jp', 'kanuri', 'ke', 'kg', 'kh', 'ki', 'kikuyu', 'km', 'kn', 'kongo', 'kp', 'kr', 'kw', 'ky', 'kz', 'la', 'lb', 'lc', 'li', 'lk', 'lr', 'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'malayali', 'maori', 'mc', 'md', 'me', 'mf', 'mg', 'mh', 'mk', 'ml', 'mm', 'mn', 'mo', 'mp', 'mq-old', 'mq', 'mr', 'ms', 'mt-civil_ensign', 'mt', 'mu', 'mv', 'mw', 'mx', 'my', 'mz', 'na', 'nc', 'ne', 'nf', 'ng', 'ni', 'nl-fr', 'nl', 'no', 'northern_cyprus', 'np', 'nr', 'nu', 'nz', 'occitania', 'om', 'otomi', 'pa', 'pe', 'pf', 'pg', 'ph', 'pk-jk', 'pk-sd', 'pk', 'pl', 'pm', 'pn', 'pr', 'ps', 'pt-20', 'pt-30', 'pt', 'pw', 'py', 'qa', 'quechua', 're', 'ro', 'rs', 'ru-ba', 'ru-ce', 'ru-cu', 'ru-da', 'ru-dpr', 'ru-ko', 'ru-lpr', 'ru-ta', 'ru-ud', 'ru', 'rw', 'sa', 'sami', 'sb', 'sc', 'sd', 'se', 'sealand', 'sg', 'sh-ac', 'sh-hl', 'sh-ta', 'sh', 'si', 'sj', 'sk', 'sl', 'sm', 'sn', 'so', 'somaliland', 'south_ossetia', 'soviet_union', 'sr', 'ss', 'st', 'su', 'sv', 'sx', 'sy', 'sz', 'ta', 'tc', 'td', 'tf', 'tg', 'th', 'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tr', 'transnistria', 'tt', 'tv', 'tw', 'tz-zanzibar', 'tz', 'ua-bpr', 'ua-kpr', 'ua', 'ug', 'uk', 'um', 'un', 'us-ak', 'us-al', 'us-ar', 'us-as', 'us-az', 'us-betsy_ross', 'us-ca', 'us-co', 'us-confederate_battle', 'us-dc', 'us-fl', 'us-ga', 'us-gu', 'us-hi', 'us-in', 'us-md', 'us-mn', 'us-mo', 'us-mp', 'us-ms', 'us-nc', 'us-nm', 'us-or', 'us-pr', 'us-ri', 'us-sc', 'us-tn', 'us-tx', 'us-um', 'us-vi', 'us-wa', 'us-wi', 'us-wy', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf', 'wiphala', 'ws', 'xk', 'xx', 'ye', 'yorubaland', 'yt', 'yu', 'za', 'zm', 'zw'};
 
@@ -216,25 +246,32 @@ class _CountryFlagIcon extends StatelessWidget {
       width: _totalDiameter + 4.0,
       height: 24.0,
       child: Center(
-        child: Container(
-          width: _totalDiameter,
-          height: _totalDiameter,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: borderColor,
-          ),
-          alignment: Alignment.center,
-          child: SizedBox.square(
-            dimension: _flagDiameter,
-            child: ClipOval(
-              child: SvgPicture.asset(
-                assetPath,
-                width: _flagDiameter,
-                height: _flagDiameter,
-                fit: BoxFit.cover,
-                placeholderBuilder: (_) => fallbackIcon(),
+        child: SizedBox.square(
+          dimension: _totalDiameter,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox.square(
+                dimension: _flagDiameter,
+                child: ClipOval(
+                  child: SvgPicture.asset(
+                    assetPath,
+                    width: _flagDiameter,
+                    height: _flagDiameter,
+                    fit: BoxFit.cover,
+                    placeholderBuilder: (_) => fallbackIcon(),
+                  ),
+                ),
               ),
-            ),
+              CustomPaint(
+                size: const Size.square(_totalDiameter),
+                painter: _SharpCircleBorderPainter(
+                  color: borderColor,
+                  strokeWidth: _strokeWidth,
+                  diameter: _totalDiameter,
+                ),
+              ),
+            ],
           ),
         ),
       ),
