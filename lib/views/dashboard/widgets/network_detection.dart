@@ -1,6 +1,5 @@
 import 'package:bett_box/common/common.dart';
 import 'package:bett_box/enum/enum.dart';
-import 'package:bett_box/manager/manager.dart';
 import 'package:bett_box/models/models.dart';
 import 'package:bett_box/state.dart';
 import 'package:bett_box/widgets/widgets.dart';
@@ -92,18 +91,12 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       ipInfo != null
-                          ? Text(
+                          ? EmojiText(
                               _countryCodeToEmoji(ipInfo.countryCode),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
-                                  ?.toLight
-                                  .copyWith(
-                                    fontFamily: EmojiManager.currentFamily,
-                                    fontFamilyFallback: [
-                                      EmojiManager.currentFamily,
-                                    ],
-                                  ),
+                                  ?.toLight,
                             )
                           : Icon(
                               Icons.network_check,

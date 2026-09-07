@@ -56,7 +56,7 @@ class EmojiManager {
   /// Register open-source font licenses for OpenMoji and Twemoji
   static void _registerLicenses() {
     LicenseRegistry.addLicense(() async* {
-      yield const LicenseEntryWithArgs(
+      yield LicenseEntryWithLineBreaks(
         ['OpenMoji'],
         '''
 All emojis designed by OpenMoji – the open-source emoji and icon project.
@@ -65,7 +65,7 @@ License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0
 License URL: https://creativecommons.org/licenses/by-sa/4.0/
 ''',
       );
-      yield const LicenseEntryWithArgs(
+      yield LicenseEntryWithLineBreaks(
         ['Twemoji'],
         '''
 Twemoji Graphics & Font Assets
