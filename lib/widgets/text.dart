@@ -81,15 +81,18 @@ class EmojiText extends StatelessWidget {
           ),
         );
       }
+      final currentFamily = EmojiManager.currentFamily;
       spans.add(
         TextSpan(
           text: match.group(0),
-          style: effectiveStyle.merge(
-            TextStyle(
-              fontFamily: EmojiManager.currentFamily,
-              fontFamilyFallback: [EmojiManager.currentFamily],
-            ),
-          ),
+          style: currentFamily != null
+              ? effectiveStyle.merge(
+                  TextStyle(
+                    fontFamily: currentFamily,
+                    fontFamilyFallback: [currentFamily],
+                  ),
+                )
+              : effectiveStyle,
         ),
       );
       lastMatchEnd = match.end;

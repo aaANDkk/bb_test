@@ -210,9 +210,6 @@ enum ProxiesIconStyle { standard, none, icon }
 enum FontFamily {
   openMoji('OpenMoji'),
   twEmoji('Twemoji'),
-  blobmoji('Blobmoji'),
-  tossFace('TossFace'),
-  emojiOne('EmojiOne'),
   jetBrainsMono('JetBrainsMono'),
   icon('Icons');
 
