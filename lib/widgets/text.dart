@@ -113,14 +113,13 @@ class EmojiText extends StatelessWidget {
     return ValueListenableBuilder<EmojiStyle>(
       valueListenable: EmojiManager.emojiStyleNotifier,
       builder: (_, __, ___) {
-        return RichText(
-          textAlign: textAlign ?? TextAlign.start,
-          textScaler: MediaQuery.of(context).textScaler,
-          maxLines: maxLines,
-          overflow: overflow ?? TextOverflow.clip,
-          text: TextSpan(
+        return Text.rich(
+          TextSpan(
             children: _buildTextSpans(text, defaultStyle),
           ),
+          textAlign: textAlign ?? TextAlign.start,
+          maxLines: maxLines,
+          overflow: overflow ?? TextOverflow.clip,
         );
       },
     );
