@@ -74,6 +74,14 @@ Copyright 2024 Twemoji contributors (https://github.com/jdecked/twemoji)
 License: Creative Commons Attribution 4.0 International (CC-BY 4.0)
 License URL: https://creativecommons.org/licenses/by/4.0/
 ''',
+      yield LicenseEntryWithLineBreaks(
+        ['circle-flags'],
+        '''
+Circle Flags by HatScripts
+Copyright (c) 2017 HatScripts (https://github.com/HatScripts/circle-flags)
+License: MIT License
+License URL: https://github.com/HatScripts/circle-flags/blob/gh-pages/LICENSE.md
+''',
       );
     });
   }

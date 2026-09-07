@@ -6,6 +6,7 @@ import 'package:bett_box/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NetworkDetection extends ConsumerStatefulWidget {
   const NetworkDetection({super.key});
@@ -15,15 +16,6 @@ class NetworkDetection extends ConsumerStatefulWidget {
 }
 
 class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
-  String _countryCodeToEmoji(String countryCode) {
-    final String code = countryCode.toUpperCase();
-    if (code.length != 2) {
-      return countryCode;
-    }
-    final int firstLetter = code.codeUnitAt(0) - 0x41 + 0x1F1E6;
-    final int secondLetter = code.codeUnitAt(1) - 0x41 + 0x1F1E6;
-    return String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
-  }
 
   void _showIpClickBehaviorSettings() {
     final isZh = Localizations.localeOf(context).languageCode == 'zh';
@@ -90,13 +82,10 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      ipInfo != null
-                          ? EmojiText(
-                              _countryCodeToEmoji(ipInfo.countryCode),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.toLight,
+                      ipInfo != null && ipInfo.countryCode.isNotEmpty
+                          ? _CountryFlagIcon(
+                              countryCode: ipInfo.countryCode,
+                              size: 23.0,
                             )
                           : Icon(
                               Icons.network_check,
@@ -185,3 +174,82 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
     );
   }
 }
+
+class _OuterBorderPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+
+  const _OuterBorderPainter({
+    required this.color,
+    required this.strokeWidth,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..isAntiAlias = true;
+    final center = Offset(size.width / 2, size.height / 2);
+    // 半径为 size.width / 2 + strokeWidth / 2
+    // 描边的内边缘刚好切合 size.width / 2 (即国旗的外边界)，严丝合缝且 100% 不向内压入遮挡国旗元素
+    final radius = size.width / 2 + strokeWidth / 2;
+    canvas.drawCircle(center, radius, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _OuterBorderPainter oldDelegate) =>
+      oldDelegate.color != color || oldDelegate.strokeWidth != strokeWidth;
+}
+
+class _CountryFlagIcon extends StatelessWidget {
+  final String countryCode;
+  final double size;
+
+  const _CountryFlagIcon({
+    required this.countryCode,
+    this.size = 23.0,
+  });
+
+  static const Set<String> _flagCodes = {'ac', 'ad', 'ae', 'af-emirate', 'af', 'ag', 'ai', 'al', 'am', 'an', 'ao', 'aq-true_south', 'aq', 'ar', 'artsakh', 'as', 'at', 'au-aboriginal', 'au-act', 'au-nsw', 'au-nt', 'au-qld', 'au-sa', 'au-tas', 'au-torres_strait_islands', 'au-vic', 'au-wa', 'au', 'aw', 'ax', 'az', 'ba', 'bb', 'bd', 'be', 'bf', 'bg', 'bh', 'bi', 'bj', 'bl', 'bm', 'bn', 'bo', 'bq-bo', 'bq-sa', 'bq-se', 'bq', 'br', 'bs', 'bt', 'bv', 'bw', 'by-historical', 'by', 'bz', 'ca-bc', 'ca-qc', 'ca', 'cc', 'cd', 'cf', 'cg', 'ch-gr', 'ch', 'ci', 'ck', 'cl', 'cm', 'cn-hk', 'cn-xj', 'cn-xz', 'cn', 'co', 'cp', 'cq', 'cr', 'cu', 'cv', 'cw', 'cx', 'cy', 'cz', 'de', 'dg', 'dj', 'dk', 'dm', 'do', 'dz', 'ea', 'easter_island', 'east_african_federation', 'ec-w', 'ec', 'ee', 'eg', 'eh', 'er', 'es-ar', 'es-ce', 'es-cn', 'es-ct', 'es-ga', 'es-ib', 'es-ml', 'es-pv', 'es-variant', 'es-vc', 'es', 'et-af', 'et-am', 'et-be', 'et-ga', 'et-ha', 'et-or', 'et-si', 'et-sn', 'et-so', 'et-sw', 'et-ti', 'et', 'eu', 'european_union', 'ewe', 'fi', 'fj', 'fk', 'fm', 'fo', 'fr-20r', 'fr-bre', 'fr-cp', 'fr', 'fx', 'ga', 'gb-con', 'gb-eng', 'gb-nir', 'gb-ork', 'gb-sct', 'gb-wls', 'gb', 'gd', 'ge-ab', 'ge', 'gf', 'gg', 'gh', 'gi', 'gl', 'gm', 'gn', 'gp', 'gq', 'gr', 'gs', 'gt', 'gu', 'guarani', 'gw', 'gy', 'hausa', 'hk', 'hm', 'hmong', 'hn', 'hr', 'ht', 'hu', 'ic', 'id-jb', 'id-jt', 'id', 'ie', 'il', 'im', 'in-as', 'in-gj', 'in-ka', 'in-mn', 'in-mz', 'in-or', 'in-tg', 'in-tn', 'in', 'io', 'iq-kr', 'iq', 'ir', 'is', 'it-21', 'it-23', 'it-25', 'it-32', 'it-34', 'it-36', 'it-42', 'it-45', 'it-52', 'it-55', 'it-57', 'it-62', 'it-65', 'it-67', 'it-72', 'it-75', 'it-77', 'it-78', 'it-82', 'it-88', 'it', 'je', 'jm', 'jo', 'jp', 'kanuri', 'ke', 'kg', 'kh', 'ki', 'kikuyu', 'km', 'kn', 'kongo', 'kp', 'kr', 'kw', 'ky', 'kz', 'la', 'lb', 'lc', 'li', 'lk', 'lr', 'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'malayali', 'maori', 'mc', 'md', 'me', 'mf', 'mg', 'mh', 'mk', 'ml', 'mm', 'mn', 'mo', 'mp', 'mq-old', 'mq', 'mr', 'ms', 'mt-civil_ensign', 'mt', 'mu', 'mv', 'mw', 'mx', 'my', 'mz', 'na', 'nc', 'ne', 'nf', 'ng', 'ni', 'nl-fr', 'nl', 'no', 'northern_cyprus', 'np', 'nr', 'nu', 'nz', 'occitania', 'om', 'otomi', 'pa', 'pe', 'pf', 'pg', 'ph', 'pk-jk', 'pk-sd', 'pk', 'pl', 'pm', 'pn', 'pr', 'ps', 'pt-20', 'pt-30', 'pt', 'pw', 'py', 'qa', 'quechua', 're', 'ro', 'rs', 'ru-ba', 'ru-ce', 'ru-cu', 'ru-da', 'ru-dpr', 'ru-ko', 'ru-lpr', 'ru-ta', 'ru-ud', 'ru', 'rw', 'sa', 'sami', 'sb', 'sc', 'sd', 'se', 'sealand', 'sg', 'sh-ac', 'sh-hl', 'sh-ta', 'sh', 'si', 'sj', 'sk', 'sl', 'sm', 'sn', 'so', 'somaliland', 'south_ossetia', 'soviet_union', 'sr', 'ss', 'st', 'su', 'sv', 'sx', 'sy', 'sz', 'ta', 'tc', 'td', 'tf', 'tg', 'th', 'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tr', 'transnistria', 'tt', 'tv', 'tw', 'tz-zanzibar', 'tz', 'ua-bpr', 'ua-kpr', 'ua', 'ug', 'uk', 'um', 'un', 'us-ak', 'us-al', 'us-ar', 'us-as', 'us-az', 'us-betsy_ross', 'us-ca', 'us-co', 'us-confederate_battle', 'us-dc', 'us-fl', 'us-ga', 'us-gu', 'us-hi', 'us-in', 'us-md', 'us-mn', 'us-mo', 'us-mp', 'us-ms', 'us-nc', 'us-nm', 'us-or', 'us-pr', 'us-ri', 'us-sc', 'us-tn', 'us-tx', 'us-um', 'us-vi', 'us-wa', 'us-wi', 'us-wy', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf', 'wiphala', 'ws', 'xk', 'xx', 'ye', 'yorubaland', 'yt', 'yu', 'za', 'zm', 'zw'};
+
+  @override
+  Widget build(BuildContext context) {
+    final code = countryCode.trim().toLowerCase();
+    final borderColor = Theme.of(context).colorScheme.onSurfaceVariant;
+    const strokeWidth = 1.5;
+
+    Widget fallbackIcon() => Icon(
+          Icons.network_check,
+          color: borderColor,
+          size: size + strokeWidth * 2,
+        );
+
+    if (code.isEmpty || !_flagCodes.contains(code)) {
+      return fallbackIcon();
+    }
+
+    final assetPath = 'assets/flags/$code.svg';
+
+    return Padding(
+      padding: const EdgeInsets.all(strokeWidth),
+      child: CustomPaint(
+        foregroundPainter: _OuterBorderPainter(
+          color: borderColor,
+          strokeWidth: strokeWidth,
+        ),
+        child: ClipOval(
+          child: SvgPicture.asset(
+            assetPath,
+            width: size,
+            height: size,
+            fit: BoxFit.cover,
+            placeholderBuilder: (_) => fallbackIcon(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
