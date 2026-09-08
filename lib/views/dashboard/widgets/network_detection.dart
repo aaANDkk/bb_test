@@ -88,6 +88,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                             )
                           : Icon(
                               Icons.network_check,
+                              size: 20.0,
                               color: Theme.of(
                                 context,
                               ).colorScheme.onSurfaceVariant,
@@ -211,11 +212,12 @@ class _CountryFlagIcon extends StatelessWidget {
     required this.countryCode,
   });
 
-  // 与 NTP 小部件 (Icons.access_time) 及标准 24dp Material Icon 视觉重量与尺寸精致平衡：
-  // 1. 描边线宽设定为 1.6dp，在 1.2dp 单薄与 2.0dp 厚重之间取得极致平衡，细腻精致且分量适中；
-  // 2. 描边完全从国旗外边缘向外扩张绘制（往外扩），整体外径锁定为 19.2dp（内径 16.0dp）；
-  // 3. 国旗尺寸设为 16.4dp，保持 0.2dp 微重叠咬合抗锯齿边界，彻底压实封死缝隙，绝对 0 空隙、0 白边，且绝不侵占国旗主体画面；
-  // 4. 外层槽位 24x24dp，四周均匀预留呼吸边距，与标准 Material Icon 占位及间距无缝对齐。
+  // 与全局卡片（CommonCard 内的 20dp Icon 如内存信息、INFO 等）视觉轴心与尺寸像素级严格对齐：
+  // 1. 外部槽位严格锁定为 20.0x20.0dp，彻底消除此前 24dp 槽位导致的视觉向右偏移，确保与全局所有卡片图标水平对齐线 100% 重合；
+  // 2. 描边线宽设定为 1.6dp，在 1.2dp 单薄与 2.0dp 厚重之间取得精致平衡；
+  // 3. 整体外径锁定为 19.2dp（内径 16.0dp），描边完全从国旗外边缘向外扩张绘制（往外扩）；
+  // 4. 国旗尺寸设为 16.4dp，保持精确的 0.2dp 微重叠咬合抗锯齿边界，彻底压实封死缝隙，绝对 0 空隙、0 白边，且绝不侵占国旗主体画面。
+  static const double _slotSize = 20.0;
   static const double _totalDiameter = 19.2;
   static const double _strokeWidth = 1.6;
   static const double _flagDiameter = 16.4;
@@ -228,11 +230,11 @@ class _CountryFlagIcon extends StatelessWidget {
     final borderColor = Theme.of(context).colorScheme.onSurfaceVariant;
 
     Widget fallbackIcon() => SizedBox.square(
-          dimension: 24.0,
+          dimension: _slotSize,
           child: Icon(
             Icons.network_check,
             color: borderColor,
-            size: 24.0,
+            size: _slotSize,
           ),
         );
 
@@ -243,7 +245,7 @@ class _CountryFlagIcon extends StatelessWidget {
     final assetPath = 'assets/flags/$code.svg';
 
     return SizedBox.square(
-      dimension: 24.0,
+      dimension: _slotSize,
       child: Center(
         child: SizedBox.square(
           dimension: _totalDiameter,
