@@ -277,6 +277,24 @@ class ApplicationState extends ConsumerState<Application>
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                 ),
+                dropdownMenuTheme: const DropdownMenuThemeData(
+                  menuStyle: MenuStyle(
+                    shape: WidgetStatePropertyAll<OutlinedBorder>(
+                      RoundedSuperellipseBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                    ),
+                  ),
+                ),
+                menuTheme: const MenuThemeData(
+                  style: MenuStyle(
+                    shape: WidgetStatePropertyAll<OutlinedBorder>(
+                      RoundedSuperellipseBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                    ),
+                  ),
+                ),
                 dividerTheme: DividerThemeData(
                   color: _getAppColorScheme(
                     brightness: Brightness.light,
@@ -363,6 +381,24 @@ class ApplicationState extends ConsumerState<Application>
                 popupMenuTheme: const PopupMenuThemeData(
                   shape: RoundedSuperellipseBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                ),
+                dropdownMenuTheme: const DropdownMenuThemeData(
+                  menuStyle: MenuStyle(
+                    shape: WidgetStatePropertyAll<OutlinedBorder>(
+                      RoundedSuperellipseBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                    ),
+                  ),
+                ),
+                menuTheme: const MenuThemeData(
+                  style: MenuStyle(
+                    shape: WidgetStatePropertyAll<OutlinedBorder>(
+                      RoundedSuperellipseBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                    ),
                   ),
                 ),
                 dividerTheme: DividerThemeData(
