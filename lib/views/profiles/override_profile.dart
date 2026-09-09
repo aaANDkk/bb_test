@@ -786,6 +786,7 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
                               );
                             }
                             return DropdownMenu<String>(
+                              alignmentOffset: const Offset(0, 8),
                               menuStyle: menuStyle,
                               expandedInsets: EdgeInsets.zero,
                               controller: _ruleProviderController,
@@ -874,6 +875,7 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
                               );
                             }
                             return DropdownMenu<String>(
+                              alignmentOffset: const Offset(0, 8),
                               menuStyle: menuStyle,
                               width: 200,
                               enableFilter: false,
@@ -940,6 +942,7 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
                               );
                             }
                             return DropdownMenu<String>(
+                              alignmentOffset: const Offset(0, 8),
                               menuStyle: menuStyle,
                               controller: _ruleTargetController,
                               label: Text(appLocalizations.ruleTarget),
@@ -958,11 +961,11 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
                       spacing: 8,
                       children: [
                         CommonCard(
-                          radius: 8,
+                          radius: 20,
                           isSelected: _src,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
+                              horizontal: 14,
                               vertical: 8,
                             ),
                             child: Text(
@@ -977,11 +980,11 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
                           },
                         ),
                         CommonCard(
-                          radius: 8,
+                          radius: 20,
                           isSelected: _noResolve,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
+                              horizontal: 14,
                               vertical: 8,
                             ),
                             child: Text(
