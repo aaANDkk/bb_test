@@ -27,11 +27,11 @@ class SuspendModule(private val context: Context) {
 
         when {
             shouldSuspendNow && !isSuspended -> {
-                Core.suspended(true)
+                Core.dozeSuspend(true)
                 isSuspended = true
             }
             !shouldSuspendNow && isSuspended -> {
-                Core.suspended(false)
+                Core.dozeSuspend(false)
                 isSuspended = false
                 com.appshub.bettbox.plugins.VpnPlugin.onUpdateNetwork()
             }
@@ -42,7 +42,7 @@ class SuspendModule(private val context: Context) {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent?.action?.let { action ->
                 if (action == Intent.ACTION_SCREEN_ON && isSuspended) {
-                    Core.suspended(false)
+                    Core.dozeSuspend(false)
                     isSuspended = false
                 } else {
                     updateSuspendState()
@@ -74,7 +74,7 @@ class SuspendModule(private val context: Context) {
         runCatching {
             context.unregisterReceiver(receiver)
             if (isSuspended) {
-                Core.suspended(false)
+                Core.dozeSuspend(false)
                 isSuspended = false
             }
         }
