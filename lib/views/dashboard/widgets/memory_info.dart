@@ -117,85 +117,66 @@ class _MemoryInfoState extends State<MemoryInfo> {
         onPressed: () => showCoreStatusDialog(context),
         onLongPress: () => showCoreStatusDialog(context),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
+            Container(
+              height: globalState.measure.titleMediumHeight + 16,
               padding: baseInfoEdgeInsets.copyWith(bottom: 0),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Flexible(
-                    flex: 1,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.memory,
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
-                        const SizedBox(width: 8),
-                        Flexible(
-                          flex: 1,
-                          child: TooltipText(
-                            text: Text(
-                              appLocalizations.memoryInfo,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: context.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  Icon(
+                    Icons.memory,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 8),
-                  IconButton(
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(
-                      minWidth: 24,
-                      minHeight: 24,
+                  Flexible(
+                    flex: 1,
+                    child: TooltipText(
+                      text: Text(
+                        appLocalizations.memoryInfo,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: context.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
                     ),
-                    onPressed: () => _handleForceGC(context),
-                    icon: Icon(
-                      size: 16.ap,
-                      Icons.settings_outlined,
-                      color: context.colorScheme.onSurfaceVariant,
+                  ),
+                  const SizedBox(width: 2),
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () => _handleForceGC(context),
+                      icon: Icon(
+                        size: 16.ap,
+                        Icons.settings_outlined,
+                        color: context.colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            Flexible(
-              flex: 1,
-              child: Container(
-                padding: baseInfoEdgeInsets.copyWith(top: 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            Container(
+              padding: baseInfoEdgeInsets.copyWith(top: 0),
+              child: SizedBox(
+                height: globalState.measure.bodyMediumHeight + 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: globalState.measure.bodyMediumHeight + 2,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            _memoryValue.showValue,
-                            style: context.textTheme.bodyMedium?.toLight.adjustSize(
-                              1,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            _memoryValue.showUnit,
-                            style: context.textTheme.bodyMedium?.toLight.adjustSize(
-                              1,
-                            ),
-                          ),
-                        ],
+                    Text(
+                      _memoryValue.showValue,
+                      style: context.textTheme.bodyMedium?.toLight.adjustSize(
+                        1,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      _memoryValue.showUnit,
+                      style: context.textTheme.bodyMedium?.toLight.adjustSize(
+                        1,
                       ),
                     ),
                   ],

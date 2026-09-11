@@ -60,8 +60,8 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
     final cat = utils.classifyIp(widget.ip);
     if (cat != IpCategory.public) {
       final elapsed = stopwatch.elapsedMilliseconds;
-      if (elapsed < 200) {
-        await Future.delayed(Duration(milliseconds: 200 - elapsed));
+      if (elapsed < 1400) {
+        await Future.delayed(Duration(milliseconds: 1400 - elapsed));
       }
       if (mounted) {
         setState(() {
@@ -74,8 +74,8 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
 
     final res = await request.queryIpDetail(widget.ip);
     final elapsed = stopwatch.elapsedMilliseconds;
-    if (elapsed < 200) {
-      await Future.delayed(Duration(milliseconds: 200 - elapsed));
+    if (elapsed < 1400) {
+      await Future.delayed(Duration(milliseconds: 1400 - elapsed));
     }
     if (!mounted) return;
 
@@ -295,7 +295,6 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
     }
 
     final Widget loadingWidget = Container(
-      key: const ValueKey('loading'),
       height: 100,
       alignment: Alignment.center,
       child: SpinKitThreeBounce(
@@ -304,14 +303,8 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
       ),
     );
 
-    final Widget detailsWidget = SingleChildScrollView(
-      key: const ValueKey('details'),
-      child: content,
-    );
-
     return CommonDialog(
       title: appLocalizations.moreIpInfo,
-      overrideScroll: true,
       actions: [
         TextButton(
           onPressed: () {
@@ -320,23 +313,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
           child: Text(appLocalizations.confirm),
         ),
       ],
-      child: AnimatedSize(
-        alignment: Alignment.topCenter,
-        duration: const Duration(milliseconds: 260),
-        curve: Curves.easeOutCubic,
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 220),
-          reverseDuration: Duration.zero,
-          switchInCurve: Curves.easeOutCubic,
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          child: _isLoading ? loadingWidget : detailsWidget,
-        ),
-      ),
+      child: _isLoading ? loadingWidget : content,
     );
   }
 }
