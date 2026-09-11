@@ -82,98 +82,123 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
           return CommonCard(
             onPressed: ipInfo != null ? _showMoreIpInfoDialog : () {},
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  height: globalState.measure.titleMediumHeight + 16,
+                Padding(
                   padding: baseInfoEdgeInsets.copyWith(bottom: 0),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ipInfo != null
-                          ? EmojiText(
-                              _countryCodeToEmoji(ipInfo.countryCode),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.toLight,
-                            )
-                          : Icon(
-                              Icons.network_check,
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.onSurfaceVariant,
-                            ),
-                      const SizedBox(width: 8),
                       Flexible(
                         flex: 1,
-                        child: TooltipText(
-                          text: Text(
-                            appLocalizations.networkDetection,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.titleSmall
-                                ?.copyWith(
-                                  color: context.colorScheme.onSurfaceVariant,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: Center(
+                                child: ipInfo != null
+                                    ? EmojiText(
+                                        _countryCodeToEmoji(ipInfo.countryCode),
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          height: 1.0,
+                                        ),
+                                      )
+                                    : Icon(
+                                        Icons.network_check,
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.onSurfaceVariant,
+                                      ),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Flexible(
+                              flex: 1,
+                              child: TooltipText(
+                                text: EmojiText(
+                                  appLocalizations.networkDetection,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context).textTheme.titleSmall
+                                      ?.copyWith(
+                                        color:
+                                            context.colorScheme.onSurfaceVariant,
+                                      ),
                                 ),
-                          ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(width: 2),
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: _showIpClickBehaviorSettings,
-                          icon: Icon(
-                            size: 16.ap,
-                            Icons.settings_outlined,
-                            color: context.colorScheme.onSurfaceVariant,
-                          ),
+                      const SizedBox(width: 8),
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 24,
+                          minHeight: 24,
+                        ),
+                        onPressed: _showIpClickBehaviorSettings,
+                        icon: Icon(
+                          size: 16.ap,
+                          Icons.settings_outlined,
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  padding: baseInfoEdgeInsets.copyWith(top: 0),
-                  child: SizedBox(
-                    height: globalState.measure.bodyMediumHeight + 2,
-                    child: FadeThroughBox(
-                      child: ipInfo != null
-                          ? TooltipText(
-                              text: Text(
-                                ipInfo.ip,
-                                style: context.textTheme.bodyMedium?.toLight
-                                    .adjustSize(1),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )
-                          : FadeThroughBox(
-                              child: isLoading == false && ipInfo == null
-                                  ? Text(
-                                      state.errorMessage ?? 'timeout',
-                                      style: context.textTheme.bodyMedium
-                                          ?.copyWith(color: Colors.red)
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    padding: baseInfoEdgeInsets.copyWith(top: 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: globalState.measure.bodyMediumHeight + 2,
+                          child: FadeThroughBox(
+                            child: ipInfo != null
+                                ? TooltipText(
+                                    text: Text(
+                                      ipInfo.ip,
+                                      style: context.textTheme.bodyMedium?.toLight
                                           .adjustSize(1),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                    )
-                                  : Container(
-                                      padding: const EdgeInsets.all(2),
-                                      child: Center(
-                                        child: OverflowBox(
-                                          maxWidth: 30,
-                                          maxHeight: 16,
-                                          child: SpinKitThreeBounce(
-                                            color: context.colorScheme.primary,
-                                            size: 16,
-                                          ),
-                                        ),
-                                      ),
                                     ),
-                            ),
+                                  )
+                                : FadeThroughBox(
+                                    child: isLoading == false && ipInfo == null
+                                        ? Text(
+                                            state.errorMessage ?? 'timeout',
+                                            style: context.textTheme.bodyMedium
+                                                ?.copyWith(color: Colors.red)
+                                                .adjustSize(1),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          )
+                                        : Container(
+                                            padding: const EdgeInsets.all(2),
+                                            child: Center(
+                                              child: OverflowBox(
+                                                maxWidth: 30,
+                                                maxHeight: 16,
+                                                child: SpinKitThreeBounce(
+                                                  color: context.colorScheme.primary,
+                                                  size: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                  ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

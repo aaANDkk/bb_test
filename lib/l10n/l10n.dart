@@ -5738,6 +5738,192 @@ class AppLocalizations {
   String get invalidFontFormat {
     return Intl.message('Only .ttf and .otf font formats are supported', name: 'invalidFontFormat', desc: '', args: []);
   }
+
+  /// `Zoom`
+  String get zoom {
+    return Intl.message('Zoom', name: 'zoom', desc: '', args: []);
+  }
+
+  /// `Core Status`
+  String get coreStatus {
+    return Intl.message('Core Status', name: 'coreStatus', desc: '', args: []);
+  }
+
+  /// `Memory & Runtime`
+  String get memoryAndRuntime {
+    return Intl.message(
+      'Memory & Runtime',
+      name: 'memoryAndRuntime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allocated`
+  String get allocatedMemory {
+    return Intl.message(
+      'Allocated',
+      name: 'allocatedMemory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reclaimable`
+  String get reclaimableMemory {
+    return Intl.message(
+      'Reclaimable',
+      name: 'reclaimableMemory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Goroutines`
+  String get activeGoroutines {
+    return Intl.message(
+      'Goroutines',
+      name: 'activeGoroutines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Heap Objects`
+  String get heapObjects {
+    return Intl.message(
+      'Heap Objects',
+      name: 'heapObjects',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile & Rules`
+  String get profileAndRules {
+    return Intl.message(
+      'Profile & Rules',
+      name: 'profileAndRules',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rules`
+  String get rulesCount {
+    return Intl.message('Rules', name: 'rulesCount', desc: '', args: []);
+  }
+
+  /// `Proxies`
+  String get proxiesCount {
+    return Intl.message('Proxies', name: 'proxiesCount', desc: '', args: []);
+  }
+
+  /// `Proxy Groups`
+  String get proxyGroupsCount {
+    return Intl.message(
+      'Proxy Groups',
+      name: 'proxyGroupsCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rule Providers`
+  String get ruleProvidersCount {
+    return Intl.message(
+      'Rule Providers',
+      name: 'ruleProvidersCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proxy Providers`
+  String get proxyProvidersCount {
+    return Intl.message(
+      'Proxy Providers',
+      name: 'proxyProvidersCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Geodata Use`
+  String get geodataUse {
+    return Intl.message('Geodata Use', name: 'geodataUse', desc: '', args: []);
+  }
+
+  /// `{count}`
+  String itemsCount(Object count) {
+    return Intl.message(
+      '$count',
+      name: 'itemsCount',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Pouring Hour Glass`
+  String get pouringHourGlass {
+    return Intl.message(
+      'Pouring Hour Glass',
+      name: 'pouringHourGlass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Square Circle`
+  String get squareCircle {
+    return Intl.message(
+      'Square Circle',
+      name: 'squareCircle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Three Rotating Dots`
+  String get threeRotatingDots {
+    return Intl.message(
+      'Three Rotating Dots',
+      name: 'threeRotatingDots',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Four Rotating Dots`
+  String get fourRotatingDots {
+    return Intl.message(
+      'Four Rotating Dots',
+      name: 'fourRotatingDots',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Staggered Dots Wave`
+  String get staggeredDotsWave {
+    return Intl.message(
+      'Staggered Dots Wave',
+      name: 'staggeredDotsWave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dots Triangle`
+  String get dotsTriangle {
+    return Intl.message(
+      'Dots Triangle',
+      name: 'dotsTriangle',
+      desc: '',
+      args: [],
+    );
+  }
+
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

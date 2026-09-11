@@ -12,6 +12,7 @@ import (
 	"runtime/debug"
 	"sort"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/metacubex/mihomo/adapter"
@@ -20,6 +21,7 @@ import (
 	"github.com/metacubex/mihomo/common/utils"
 	"github.com/metacubex/mihomo/common/yaml"
 	"github.com/metacubex/mihomo/component/age"
+	"github.com/metacubex/mihomo/component/geodata"
 	"github.com/metacubex/mihomo/component/mmdb"
 	"github.com/metacubex/mihomo/component/resolver"
 	"github.com/metacubex/mihomo/component/updater"
@@ -529,7 +531,124 @@ func handleGetCountryCode(ip string, fn func(value string)) {
 
 func handleGetMemory(fn func(value string)) {
 	go func() {
-		fn(strconv.FormatUint(statistic.DefaultManager.Memory(), 10))
+		var m runtime.MemStats
+		runtime.ReadMemStats(&m)
+		var retainedIdle uint64
+		if m.HeapIdle > m.HeapReleased {
+			retainedIdle = m.HeapIdle - m.HeapReleased
+		}
+		mem := m.HeapInuse + retainedIdle + m.StackInuse
+		fn(strconv.FormatUint(mem, 10))
+	}()
+}
+
+func handleGetCoreStatus(fn func(value string)) {
+	go func() {
+		var m runtime.MemStats
+		runtime.ReadMemStats(&m)
+		var retainedIdle uint64
+		if m.HeapIdle > m.HeapReleased {
+			retainedIdle = m.HeapIdle - m.HeapReleased
+		}
+		inUse := m.HeapInuse + m.StackInuse
+		physical := inUse + retainedIdle
+
+		var proxyGroupsCount int
+		proxyNames := make(map[string]struct{})
+		for _, p := range tunnel.Proxies() {
+			if p == nil {
+				continue
+			}
+			if _, ok := p.Adapter().(outboundgroup.ProxyGroup); ok {
+				proxyGroupsCount++
+				continue
+			}
+			switch p.Type() {
+			case constant.Direct, constant.Reject, constant.RejectDrop, constant.Compatible, constant.Pass, constant.PassRule, constant.Rematch, constant.Dns:
+				continue
+			default:
+				proxyNames[p.Name()] = struct{}{}
+			}
+		}
+
+		for name, pr := range tunnel.Providers() {
+			if pr == nil || name == "default" || pr.VehicleType() == cp.Compatible {
+				continue
+			}
+			for _, p := range pr.Proxies() {
+				if p != nil {
+					proxyNames[p.Name()] = struct{}{}
+				}
+			}
+		}
+
+		var ruleProvidersCount int
+		var proxyProvidersCount int
+		if currentRawConfig != nil {
+			ruleProvidersCount = len(currentRawConfig.RuleProvider)
+			proxyProvidersCount = len(currentRawConfig.ProxyProvider)
+		} else {
+			for name, pr := range tunnel.Providers() {
+				if pr == nil || name == "default" || pr.VehicleType() == cp.Compatible {
+					continue
+				}
+				proxyProvidersCount++
+			}
+			ruleProvidersCount = len(tunnel.RuleProviders())
+		}
+
+		hasMMDB := geodata.GeoIpEnable()
+		hasSite := geodata.GeoSiteEnable()
+		hasASN := geodata.ASNEnable()
+
+		if !hasMMDB || !hasSite || !hasASN {
+			for _, r := range tunnel.Rules() {
+				if r == nil {
+					continue
+				}
+				switch r.RuleType() {
+				case constant.GEOIP, constant.SrcGEOIP:
+					hasMMDB = true
+				case constant.GEOSITE:
+					hasSite = true
+				case constant.IPASN, constant.SrcIPASN:
+					hasASN = true
+				}
+			}
+		}
+
+		var geodatas []string
+		if hasMMDB {
+			geodatas = append(geodatas, "MMDB")
+		}
+		if hasSite {
+			geodatas = append(geodatas, "Site")
+		}
+		if hasASN {
+			geodatas = append(geodatas, "ASN")
+		}
+
+		geodataUse := "None"
+		if len(geodatas) > 0 {
+			geodataUse = strings.Join(geodatas, ", ")
+		}
+
+		status := map[string]any{
+			"physical":        physical,
+			"in-use":          inUse,
+			"reclaimable":     retainedIdle,
+			"goroutines":      runtime.NumGoroutine(),
+			"heap-objects":    m.HeapObjects,
+			"last-gc":         m.LastGC / 1000000,
+			"rules":           len(tunnel.Rules()),
+			"proxies":         len(proxyNames),
+			"proxy-groups":    proxyGroupsCount,
+			"rule-providers":  ruleProvidersCount,
+			"proxy-providers": proxyProvidersCount,
+			"geodata-use":     geodataUse,
+		}
+		bytes, _ := json.Marshal(status)
+		fn(string(bytes))
 	}()
 }
 
@@ -606,6 +725,9 @@ func handleSetupConfig(bytes []byte) string {
 	}
 	clearSuspendedHealthChecks()
 	clearSuspendedWireGuard()
+	suspendModeLock.Lock()
+	currentSuspendMode = 0
+	suspendModeLock.Unlock()
 	err = setupConfig(params)
 	if err != nil {
 		return err.Error()
@@ -613,11 +735,23 @@ func handleSetupConfig(bytes []byte) string {
 	return ""
 }
 
-func handleSuspend(suspended bool) bool {
+var (
+	currentSuspendMode = 0
+	suspendModeLock    sync.Mutex
+)
+
+func handleSuspend(mode int) bool {
 	if !isInit {
 		return false
 	}
-	if suspended {
+	suspendModeLock.Lock()
+	defer suspendModeLock.Unlock()
+
+	switch mode {
+	case 1:
+		if currentSuspendMode == 1 {
+			return true
+		}
 		log.Infoln("[APP] Suspend mode enabled")
 		tunnel.OnSuspend()
 		pauseHealthChecks()
@@ -631,25 +765,51 @@ func handleSuspend(suspended bool) bool {
 		})
 
 		runtime.GC()
-	} else {
-		log.Infoln("[APP] Resume from suspend")
-		tunnel.OnRunning()
-		resumeHealthChecks()
-		resumeWireGuard()
+		currentSuspendMode = 1
 
-		runLock.Lock()
-		cfg := currentConfig
-		runLock.Unlock()
-		if cfg != nil && cfg.NTP != nil && cfg.NTP.Enable {
-			c := cfg.NTP
-			mihomoNtp.ReCreateNTPService(
-				net.JoinHostPort(c.Server, strconv.Itoa(c.Port)),
-				time.Duration(c.Interval),
-				c.DialerProxy,
-				tunnel.Tunnel,
-				c.WriteToSystem,
-			)
+	case 2:
+		if currentSuspendMode == 1 || currentSuspendMode == 2 {
+			return true
 		}
+		log.Infoln("[APP] Doze suspend mode enabled")
+		pauseHealthChecks()
+		resolver.ResetConnection()
+		runtime.GC()
+		currentSuspendMode = 2
+
+	case 0:
+		if currentSuspendMode == 0 {
+			return true
+		}
+		log.Infoln("[APP] Resume from suspend")
+		prevMode := currentSuspendMode
+		currentSuspendMode = 0
+
+		if prevMode == 1 {
+			tunnel.OnRunning()
+			resumeHealthChecks()
+			resumeWireGuard()
+
+			runLock.Lock()
+			cfg := currentConfig
+			runLock.Unlock()
+			if cfg != nil && cfg.NTP != nil && cfg.NTP.Enable {
+				c := cfg.NTP
+				mihomoNtp.ReCreateNTPService(
+					net.JoinHostPort(c.Server, strconv.Itoa(c.Port)),
+					time.Duration(c.Interval),
+					c.DialerProxy,
+					tunnel.Tunnel,
+					c.WriteToSystem,
+				)
+			}
+		} else if prevMode == 2 {
+			resumeHealthChecks()
+			resolver.ResetConnection()
+		}
+
+	default:
+		return false
 	}
 	return true
 }

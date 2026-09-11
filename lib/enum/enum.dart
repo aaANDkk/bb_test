@@ -259,6 +259,7 @@ enum ActionMethod {
   decryptAgeConfig,
   getMode,
   parseExternalProviderContent,
+  getCoreStatus,
 
   ///Android,
   setState,
@@ -455,13 +456,18 @@ enum ScrollPositionCacheKeys { tools, profiles, proxiesList, proxiesTabList }
 
 enum DelayAnimationType {
   none,
+  pouringHourGlass,
+  squareCircle,
+  threeRotatingDots,
+  fourRotatingDots,
+  staggeredDotsWave,
+  dotsTriangle,
   rotatingCircle,
   pulse,
   spinningLines,
   threeInOut,
   threeBounce,
   circle,
-  fadingCircle,
   fadingFour,
   wave,
   doubleBounce,

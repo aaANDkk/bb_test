@@ -9,6 +9,7 @@ import 'package:emoji_regex/emoji_regex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 final proxyIconProvider = Provider.family<String, String>((ref, proxyName) {
   if (proxyName.isEmpty) return '';
@@ -142,6 +143,33 @@ class ProxyCard extends StatelessWidget {
   ) {
     return switch (animationType) {
       DelayAnimationType.none => Icon(Icons.bolt, size: size),
+      DelayAnimationType.pouringHourGlass => SpinKitPouringHourGlass(
+        color: color,
+        size: size,
+      ),
+      DelayAnimationType.squareCircle => SpinKitSquareCircle(
+        color: color,
+        size: size,
+      ),
+      DelayAnimationType.threeRotatingDots =>
+        LoadingAnimationWidget.threeRotatingDots(
+          color: color,
+          size: size,
+        ),
+      DelayAnimationType.fourRotatingDots =>
+        LoadingAnimationWidget.fourRotatingDots(
+          color: color,
+          size: size,
+        ),
+      DelayAnimationType.staggeredDotsWave =>
+        LoadingAnimationWidget.staggeredDotsWave(
+          color: color,
+          size: size,
+        ),
+      DelayAnimationType.dotsTriangle => LoadingAnimationWidget.dotsTriangle(
+        color: color,
+        size: size,
+      ),
       DelayAnimationType.rotatingCircle => SpinKitRotatingCircle(
         color: color,
         size: size,
@@ -160,10 +188,6 @@ class ProxyCard extends StatelessWidget {
         size: size,
       ),
       DelayAnimationType.circle => SpinKitCircle(color: color, size: size),
-      DelayAnimationType.fadingCircle => SpinKitFadingCircle(
-        color: color,
-        size: size,
-      ),
       DelayAnimationType.fadingFour => SpinKitFadingFour(
         color: color,
         size: size,
