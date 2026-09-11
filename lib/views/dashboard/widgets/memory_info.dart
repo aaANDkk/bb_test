@@ -81,23 +81,6 @@ class _MemoryInfoState extends State<MemoryInfo> {
     }
   }
 
-  Future<void> _showMemoryInfoDialog(BuildContext context) async {
-    await globalState.showCommonDialog<void>(
-      child: CommonDialog(
-        title: appLocalizations.memoryInfo,
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-            child: Text(appLocalizations.confirm),
-          ),
-        ],
-        child: Text(appLocalizations.memoryInfoDesc),
-      ),
-    );
-  }
-
   Future<void> _handleForceGC(BuildContext context) async {
     final result = await globalState.showCommonDialog<bool>(
       child: CommonDialog(
@@ -132,79 +115,91 @@ class _MemoryInfoState extends State<MemoryInfo> {
       height: getWidgetHeight(1),
       child: CommonCard(
         onPressed: () => showCoreStatusDialog(context),
-        onLongPress: () => _handleForceGC(context),
+        onLongPress: () => showCoreStatusDialog(context),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              height: globalState.measure.titleMediumHeight + 16,
+            Padding(
               padding: baseInfoEdgeInsets.copyWith(bottom: 0),
               child: Row(
-                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.memory,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                  const SizedBox(width: 8),
                   Flexible(
                     flex: 1,
-                    child: TooltipText(
-                      text: Text(
-                        appLocalizations.memoryInfo,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 2),
-                  AspectRatio(
-                    aspectRatio: 1,
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () => _showMemoryInfoDialog(context),
-                      icon: Icon(
-                        size: 16.ap,
-                        Icons.info_outline,
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: baseInfoEdgeInsets.copyWith(top: 0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: globalState.measure.bodyMediumHeight + 2,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          _memoryValue.showValue,
-                          style: context.textTheme.bodyMedium?.toLight.adjustSize(
-                            1,
-                          ),
+                        Icon(
+                          Icons.memory,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                         const SizedBox(width: 8),
-                        Text(
-                          _memoryValue.showUnit,
-                          style: context.textTheme.bodyMedium?.toLight.adjustSize(
-                            1,
+                        Flexible(
+                          flex: 1,
+                          child: TooltipText(
+                            text: Text(
+                              appLocalizations.memoryInfo,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: context.colorScheme.onSurfaceVariant,
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
+                  const SizedBox(width: 8),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(
+                      minWidth: 24,
+                      minHeight: 24,
+                    ),
+                    onPressed: () => _handleForceGC(context),
+                    icon: Icon(
+                      size: 16.ap,
+                      Icons.settings_outlined,
+                      color: context.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
                 ],
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: Container(
+                padding: baseInfoEdgeInsets.copyWith(top: 0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: globalState.measure.bodyMediumHeight + 2,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            _memoryValue.showValue,
+                            style: context.textTheme.bodyMedium?.toLight.adjustSize(
+                              1,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            _memoryValue.showUnit,
+                            style: context.textTheme.bodyMedium?.toLight.adjustSize(
+                              1,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
