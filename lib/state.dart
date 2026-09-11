@@ -155,6 +155,7 @@ class GlobalState {
       );
     }
     await EmojiManager.init();
+    await request.preloadIpCache();
   }
 
   bool get isAndroidTV => _isAndroidTV ?? false;

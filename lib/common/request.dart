@@ -438,6 +438,38 @@ class Request {
 
   final Map<String, IpInfo> _memoryIpCache = {};
 
+  Future<void> preloadIpCache() async {
+    try {
+      final prefs = await preferences.sharedPreferencesCompleter.future;
+      final cacheStr = prefs?.getString(_ipCacheKey);
+      if (cacheStr == null || cacheStr.isEmpty) return;
+
+      final dynamic decoded = json.decode(cacheStr);
+      if (decoded is! Map) return;
+
+      final rawMap = Map<String, dynamic>.from(decoded);
+      final now = DateTime.now().millisecondsSinceEpoch;
+      final maxAgeMs = _cacheDuration.inMilliseconds;
+
+      for (final entry in rawMap.entries) {
+        final val = entry.value;
+        if (val is Map) {
+          final valMap = Map<String, dynamic>.from(val);
+          final timestamp = valMap['timestamp'] as num?;
+          if (timestamp != null && (now - timestamp) < maxAgeMs) {
+            if (valMap['data'] is Map) {
+              try {
+                _memoryIpCache[entry.key] = IpInfo.fromJson(
+                  Map<String, dynamic>.from(valMap['data'] as Map),
+                );
+              } catch (_) {}
+            }
+          }
+        }
+      }
+    } catch (_) {}
+  }
+
   IpInfo? getMemoryCachedIp(String ip) {
     final isZh = Intl.getCurrentLocale().toLowerCase().startsWith('zh');
     return _memoryIpCache['${ip}_${isZh ? 'zh' : 'en'}'];
