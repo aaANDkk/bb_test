@@ -91,18 +91,12 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       ipInfo != null
-                          ? Text(
+                          ? EmojiText(
                               _countryCodeToEmoji(ipInfo.countryCode),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
-                                  ?.toLight
-                                  .copyWith(
-                                    fontFamily: FontFamily.twEmoji.value,
-                                    fontFamilyFallback: [
-                                      FontFamily.twEmoji.value,
-                                    ],
-                                  ),
+                                  ?.toLight,
                             )
                           : Icon(
                               Icons.network_check,
