@@ -6,6 +6,8 @@ import 'package:bett_box/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'card.dart';
+
 class ProxiesAdvancedSettings extends ConsumerWidget {
   const ProxiesAdvancedSettings({super.key});
 
@@ -253,6 +255,18 @@ class _DelayAnimationItem extends ConsumerWidget {
         options: DelayAnimationType.values,
         value: delayAnimation,
         textBuilder: (value) => _getTextForDelayAnimation(value),
+        trailingBuilder: (value) => SizedBox(
+          width: 32,
+          height: 24,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: buildDelayAnimationWidget(
+              value,
+              size: 16.0,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+        ),
         onChanged: (value) {
           if (value != null) {
             ref.read(proxiesStyleSettingProvider.notifier).updateState(

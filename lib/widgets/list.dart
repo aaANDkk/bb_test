@@ -89,12 +89,14 @@ class OptionsDelegate<T> extends Delegate {
   final String title;
   final T value;
   final String Function(T value) textBuilder;
+  final Widget Function(T value)? trailingBuilder;
   final Function(T? value) onChanged;
 
   const OptionsDelegate({
     required this.title,
     required this.options,
     required this.textBuilder,
+    this.trailingBuilder,
     required this.value,
     required this.onChanged,
   });
@@ -375,6 +377,7 @@ class ListItem<T> extends StatelessWidget {
               title: optionsDelegate.title,
               options: optionsDelegate.options,
               textBuilder: optionsDelegate.textBuilder,
+              trailingBuilder: optionsDelegate.trailingBuilder,
               value: optionsDelegate.value,
             ),
           );

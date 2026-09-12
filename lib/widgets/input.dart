@@ -18,12 +18,14 @@ class OptionsDialog<T> extends StatelessWidget {
   final List<T> options;
   final T value;
   final String Function(T value) textBuilder;
+  final Widget Function(T value)? trailingBuilder;
 
   const OptionsDialog({
     super.key,
     required this.title,
     required this.options,
     required this.textBuilder,
+    this.trailingBuilder,
     required this.value,
   });
 
@@ -43,9 +45,11 @@ class OptionsDialog<T> extends StatelessWidget {
                   Navigator.of(context).pop(option);
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 12,
+                    top: 12,
+                    bottom: 12,
                   ),
                   child: Row(
                     children: [
@@ -69,6 +73,10 @@ class OptionsDialog<T> extends StatelessWidget {
                           maxLines: 1,
                         ),
                       ),
+                      if (trailingBuilder != null) ...[
+                        const SizedBox(width: 8),
+                        trailingBuilder!(option),
+                      ],
                     ],
                   ),
                 ),
