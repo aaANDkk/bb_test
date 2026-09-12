@@ -708,6 +708,6 @@
   "proxyGroupsCount": "Proxy Groups",
   "ruleProvidersCount": "Rule Providers",
   "proxyProvidersCount": "Proxy Providers",
-  "geodataUse": "Geodata Use",
+  "geodataUse": "Geo Load",
   "itemsCount": "{count}"
 }
