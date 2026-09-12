@@ -101,6 +101,7 @@ class _StartFabState extends ConsumerState<StartFab> {
             theme.colorScheme.onPrimaryContainer;
     return base.copyWith(
       color: foregroundColor,
+      fontWeight: FontWeight.bold,
       height: 1.15,
       fontFeatures: const [FontFeature.tabularFigures()],
     );

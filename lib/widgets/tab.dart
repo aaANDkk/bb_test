@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 import 'dart:math';
-import 'dart:ui' show FontVariation;
 
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
@@ -36,7 +35,7 @@ const double _kContentPressedMinOpacity = 0.2;
 
 const double _kFontSize = 13.0;
 
-const FontWeight _kFontWeight = FontWeight.w400;
+const FontWeight _kFontWeight = FontWeight.w500;
 
 const FontWeight _kHighlightedFontWeight = FontWeight.w600;
 
@@ -502,9 +501,6 @@ class _SegmentState<T> extends State<_Segment<T>>
                   fontWeight: widget.highlighted
                       ? _kHighlightedFontWeight
                       : _kFontWeight,
-                  fontVariations: [
-                    FontVariation('wght', widget.highlighted ? 600 : 400),
-                  ],
                   fontSize: _kFontSize,
                   color: widget.enabled ? null : _kDisabledContentColor,
                 ),

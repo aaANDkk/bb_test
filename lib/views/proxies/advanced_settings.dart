@@ -256,10 +256,9 @@ class _DelayAnimationItem extends ConsumerWidget {
         value: delayAnimation,
         textBuilder: (value) => _getTextForDelayAnimation(value),
         trailingBuilder: (value) => SizedBox(
-          width: 32,
+          width: 24,
           height: 24,
-          child: Align(
-            alignment: Alignment.centerRight,
+          child: Center(
             child: buildDelayAnimationWidget(
               value,
               size: 16.0,

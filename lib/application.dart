@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:ui' show FontVariation;
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:bett_box/clash/clash.dart';
 import 'package:bett_box/common/common.dart';
 import 'package:bett_box/common/external_control.dart';
@@ -48,64 +46,6 @@ class ApplicationState extends ConsumerState<Application>
     int? primaryColor,
   }) {
     return ref.read(genColorSchemeProvider(brightness));
-  }
-
-  TextTheme _buildThemeTextTheme({
-    required Brightness brightness,
-    required ColorScheme colorScheme,
-    String? fontFamily,
-  }) {
-    final base = Typography.material2021(
-      platform: defaultTargetPlatform,
-      colorScheme: colorScheme,
-    );
-    final textTheme = brightness == Brightness.dark ? base.white : base.black;
-
-    TextStyle enhance(TextStyle? original, FontWeight weight, double wght) {
-      return (original ?? const TextStyle()).copyWith(
-        fontFamily: fontFamily,
-        fontWeight: weight,
-        fontVariations: [FontVariation('wght', wght)],
-      );
-    }
-
-    return textTheme.copyWith(
-      displayLarge: enhance(textTheme.displayLarge, FontWeight.w400, 400),
-      displayMedium: enhance(textTheme.displayMedium, FontWeight.w400, 400),
-      displaySmall: enhance(textTheme.displaySmall, FontWeight.w400, 400),
-      headlineLarge: enhance(textTheme.headlineLarge, FontWeight.w700, 700),
-      headlineMedium: enhance(textTheme.headlineMedium, FontWeight.w700, 700),
-      headlineSmall: enhance(textTheme.headlineSmall, FontWeight.w700, 700),
-      titleLarge: enhance(textTheme.titleLarge, FontWeight.w700, 700),
-      titleMedium: enhance(textTheme.titleMedium, FontWeight.w600, 600),
-      titleSmall: enhance(textTheme.titleSmall, FontWeight.w600, 600),
-      bodyLarge: enhance(textTheme.bodyLarge, FontWeight.w400, 400),
-      bodyMedium: enhance(textTheme.bodyMedium, FontWeight.w400, 400),
-      bodySmall: enhance(textTheme.bodySmall, FontWeight.w400, 400),
-      labelLarge: enhance(textTheme.labelLarge, FontWeight.w600, 600),
-      labelMedium: enhance(textTheme.labelMedium, FontWeight.w600, 600),
-      labelSmall: enhance(textTheme.labelSmall, FontWeight.w500, 500),
-    );
-  }
-
-  ListTileThemeData _buildListTileTheme({
-    required ColorScheme colorScheme,
-    String? fontFamily,
-  }) {
-    return ListTileThemeData(
-      titleTextStyle: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-        fontFamily: fontFamily,
-        fontVariations: const [FontVariation('wght', 600)],
-      ),
-      subtitleTextStyle: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        fontFamily: fontFamily,
-        fontVariations: const [FontVariation('wght', 400)],
-      ),
-    );
   }
 
   @override
@@ -269,15 +209,6 @@ class ApplicationState extends ConsumerState<Application>
                     ? customFontFamily
                     : null;
 
-                final lightColorScheme = _getAppColorScheme(
-                  brightness: Brightness.light,
-                  primaryColor: themeProps.primaryColor,
-                );
-                final darkColorScheme = _getAppColorScheme(
-                  brightness: Brightness.dark,
-                  primaryColor: themeProps.primaryColor,
-                ).toPureBlack(themeProps.pureBlack);
-
                 return MaterialApp(
               debugShowCheckedModeBanner: false,
               navigatorKey: globalState.navigatorKey,
@@ -316,23 +247,20 @@ class ApplicationState extends ConsumerState<Application>
               theme: ThemeData(
                 useMaterial3: true,
                 pageTransitionsTheme: _pageTransitionsTheme,
-                colorScheme: lightColorScheme,
-                fontFamily: fontFamily,
-                textTheme: _buildThemeTextTheme(
+                colorScheme: _getAppColorScheme(
                   brightness: Brightness.light,
-                  colorScheme: lightColorScheme,
-                  fontFamily: fontFamily,
+                  primaryColor: themeProps.primaryColor,
                 ),
-                listTileTheme: _buildListTileTheme(
-                  colorScheme: lightColorScheme,
-                  fontFamily: fontFamily,
-                ),
+                fontFamily: fontFamily,
                 floatingActionButtonTheme: FloatingActionButtonThemeData(
                   shape: RoundedSuperellipseBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                   elevation: 3,
                   hoverElevation: 5,
+                  extendedTextStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 dialogTheme: DialogThemeData(
                   shape: RoundedSuperellipseBorder(
@@ -371,7 +299,10 @@ class ApplicationState extends ConsumerState<Application>
                   ),
                 ),
                 dividerTheme: DividerThemeData(
-                  color: lightColorScheme.outlineVariant.withValues(alpha: 0.6),
+                  color: _getAppColorScheme(
+                    brightness: Brightness.light,
+                    primaryColor: themeProps.primaryColor,
+                  ).outlineVariant.withValues(alpha: 0.6),
                   thickness: 1,
                   space: 1,
                 ),
@@ -382,13 +313,19 @@ class ApplicationState extends ConsumerState<Application>
                   enabledBorder: SuperellipseInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(18)),
                     borderSide: BorderSide(
-                      color: lightColorScheme.outlineVariant.withValues(alpha: 0.6),
+                      color: _getAppColorScheme(
+                        brightness: Brightness.light,
+                        primaryColor: themeProps.primaryColor,
+                      ).outlineVariant.withValues(alpha: 0.6),
                     ),
                   ),
                   focusedBorder: SuperellipseInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(18)),
                     borderSide: BorderSide(
-                      color: lightColorScheme.primary,
+                      color: _getAppColorScheme(
+                        brightness: Brightness.light,
+                        primaryColor: themeProps.primaryColor,
+                      ).primary,
                       width: 2,
                     ),
                   ),
@@ -398,7 +335,10 @@ class ApplicationState extends ConsumerState<Application>
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
                   side: BorderSide(
-                    color: lightColorScheme.outlineVariant.withValues(alpha: 0.6),
+                    color: _getAppColorScheme(
+                      brightness: Brightness.light,
+                      primaryColor: themeProps.primaryColor,
+                    ).outlineVariant.withValues(alpha: 0.6),
                   ),
                 ),
                 tooltipTheme: TooltipThemeData(
@@ -410,30 +350,26 @@ class ApplicationState extends ConsumerState<Application>
                     color: Colors.white,
                     fontSize: 12,
                     fontFamily: fontFamily,
-                    fontVariations: const [FontVariation('wght', 500)],
                   ),
                 ),
               ),
               darkTheme: ThemeData(
                 useMaterial3: true,
                 pageTransitionsTheme: _pageTransitionsTheme,
-                colorScheme: darkColorScheme,
-                fontFamily: fontFamily,
-                textTheme: _buildThemeTextTheme(
+                colorScheme: _getAppColorScheme(
                   brightness: Brightness.dark,
-                  colorScheme: darkColorScheme,
-                  fontFamily: fontFamily,
-                ),
-                listTileTheme: _buildListTileTheme(
-                  colorScheme: darkColorScheme,
-                  fontFamily: fontFamily,
-                ),
+                  primaryColor: themeProps.primaryColor,
+                ).toPureBlack(themeProps.pureBlack),
+                fontFamily: fontFamily,
                 floatingActionButtonTheme: FloatingActionButtonThemeData(
                   shape: RoundedSuperellipseBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                   elevation: 3,
                   hoverElevation: 5,
+                  extendedTextStyle: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 dialogTheme: DialogThemeData(
                   shape: RoundedSuperellipseBorder(
@@ -472,7 +408,14 @@ class ApplicationState extends ConsumerState<Application>
                   ),
                 ),
                 dividerTheme: DividerThemeData(
-                  color: darkColorScheme.outlineVariant.withValues(alpha: 0.45),
+                  color:
+                      _getAppColorScheme(
+                            brightness: Brightness.dark,
+                            primaryColor: themeProps.primaryColor,
+                          )
+                          .toPureBlack(themeProps.pureBlack)
+                          .outlineVariant
+                          .withValues(alpha: 0.45),
                   thickness: 1,
                   space: 1,
                 ),
@@ -483,13 +426,23 @@ class ApplicationState extends ConsumerState<Application>
                   enabledBorder: SuperellipseInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(18)),
                     borderSide: BorderSide(
-                      color: darkColorScheme.outlineVariant.withValues(alpha: 0.45),
+                      color:
+                          _getAppColorScheme(
+                                brightness: Brightness.dark,
+                                primaryColor: themeProps.primaryColor,
+                              )
+                              .toPureBlack(themeProps.pureBlack)
+                              .outlineVariant
+                              .withValues(alpha: 0.45),
                     ),
                   ),
                   focusedBorder: SuperellipseInputBorder(
                     borderRadius: const BorderRadius.all(Radius.circular(18)),
                     borderSide: BorderSide(
-                      color: darkColorScheme.primary,
+                      color: _getAppColorScheme(
+                        brightness: Brightness.dark,
+                        primaryColor: themeProps.primaryColor,
+                      ).toPureBlack(themeProps.pureBlack).primary,
                       width: 2,
                     ),
                   ),
@@ -499,7 +452,14 @@ class ApplicationState extends ConsumerState<Application>
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
                   side: BorderSide(
-                    color: darkColorScheme.outlineVariant.withValues(alpha: 0.45),
+                    color:
+                        _getAppColorScheme(
+                              brightness: Brightness.dark,
+                              primaryColor: themeProps.primaryColor,
+                            )
+                            .toPureBlack(themeProps.pureBlack)
+                            .outlineVariant
+                            .withValues(alpha: 0.45),
                   ),
                 ),
                 tooltipTheme: TooltipThemeData(
@@ -511,7 +471,6 @@ class ApplicationState extends ConsumerState<Application>
                     color: Colors.white,
                     fontSize: 12,
                     fontFamily: fontFamily,
-                    fontVariations: const [FontVariation('wght', 500)],
                   ),
                 ),
               ),

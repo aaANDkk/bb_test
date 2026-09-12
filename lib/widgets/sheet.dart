@@ -127,7 +127,10 @@ class AdaptiveSheetScaffold extends StatelessWidget {
           : true,
       centerTitle: bottomSheet,
       backgroundColor: backgroundColor,
-      title: EmojiText(title),
+      title: EmojiText(
+        title,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
       actions: genActions([
         if (actions.isEmpty && sideSheet) CloseButton(),
         ...actions,

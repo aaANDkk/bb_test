@@ -45,7 +45,10 @@ class CommonDialog extends ConsumerWidget {
         shape: RoundedSuperellipseBorder(
           borderRadius: BorderRadius.circular(35),
         ),
-        title: EmojiText(title),
+        title: EmojiText(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: actions,
         contentPadding: padding,
         backgroundColor: backgroundColor,

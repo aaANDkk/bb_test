@@ -478,7 +478,10 @@ class EditProfileViewState extends State<EditProfileView> {
               clipBehavior: Clip.none,
               heroTag: null,
               onPressed: _handleConfirm,
-              label: Text(appLocalizations.save),
+              label: Text(
+                appLocalizations.save,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
               icon: const Icon(Icons.save),
             ),
           ),

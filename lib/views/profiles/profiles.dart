@@ -156,7 +156,10 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
           heroTag: null,
           onPressed: _handleShowAddExtendPage,
           icon: const Icon(Icons.add),
-          label: Text(appLocalizations.addProfile),
+          label: Text(
+            appLocalizations.addProfile,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );

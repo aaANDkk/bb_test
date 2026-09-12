@@ -622,7 +622,10 @@ class _DelayTestButtonState extends ConsumerState<DelayTestButton>
                 ),
                 label: Transform.scale(
                   scale: contentScale,
-                  child: Text(appLocalizations.startTest),
+                  child: Text(
+                    appLocalizations.startTest,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),

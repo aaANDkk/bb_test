@@ -216,6 +216,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
                 : appLocalizations.selectedCountTitle(
                     '${_appBarState.value.editState?.editCount ?? 0}',
                   ),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           );
   }
 
