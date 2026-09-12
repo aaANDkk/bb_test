@@ -537,7 +537,7 @@
   "tryManualRefresh": "请尝试手动刷新",
   "refreshAppList": "刷新应用列表",
   "refreshAppListConfirm": "是否刷新应用列表？",
-  "switchToDomesticIp": "获取国内 IP",
+  "switchToDomesticIp": "获取直连 IP",
   "listen": "监听",
   "undo": "撤销",
   "redo": "重做",

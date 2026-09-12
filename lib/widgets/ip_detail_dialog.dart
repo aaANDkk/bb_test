@@ -276,7 +276,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
           if (provinceCity.isNotEmpty)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.location_city_outlined),
+              leading: const Icon(Icons.my_location_rounded),
               title: Text(appLocalizations.provinceAndCity),
               subtitle: Text(provinceCity),
             ),

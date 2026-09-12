@@ -581,7 +581,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
         value: rulesText,
       ),
       _MetricItem(
-        icon: Icons.dns_rounded,
+        icon: Icons.format_list_bulleted_rounded,
         label: appLocalizations.proxiesCount,
         value: proxiesText,
       ),
@@ -598,7 +598,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
         ),
       if ((status?.proxyProviders ?? 0) > 0)
         _MetricItem(
-          icon: Icons.cloud_sync_rounded,
+          icon: Icons.horizontal_split_rounded,
           label: appLocalizations.proxyProvidersCount,
           value: proxyProvidersText,
         ),
@@ -630,7 +630,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
             children: [
               Expanded(
                 child: _buildMiniStatCard(
-                  icon: Icons.alt_route_rounded,
+                  icon: Icons.swap_calls_rounded,
                   iconColor: context.colorScheme.primary,
                   label: appLocalizations.activeGoroutines,
                   value: goroutinesText,

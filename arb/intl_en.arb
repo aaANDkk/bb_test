@@ -537,7 +537,7 @@
   "tryManualRefresh": "Please try manual refresh",
   "refreshAppList": "Refresh App List",
   "refreshAppListConfirm": "Refresh the app list?",
-  "switchToDomesticIp": "Get Domestic IP",
+  "switchToDomesticIp": "Get Direct IP",
   "listen": "Listen",
   "undo": "Undo",
   "redo": "Redo",

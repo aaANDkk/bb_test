@@ -813,7 +813,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "submit": MessageLookupByLibrary.simpleMessage("提交"),
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "switchLabel": MessageLookupByLibrary.simpleMessage("开关"),
-    "switchToDomesticIp": MessageLookupByLibrary.simpleMessage("获取国内 IP"),
+    "switchToDomesticIp": MessageLookupByLibrary.simpleMessage("获取直连 IP"),
     "sync": MessageLookupByLibrary.simpleMessage("同步"),
     "syncAll": MessageLookupByLibrary.simpleMessage("全部同步"),
     "syncFailed": MessageLookupByLibrary.simpleMessage("同步失败"),

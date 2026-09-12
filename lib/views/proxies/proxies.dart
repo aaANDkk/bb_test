@@ -73,7 +73,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
         popup: CommonPopupMenu(
           items: [
             PopupMenuItemData(
-              icon: Icons.tune,
+              icon: Icons.build_outlined,
               label: appLocalizations.settings,
               onPressed: () {
                 showSheet(
@@ -120,7 +120,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
             ),
             if (!_isTab)
               PopupMenuItemData(
-                icon: Icons.style_outlined,
+                icon: Icons.burst_mode_outlined,
                 label: appLocalizations.iconConfiguration,
                 onPressed: () {
                   showExtend(

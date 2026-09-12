@@ -1145,7 +1145,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "success": MessageLookupByLibrary.simpleMessage("Success"),
     "switchLabel": MessageLookupByLibrary.simpleMessage("Switch"),
     "switchToDomesticIp": MessageLookupByLibrary.simpleMessage(
-      "Get Domestic IP",
+      "Get Direct IP",
     ),
     "sync": MessageLookupByLibrary.simpleMessage("Sync"),
     "syncAll": MessageLookupByLibrary.simpleMessage("Sync All"),

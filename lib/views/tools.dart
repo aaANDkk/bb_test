@@ -275,7 +275,7 @@ class _ToolViewState extends ConsumerState<ToolsView> {
           title: appLocalizations.accessControl,
           subtitle: appLocalizations.accessControlDesc,
           category: settingsCategory,
-          leading: const Icon(Icons.view_list),
+          leading: const Icon(Icons.fact_check_rounded),
           onTap: (context, _) => _pushPage(
             context,
             appLocalizations.appAccessControl,
@@ -286,7 +286,7 @@ class _ToolViewState extends ConsumerState<ToolsView> {
         title: appLocalizations.basicConfig,
         subtitle: appLocalizations.basicConfigDesc,
         category: settingsCategory,
-        leading: const Icon(Icons.edit),
+        leading: const Icon(Icons.motion_photos_on),
         onTap: (context, _) => _pushPage(
           context,
           appLocalizations.basicConfig,
@@ -297,7 +297,7 @@ class _ToolViewState extends ConsumerState<ToolsView> {
         title: appLocalizations.otherSettings,
         subtitle: appLocalizations.otherSettingsDesc,
         category: settingsCategory,
-        leading: const Icon(Icons.settings_suggest_outlined),
+        leading: const Icon(Icons.auto_awesome_sharp),
         onTap: (context, _) => _pushPage(
           context,
           appLocalizations.otherSettings,
@@ -1559,7 +1559,7 @@ class _AccessItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.next(
-      leading: const Icon(Icons.view_list),
+      leading: const Icon(Icons.fact_check_rounded),
       title: Text(appLocalizations.accessControl),
       subtitle: Text(appLocalizations.accessControlDesc),
       delegate: NextDelegate(
@@ -1576,7 +1576,7 @@ class _ConfigItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.next(
-      leading: const Icon(Icons.edit),
+      leading: const Icon(Icons.motion_photos_on),
       title: Text(appLocalizations.basicConfig),
       subtitle: Text(appLocalizations.basicConfigDesc),
       delegate: NextDelegate(
@@ -1593,7 +1593,7 @@ class _OtherSettingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.next(
-      leading: const Icon(Icons.settings_suggest_outlined),
+      leading: const Icon(Icons.auto_awesome_sharp),
       title: Text(appLocalizations.otherSettings),
       subtitle: Text(appLocalizations.otherSettingsDesc),
       delegate: NextDelegate(
