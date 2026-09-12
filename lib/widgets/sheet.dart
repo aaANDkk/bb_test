@@ -128,6 +128,7 @@ class AdaptiveSheetScaffold extends StatelessWidget {
           ? false
           : true,
       centerTitle: bottomSheet,
+      titleSpacing: bottomSheet ? null : 0.0,
       backgroundColor: backgroundColor,
       title: EmojiText(
         title,

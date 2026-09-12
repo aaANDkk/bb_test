@@ -386,6 +386,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
           absorbing: _isBusy || _isLoading,
           child: CommonScaffold(
             appBar: AppBar(
+              titleSpacing: 0.0,
               title: TextField(
                 focusNode: _titleFocusNode,
                 enabled: widget.titleEditable && !readOnly,

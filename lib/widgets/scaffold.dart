@@ -295,11 +295,16 @@ class CommonScaffoldState extends State<CommonScaffold> {
           widget.appBar ??
               ValueListenableBuilder<AppBarState>(
                 valueListenable: _appBarState,
-                builder: (_, state, _) {
+                builder: (context, state, _) {
+                  final parentRoute = ModalRoute.of(context);
+                  final canPop = parentRoute?.canPop ?? false;
+                  final leading = _buildLeading();
+                  final hasLeading = leading != null || canPop;
                   return _buildAppBarWrap(
                     AppBar(
                       centerTitle: widget.centerTitle ?? false,
-                      leading: _buildLeading(),
+                      leading: leading,
+                      titleSpacing: hasLeading ? 0.0 : null,
                       title: _buildTitle(state.searchState),
                       actions: _buildActions(
                         state.searchState != null,
