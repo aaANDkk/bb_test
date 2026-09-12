@@ -65,7 +65,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
     return Padding(
       padding: const EdgeInsets.only(top: 14, bottom: 8),
       child: Text(
-        '［$title］',
+        '［ $title ］',
         style: context.textTheme.labelMedium?.copyWith(
           color: context.colorScheme.primary,
           fontWeight: FontWeight.bold,
