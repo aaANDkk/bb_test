@@ -576,11 +576,6 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
 
     final metricItems = <_MetricItem>[
       _MetricItem(
-        icon: Icons.rule_rounded,
-        label: appLocalizations.rulesCount,
-        value: rulesText,
-      ),
-      _MetricItem(
         icon: Icons.format_list_bulleted_rounded,
         label: appLocalizations.proxiesCount,
         value: proxiesText,
@@ -590,18 +585,21 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
         label: appLocalizations.proxyGroupsCount,
         value: proxyGroupsText,
       ),
-      if ((status?.ruleProviders ?? 0) > 0)
-        _MetricItem(
-          icon: Icons.library_books_rounded,
-          label: appLocalizations.ruleProvidersCount,
-          value: ruleProvidersText,
-        ),
-      if ((status?.proxyProviders ?? 0) > 0)
-        _MetricItem(
-          icon: Icons.horizontal_split_rounded,
-          label: appLocalizations.proxyProvidersCount,
-          value: proxyProvidersText,
-        ),
+      _MetricItem(
+        icon: Icons.airplanemode_on,
+        label: appLocalizations.proxyProvidersCount,
+        value: proxyProvidersText,
+      ),
+      _MetricItem(
+        icon: Icons.library_books_rounded,
+        label: appLocalizations.ruleProvidersCount,
+        value: ruleProvidersText,
+      ),
+      _MetricItem(
+        icon: Icons.rule_rounded,
+        label: appLocalizations.rulesCount,
+        value: rulesText,
+      ),
     ];
 
     return CommonDialog(
