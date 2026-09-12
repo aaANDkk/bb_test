@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' show FontVariation;
 
 import 'package:bett_box/clash/clash.dart';
 import 'package:bett_box/common/common.dart';
@@ -480,7 +481,10 @@ class EditProfileViewState extends State<EditProfileView> {
               onPressed: _handleConfirm,
               label: Text(
                 appLocalizations.save,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontVariations: [FontVariation('wght', 700)],
+                ),
               ),
               icon: const Icon(Icons.save),
             ),

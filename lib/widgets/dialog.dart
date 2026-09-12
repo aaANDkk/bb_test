@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui' show FontVariation;
 
 import 'package:bett_box/providers/app.dart';
 import 'package:bett_box/widgets/pop_scope.dart';
@@ -47,7 +48,10 @@ class CommonDialog extends ConsumerWidget {
         ),
         title: EmojiText(
           title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontVariations: [FontVariation('wght', 700)],
+          ),
         ),
         actions: actions,
         contentPadding: padding,

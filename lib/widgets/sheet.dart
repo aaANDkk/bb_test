@@ -1,3 +1,5 @@
+import 'dart:ui' show FontVariation;
+
 import 'package:bett_box/common/common.dart';
 import 'package:bett_box/enum/enum.dart';
 import 'package:bett_box/models/models.dart';
@@ -129,7 +131,10 @@ class AdaptiveSheetScaffold extends StatelessWidget {
       backgroundColor: backgroundColor,
       title: EmojiText(
         title,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontVariations: [FontVariation('wght', 700)],
+        ),
       ),
       actions: genActions([
         if (actions.isEmpty && sideSheet) CloseButton(),

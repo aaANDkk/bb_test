@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show FontVariation;
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
@@ -260,6 +261,7 @@ class ApplicationState extends ConsumerState<Application>
                   hoverElevation: 5,
                   extendedTextStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontVariations: [FontVariation('wght', 700)],
                   ),
                 ),
                 dialogTheme: DialogThemeData(
@@ -369,6 +371,7 @@ class ApplicationState extends ConsumerState<Application>
                   hoverElevation: 5,
                   extendedTextStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontVariations: [FontVariation('wght', 700)],
                   ),
                 ),
                 dialogTheme: DialogThemeData(

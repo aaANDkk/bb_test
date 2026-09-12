@@ -102,6 +102,7 @@ class _StartFabState extends ConsumerState<StartFab> {
     return base.copyWith(
       color: foregroundColor,
       fontWeight: FontWeight.bold,
+      fontVariations: const [FontVariation('wght', 700)],
       height: 1.15,
       fontFeatures: const [FontFeature.tabularFigures()],
     );

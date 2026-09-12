@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui' show FontVariation;
 
 import 'package:bett_box/clash/clash.dart';
 import 'package:bett_box/common/common.dart';
@@ -69,6 +70,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
         style: context.textTheme.labelMedium?.copyWith(
           color: context.colorScheme.primary,
           fontWeight: FontWeight.bold,
+          fontVariations: const [FontVariation('wght', 700)],
           letterSpacing: 0.5,
         ),
       ),
@@ -338,6 +340,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
                   value,
                   style: context.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
+                    fontVariations: const [FontVariation('wght', 700)],
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -393,6 +396,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
                     item.value,
                     style: context.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
+                      fontVariations: const [FontVariation('wght', 700)],
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -407,6 +411,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
               item.value,
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
+                fontVariations: const [FontVariation('wght', 700)],
               ),
             ),
           ],

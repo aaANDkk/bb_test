@@ -1,3 +1,5 @@
+import 'dart:ui' show FontVariation;
+
 import 'package:bett_box/common/common.dart';
 import 'package:bett_box/enum/enum.dart';
 import 'package:bett_box/models/models.dart';
@@ -129,6 +131,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
         widget.ip,
         style: context.textTheme.bodyMedium?.copyWith(
           fontWeight: FontWeight.bold,
+          fontVariations: const [FontVariation('wght', 700)],
         ),
       ),
       trailing: IconButton(

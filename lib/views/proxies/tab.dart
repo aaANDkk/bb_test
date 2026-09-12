@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui' show FontVariation;
 
 import 'package:bett_box/common/common.dart';
 import 'package:bett_box/enum/enum.dart';
@@ -624,7 +625,10 @@ class _DelayTestButtonState extends ConsumerState<DelayTestButton>
                   scale: contentScale,
                   child: Text(
                     appLocalizations.startTest,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontVariations: [FontVariation('wght', 700)],
+                    ),
                   ),
                 ),
               ),

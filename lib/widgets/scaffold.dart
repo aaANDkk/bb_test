@@ -1,6 +1,8 @@
+import 'dart:async';
+import 'dart:ui' show FontVariation;
+
 import 'package:bett_box/common/common.dart';
 import 'package:bett_box/enum/enum.dart';
-import 'dart:async';
 
 import 'package:bett_box/models/models.dart';
 import 'package:bett_box/providers/app.dart';
@@ -216,7 +218,10 @@ class CommonScaffoldState extends State<CommonScaffold> {
                 : appLocalizations.selectedCountTitle(
                     '${_appBarState.value.editState?.editCount ?? 0}',
                   ),
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontVariations: [FontVariation('wght', 700)],
+            ),
           );
   }
 
