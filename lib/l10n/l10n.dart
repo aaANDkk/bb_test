@@ -5864,6 +5864,36 @@ class AppLocalizations {
     );
   }
 
+  /// `Fading Cube`
+  String get fadingCube {
+    return Intl.message(
+      'Fading Cube',
+      name: 'fadingCube',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Folding Cube`
+  String get foldingCube {
+    return Intl.message(
+      'Folding Cube',
+      name: 'foldingCube',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pumping Heart`
+  String get pumpingHeart {
+    return Intl.message(
+      'Pumping Heart',
+      name: 'pumpingHeart',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Pouring Hour Glass`
   String get pouringHourGlass {
     return Intl.message(

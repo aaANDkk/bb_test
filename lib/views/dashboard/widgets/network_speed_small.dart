@@ -41,6 +41,9 @@ class NetworkSpeedSmall extends ConsumerWidget {
           onPressed: () {
             globalState.openUrl('https://ptclspeed.speedtestcustom.com');
           },
+          onLongPress: () {
+            globalState.openUrl('https://ptclspeed.speedtestcustom.com');
+          },
           info: Info(
             label: appLocalizations.networkSpeed,
             iconData: Icons.speed_sharp,

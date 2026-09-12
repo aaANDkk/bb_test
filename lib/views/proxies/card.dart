@@ -143,6 +143,18 @@ class ProxyCard extends StatelessWidget {
   ) {
     return switch (animationType) {
       DelayAnimationType.none => Icon(Icons.bolt, size: size),
+      DelayAnimationType.fadingCube => SpinKitFadingCube(
+        color: color,
+        size: size,
+      ),
+      DelayAnimationType.foldingCube => SpinKitFoldingCube(
+        color: color,
+        size: size,
+      ),
+      DelayAnimationType.pumpingHeart => SpinKitPumpingHeart(
+        color: color,
+        size: size,
+      ),
       DelayAnimationType.pouringHourGlass => SpinKitPouringHourGlass(
         color: color,
         size: size,

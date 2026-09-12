@@ -350,6 +350,9 @@ const _$ProxyCardTypeEnumMap = {
 
 const _$DelayAnimationTypeEnumMap = {
   DelayAnimationType.none: 'none',
+  DelayAnimationType.fadingCube: 'fadingCube',
+  DelayAnimationType.foldingCube: 'foldingCube',
+  DelayAnimationType.pumpingHeart: 'pumpingHeart',
   DelayAnimationType.pouringHourGlass: 'pouringHourGlass',
   DelayAnimationType.squareCircle: 'squareCircle',
   DelayAnimationType.threeRotatingDots: 'threeRotatingDots',

@@ -81,6 +81,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
           final isLoading = state.isLoading;
           return CommonCard(
             onPressed: ipInfo != null ? _showMoreIpInfoDialog : () {},
+            onLongPress: ipInfo != null ? _showMoreIpInfoDialog : () {},
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

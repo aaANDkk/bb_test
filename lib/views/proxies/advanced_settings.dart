@@ -215,6 +215,9 @@ class _DelayAnimationItem extends ConsumerWidget {
   String _getTextForDelayAnimation(DelayAnimationType type) {
     return switch (type) {
       DelayAnimationType.none => appLocalizations.noAnimation,
+      DelayAnimationType.fadingCube => appLocalizations.fadingCube,
+      DelayAnimationType.foldingCube => appLocalizations.foldingCube,
+      DelayAnimationType.pumpingHeart => appLocalizations.pumpingHeart,
       DelayAnimationType.pouringHourGlass => appLocalizations.pouringHourGlass,
       DelayAnimationType.squareCircle => appLocalizations.squareCircle,
       DelayAnimationType.threeRotatingDots =>

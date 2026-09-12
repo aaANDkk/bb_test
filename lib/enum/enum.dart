@@ -456,6 +456,9 @@ enum ScrollPositionCacheKeys { tools, profiles, proxiesList, proxiesTabList }
 
 enum DelayAnimationType {
   none,
+  fadingCube,
+  foldingCube,
+  pumpingHeart,
   pouringHourGlass,
   squareCircle,
   threeRotatingDots,

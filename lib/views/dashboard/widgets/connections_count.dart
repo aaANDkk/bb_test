@@ -68,6 +68,14 @@ class _ConnectionsCountState extends State<ConnectionsCount> {
             },
           );
         },
+        onLongPress: () {
+          showExtend(
+            context,
+            builder: (_, type) {
+              return const ConnectionsView(respectCurrentPage: false);
+            },
+          );
+        },
         child: Container(
           padding: baseInfoEdgeInsets.copyWith(top: 0),
           child: Align(
