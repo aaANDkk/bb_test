@@ -203,7 +203,7 @@ class CommonCard extends StatelessWidget {
 
     final isInteractive = onPressed != null || onLongPress != null;
     final card = OutlinedButton(
-      onLongPress: onLongPress,
+      onLongPress: isInteractive ? (onLongPress ?? () {}) : null,
       clipBehavior: Clip.antiAlias,
       style: ButtonStyle(
         padding: const WidgetStatePropertyAll(EdgeInsets.zero),

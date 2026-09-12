@@ -456,7 +456,7 @@ class _DashboardTitleDialogState extends State<_DashboardTitleDialog> {
         child: TextField(
           controller: _controller,
           decoration: InputDecoration(
-            hintText: '⚡️Bettbox',
+            hintText: 'Have fun with Bettbox',
             errorText: _errorText,
           ),
           onChanged: _validate,

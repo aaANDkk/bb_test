@@ -19,9 +19,6 @@ class IntranetIP extends ConsumerWidget {
         onPressed: (localIp != null && localIp.isNotEmpty)
             ? () => showIpDetailDialog(context, localIp)
             : () {},
-        onLongPress: (localIp != null && localIp.isNotEmpty)
-            ? () => showIpDetailDialog(context, localIp)
-            : () {},
         child: Container(
           padding: baseInfoEdgeInsets.copyWith(top: 0),
           child: Column(
