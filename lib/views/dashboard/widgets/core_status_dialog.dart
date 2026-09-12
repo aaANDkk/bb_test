@@ -193,10 +193,12 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
         : '0.0';
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+      decoration: ShapeDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
       ),
       child: Row(
         children: [
@@ -301,9 +303,11 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(12),
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
       ),
       child: Row(
         children: [
@@ -349,9 +353,11 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
   Widget _buildGridItem(_MetricItem item, {bool isFullWidth = false}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(12),
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
       ),
       child: Row(
         children: [
@@ -450,13 +456,15 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
       chips.add(
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-          decoration: BoxDecoration(
+          decoration: ShapeDecoration(
             color: context.colorScheme.surfaceContainerHighest.withValues(
               alpha: 0.5,
             ),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: context.colorScheme.outlineVariant.withValues(alpha: 0.5),
+            shape: RoundedSuperellipseBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(
+                color: context.colorScheme.outlineVariant.withValues(alpha: 0.5),
+              ),
             ),
           ),
           child: Text(
@@ -477,9 +485,11 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
         chips.add(
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            decoration: BoxDecoration(
+            decoration: ShapeDecoration(
               color: context.colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(12),
+              shape: RoundedSuperellipseBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
             child: Text(
               part,
@@ -496,9 +506,11 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(12),
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
       ),
       child: Row(
         children: [
