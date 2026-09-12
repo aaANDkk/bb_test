@@ -443,10 +443,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "global": MessageLookupByLibrary.simpleMessage("글로벌"),
     "go": MessageLookupByLibrary.simpleMessage("이동"),
     "goDownload": MessageLookupByLibrary.simpleMessage("다운로드 이동"),
-    "harmonyFont": MessageLookupByLibrary.simpleMessage("글꼴 복구"),
-    "harmonyFontDesc": MessageLookupByLibrary.simpleMessage(
-      "표시 이상 해결을 위해 내장 글꼴 사용",
-    ),
+    "harmonyFont": MessageLookupByLibrary.simpleMessage("사용자 정의 글꼴"),
+    "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("기본 시스템 글꼴, 활성화하여 원하는 글꼴 적용"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage("수정 사항을 캐시하시겠습니까?"),
     "healthCheckTimeout": MessageLookupByLibrary.simpleMessage("타임아웃 시간"),
     "healthCheckTimeoutDesc": MessageLookupByLibrary.simpleMessage(

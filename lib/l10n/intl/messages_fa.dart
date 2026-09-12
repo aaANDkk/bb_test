@@ -538,10 +538,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "global": MessageLookupByLibrary.simpleMessage("سراسر جهان"),
     "go": MessageLookupByLibrary.simpleMessage("رفتن"),
     "goDownload": MessageLookupByLibrary.simpleMessage("رفتن به دانلود"),
-    "harmonyFont": MessageLookupByLibrary.simpleMessage("ترمیم فونت"),
-    "harmonyFontDesc": MessageLookupByLibrary.simpleMessage(
-      "استفاده از فونت داخلی برای رفع مشکلات نمایش",
-    ),
+    "harmonyFont": MessageLookupByLibrary.simpleMessage("فونت سفارشی"),
+    "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("به طور پیش فرض فونت سیستم، برای اعمال فونت دلخواه خود فعال کنید"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage(
       "آیا تغییرات ذخیره شوند؟",
     ),

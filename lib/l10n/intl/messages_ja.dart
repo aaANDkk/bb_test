@@ -433,10 +433,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "global": MessageLookupByLibrary.simpleMessage("グローバル"),
     "go": MessageLookupByLibrary.simpleMessage("移動"),
     "goDownload": MessageLookupByLibrary.simpleMessage("ダウンロードへ"),
-    "harmonyFont": MessageLookupByLibrary.simpleMessage("フォント修復"),
-    "harmonyFontDesc": MessageLookupByLibrary.simpleMessage(
-      "表示異常を改善するため内蔵フォントを使用",
-    ),
+    "harmonyFont": MessageLookupByLibrary.simpleMessage("カスタムフォント"),
+    "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("デフォルトはシステムフォント、有効にして好みのフォントを適用"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage("変更をキャッシュしますか？"),
     "healthCheckTimeout": MessageLookupByLibrary.simpleMessage("タイムアウト時間"),
     "healthCheckTimeoutDesc": MessageLookupByLibrary.simpleMessage(

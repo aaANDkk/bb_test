@@ -544,10 +544,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "global": MessageLookupByLibrary.simpleMessage("Global"),
     "go": MessageLookupByLibrary.simpleMessage("Go"),
     "goDownload": MessageLookupByLibrary.simpleMessage("Download Now"),
-    "harmonyFont": MessageLookupByLibrary.simpleMessage("Font Fix"),
-    "harmonyFontDesc": MessageLookupByLibrary.simpleMessage(
-      "Use built-in font to fix display issues",
-    ),
+    "harmonyFont": MessageLookupByLibrary.simpleMessage("Custom Font"),
+    "harmonyFontDesc": MessageLookupByLibrary.simpleMessage("Use system font by default, enable to customize your favorite font"),
     "hasCacheChange": MessageLookupByLibrary.simpleMessage(
       "Cache modifications?",
     ),
