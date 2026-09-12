@@ -705,7 +705,7 @@
   "proxyGroupsCount": "Proxy Groups",
   "ruleProvidersCount": "Rule Providers",
   "proxyProvidersCount": "Proxy Providers",
-  "geodataUse": "Geodata Use",
+  "geodataUse": "Geo Load",
   "itemsCount": "{count}",
   "startRunning": "Start",
   "tabAnimation": "Tab Animation",
@@ -728,3 +728,4 @@
   "dotsTriangle": "Dots Triangle",
   "zoom": "Zoom"
 }
+

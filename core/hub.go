@@ -773,7 +773,6 @@ func handleSuspend(mode int) bool {
 		}
 		log.Infoln("[APP] Doze suspend mode enabled")
 		pauseHealthChecks()
-		resolver.ResetConnection()
 		runtime.GC()
 		currentSuspendMode = 2
 
@@ -805,7 +804,6 @@ func handleSuspend(mode int) bool {
 			}
 		} else if prevMode == 2 {
 			resumeHealthChecks()
-			resolver.ResetConnection()
 		}
 
 	default:

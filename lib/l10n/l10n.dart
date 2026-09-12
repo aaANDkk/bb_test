@@ -5849,9 +5849,9 @@ class AppLocalizations {
     );
   }
 
-  /// `Geodata Use`
+  /// `Geo Load`
   String get geodataUse {
-    return Intl.message('Geodata Use', name: 'geodataUse', desc: '', args: []);
+    return Intl.message('Geo Load', name: 'geodataUse', desc: '', args: []);
   }
 
   /// `{count}`
