@@ -158,9 +158,10 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
           icon: const Icon(Icons.add),
           label: Text(
             appLocalizations.addProfile,
-            style: const TextStyle(
+            style: TextStyle(
+              fontFamily: Theme.of(context).textTheme.labelLarge?.fontFamily,
               fontWeight: FontWeight.bold,
-              fontVariations: [FontVariation('wght', 700)],
+              fontVariations: const [FontVariation('wght', 700)],
             ),
           ),
         ),

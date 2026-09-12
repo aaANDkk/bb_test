@@ -99,8 +99,11 @@ class _StartFabState extends ConsumerState<StartFab> {
     final foregroundColor =
         theme.floatingActionButtonTheme.foregroundColor ??
             theme.colorScheme.onPrimaryContainer;
+    final fontFamily = theme.textTheme.labelLarge?.fontFamily ??
+        theme.floatingActionButtonTheme.extendedTextStyle?.fontFamily;
     return base.copyWith(
       color: foregroundColor,
+      fontFamily: fontFamily,
       fontWeight: FontWeight.bold,
       fontVariations: const [FontVariation('wght', 700)],
       height: 1.15,

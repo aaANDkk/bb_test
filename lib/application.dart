@@ -259,9 +259,10 @@ class ApplicationState extends ConsumerState<Application>
                   ),
                   elevation: 3,
                   hoverElevation: 5,
-                  extendedTextStyle: const TextStyle(
+                  extendedTextStyle: TextStyle(
+                    fontFamily: fontFamily,
                     fontWeight: FontWeight.bold,
-                    fontVariations: [FontVariation('wght', 700)],
+                    fontVariations: const [FontVariation('wght', 700)],
                   ),
                 ),
                 dialogTheme: DialogThemeData(
@@ -369,9 +370,10 @@ class ApplicationState extends ConsumerState<Application>
                   ),
                   elevation: 3,
                   hoverElevation: 5,
-                  extendedTextStyle: const TextStyle(
+                  extendedTextStyle: TextStyle(
+                    fontFamily: fontFamily,
                     fontWeight: FontWeight.bold,
-                    fontVariations: [FontVariation('wght', 700)],
+                    fontVariations: const [FontVariation('wght', 700)],
                   ),
                 ),
                 dialogTheme: DialogThemeData(

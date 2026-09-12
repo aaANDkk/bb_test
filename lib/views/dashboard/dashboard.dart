@@ -228,7 +228,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
     return CommonScaffold(
       resizeToAvoidBottomInset: false,
       title:
-          ref.watch(customDashboardTitleProvider) ?? appLocalizations.dashboard,
+          ref.watch(customDashboardTitleProvider) ?? '⚡️Bettbox',
       actions: _buildActions(),
       floatingActionButton: Padding(
         padding: EdgeInsets.only(
@@ -456,7 +456,7 @@ class _DashboardTitleDialogState extends State<_DashboardTitleDialog> {
         child: TextField(
           controller: _controller,
           decoration: InputDecoration(
-            hintText: 'Have fun with Bettbox',
+            hintText: '⚡️Bettbox',
             errorText: _errorText,
           ),
           onChanged: _validate,
