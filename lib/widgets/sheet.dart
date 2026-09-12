@@ -106,6 +106,7 @@ class AdaptiveSheetScaffold extends StatelessWidget {
   final Widget body;
   final String title;
   final List<Widget> actions;
+  final Widget? leading;
 
   const AdaptiveSheetScaffold({
     super.key,
@@ -113,6 +114,7 @@ class AdaptiveSheetScaffold extends StatelessWidget {
     required this.body,
     required this.title,
     this.actions = const [],
+    this.leading,
   });
 
   @override
@@ -120,13 +122,14 @@ class AdaptiveSheetScaffold extends StatelessWidget {
     final backgroundColor = context.colorScheme.surface;
     final bottomSheet = type == SheetType.bottomSheet;
     final sideSheet = type == SheetType.sideSheet;
+    final canPop = ModalRoute.of(context)?.canPop ?? false;
+    final implyLeading = !bottomSheet && (!(actions.isEmpty && sideSheet));
+    final hasLeading = leading != null || (implyLeading && canPop);
     final appBar = AppBar(
+      leading: leading,
       forceMaterialTransparency: bottomSheet ? true : false,
-      automaticallyImplyLeading: bottomSheet
-          ? false
-          : actions.isEmpty && sideSheet
-          ? false
-          : true,
+      automaticallyImplyLeading: implyLeading,
+      titleSpacing: hasLeading ? 0.0 : null,
       centerTitle: bottomSheet,
       backgroundColor: backgroundColor,
       title: EmojiText(
