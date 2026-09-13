@@ -5519,11 +5519,21 @@ class AppLocalizations {
     return Intl.message('Wrap Lines', name: 'lineWrap', desc: '', args: []);
   }
 
-  /// `Show Hidden Items`
+  /// `Hidden Items`
   String get showHiddenItems {
     return Intl.message(
-      'Show Hidden Items',
+      'Hidden Items',
       name: 'showHiddenItems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Style Settings`
+  String get styleSetting {
+    return Intl.message(
+      'Style Settings',
+      name: 'styleSetting',
       desc: '',
       args: [],
     );

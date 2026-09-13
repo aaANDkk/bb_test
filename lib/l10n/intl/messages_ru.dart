@@ -1095,8 +1095,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceRunning": MessageLookupByLibrary.simpleMessage("Служба запущена"),
     "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
     "show": MessageLookupByLibrary.simpleMessage("Показать"),
-    "showHiddenItems": MessageLookupByLibrary.simpleMessage("Показать скрытые"),
+    "showHiddenItems": MessageLookupByLibrary.simpleMessage("Скрытые элементы"),
     "showMenu": MessageLookupByLibrary.simpleMessage("Открыть меню"),
+    "styleSetting": MessageLookupByLibrary.simpleMessage("Настройки стиля"),
     "showPanel": MessageLookupByLibrary.simpleMessage("Показать окно"),
     "showStartSwitch": MessageLookupByLibrary.simpleMessage(
       "Тумблер запуска на главной",

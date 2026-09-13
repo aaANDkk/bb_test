@@ -155,7 +155,7 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
           clipBehavior: Clip.none,
           heroTag: null,
           onPressed: _handleShowAddExtendPage,
-          icon: const Icon(Icons.add_circle_outline_rounded),
+          icon: const Icon(Icons.add_rounded),
           label: Text(
             appLocalizations.addProfile,
             style: TextStyle(

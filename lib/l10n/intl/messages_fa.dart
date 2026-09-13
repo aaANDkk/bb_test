@@ -1091,9 +1091,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "settings": MessageLookupByLibrary.simpleMessage("تنظیمات"),
     "show": MessageLookupByLibrary.simpleMessage("نمایش"),
     "showHiddenItems": MessageLookupByLibrary.simpleMessage(
-      "نمایش موارد پنهان",
+      "موارد پنهان",
     ),
     "showMenu": MessageLookupByLibrary.simpleMessage("باز کردن منو"),
+    "styleSetting": MessageLookupByLibrary.simpleMessage("تنظیمات سبک"),
     "showPanel": MessageLookupByLibrary.simpleMessage("نمایش پنجره"),
     "showStartSwitch": MessageLookupByLibrary.simpleMessage("دکمه کلید سوئیچ"),
     "showStartSwitchDesc": MessageLookupByLibrary.simpleMessage(

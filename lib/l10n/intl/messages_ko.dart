@@ -853,8 +853,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceRunning": MessageLookupByLibrary.simpleMessage("서비스 실행 중"),
     "settings": MessageLookupByLibrary.simpleMessage("설정"),
     "show": MessageLookupByLibrary.simpleMessage("표시"),
-    "showHiddenItems": MessageLookupByLibrary.simpleMessage("숨겨진 항목 표시"),
+    "showHiddenItems": MessageLookupByLibrary.simpleMessage("숨겨진 항목"),
     "showMenu": MessageLookupByLibrary.simpleMessage("메뉴 열기"),
+    "styleSetting": MessageLookupByLibrary.simpleMessage("스타일 설정"),
     "showPanel": MessageLookupByLibrary.simpleMessage("창 표시"),
     "showStartSwitch": MessageLookupByLibrary.simpleMessage("스위치 버튼 표시"),
     "showStartSwitchDesc": MessageLookupByLibrary.simpleMessage(

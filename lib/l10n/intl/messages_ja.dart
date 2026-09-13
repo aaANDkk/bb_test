@@ -843,8 +843,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceRunning": MessageLookupByLibrary.simpleMessage("サービス稼働中"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
     "show": MessageLookupByLibrary.simpleMessage("表示"),
-    "showHiddenItems": MessageLookupByLibrary.simpleMessage("非表示項目を表示"),
+    "showHiddenItems": MessageLookupByLibrary.simpleMessage("非表示項目"),
     "showMenu": MessageLookupByLibrary.simpleMessage("メニューを開く"),
+    "styleSetting": MessageLookupByLibrary.simpleMessage("スタイル設定"),
     "showPanel": MessageLookupByLibrary.simpleMessage("ウィンドウを表示"),
     "showStartSwitch": MessageLookupByLibrary.simpleMessage("単独スイッチ表示"),
     "showStartSwitchDesc": MessageLookupByLibrary.simpleMessage(

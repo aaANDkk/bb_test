@@ -57,7 +57,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
       if (hasCustom)
         IconButton(
           onPressed: _handleCustomOptions,
-          icon: const Icon(Icons.tune_rounded),
+          icon: const Icon(Icons.stream_rounded),
           tooltip: appLocalizations.custom,
         ),
       CommonPopupBox(
@@ -73,8 +73,8 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
         popup: CommonPopupMenu(
           items: [
             PopupMenuItemData(
-              icon: Icons.build_outlined,
-              label: appLocalizations.settings,
+              icon: Icons.tune_rounded,
+              label: appLocalizations.styleSetting,
               onPressed: () {
                 showSheet(
                   context: context,
@@ -83,27 +83,14 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
                     return AdaptiveSheetScaffold(
                       type: type,
                       body: const ProxiesSetting(),
-                      title: appLocalizations.settings,
+                      title: appLocalizations.styleSetting,
                     );
                   },
                 );
               },
             ),
-            if (_hasProviders)
-              PopupMenuItemData(
-                icon: Icons.stream_rounded,
-                label: appLocalizations.providers,
-                onPressed: () {
-                  showExtend(
-                    context,
-                    builder: (_, type) {
-                      return ProvidersView(type: type);
-                    },
-                  );
-                },
-              ),
             PopupMenuItemData(
-              icon: Icons.settings_suggest_rounded,
+              icon: Icons.settings_suggest_outlined,
               label: appLocalizations.advancedSettings,
               onPressed: () {
                 showExtend(
@@ -120,7 +107,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
             ),
             if (!_isTab)
               PopupMenuItemData(
-                icon: Icons.burst_mode_outlined,
+                icon: Icons.burst_mode_rounded,
                 label: appLocalizations.iconConfiguration,
                 onPressed: () {
                   showExtend(
@@ -131,6 +118,19 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
                         body: const _IconConfigView(),
                         title: appLocalizations.iconConfiguration,
                       );
+                    },
+                  );
+                },
+              ),
+            if (_hasProviders)
+              PopupMenuItemData(
+                icon: Icons.insert_chart_outlined_rounded,
+                label: appLocalizations.providers,
+                onPressed: () {
+                  showExtend(
+                    context,
+                    builder: (_, type) {
+                      return ProvidersView(type: type);
                     },
                   );
                 },

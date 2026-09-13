@@ -215,7 +215,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
                           ),
                           if (script.isCompatibleWithBettbox)
                             PopupMenuItemData(
-                              icon: Icons.tune_rounded,
+                              icon: Icons.stream_rounded,
                               label: appLocalizations.custom,
                               onPressed: () {
                                 _handleCustomOptions(script);
@@ -420,7 +420,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
         IconButton(
           onPressed: _handleShowScriptSettings,
           tooltip: appLocalizations.settings,
-          icon: Icon(Icons.settings_rounded),
+          icon: const Icon(Icons.settings_outlined),
         ),
       ],
       body: _buildContent(),

@@ -617,7 +617,7 @@ class ExternalControllerItem extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListItem.switchItem(
-          leading: const Icon(Icons.api_outlined),
+          leading: const Icon(Icons.api_rounded),
           title: Text(appLocalizations.externalController),
           subtitle: Text(appLocalizations.externalControllerDesc),
           delegate: SwitchDelegate(
