@@ -608,14 +608,12 @@ class TrackerInfoDetailView extends ConsumerWidget {
               ),
       _buildChains(info),
     ];
-    return SelectionArea(
-      child: ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 12),
-        itemCount: items.length,
-        itemBuilder: (_, index) {
-          return items[index];
-        },
-      ),
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      itemCount: items.length,
+      itemBuilder: (_, index) {
+        return items[index];
+      },
     );
   }
 }
