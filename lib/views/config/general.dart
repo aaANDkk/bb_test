@@ -61,7 +61,7 @@ class _UaItemState extends ConsumerState<UaItem> {
     }
 
     return ListItem(
-      leading: const Icon(Icons.computer_outlined),
+      leading: const Icon(Icons.computer_rounded),
       title: const Text('UA'),
       subtitle: Text(isCustom ? appLocalizations.custom : appLocalizations.defaultText),
       onTap: () async {
@@ -494,7 +494,7 @@ class UnifiedDelayItem extends ConsumerWidget {
     );
 
     return ListItem.switchItem(
-      leading: const Icon(Icons.compress_outlined),
+      leading: const Icon(Icons.compress_rounded),
       title: Text(appLocalizations.unifiedDelay),
       subtitle: Text(appLocalizations.unifiedDelayDesc),
       delegate: SwitchDelegate(
@@ -551,7 +551,7 @@ class TcpConcurrentItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.tcpConcurrent),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.double_arrow_outlined),
+      leading: const Icon(Icons.double_arrow_rounded),
       title: Text(appLocalizations.tcpConcurrent),
       subtitle: Text(appLocalizations.tcpConcurrentDesc),
       delegate: SwitchDelegate(
@@ -660,7 +660,7 @@ class ExternalControllerItem extends ConsumerWidget {
             endIndent: 16,
           ),
           ListItem(
-            leading: const Icon(Icons.password_outlined),
+            leading: const Icon(Icons.password_rounded),
             title: Text(appLocalizations.controlSecret),
             subtitle: Text(
               secret.isEmpty ? appLocalizations.controlSecretDesc : secret,

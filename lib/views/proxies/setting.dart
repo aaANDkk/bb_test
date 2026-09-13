@@ -19,7 +19,7 @@ class ProxiesSetting extends StatelessWidget {
 
   IconData _getIconWithProxiesSortType(ProxiesSortType type) {
     return switch (type) {
-      ProxiesSortType.none => Icons.sort_rounded,
+      ProxiesSortType.none => Icons.align_horizontal_left_rounded,
       ProxiesSortType.delay => Icons.network_ping_rounded,
       ProxiesSortType.name => Icons.sort_by_alpha_rounded,
     };
