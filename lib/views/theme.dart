@@ -380,8 +380,13 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                               color: Colors.white.opacity0,
                               padding: EdgeInsets.all(8),
                               child: IconButton.filledTonal(
+                                style: IconButton.styleFrom(
+                                  visualDensity: VisualDensity.compact,
+                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  shape: const CircleBorder(),
+                                ),
                                 onPressed: _handleDel,
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 iconSize: 30,
                                 icon: Icon(
                                   color: context.colorScheme.primary,
@@ -396,8 +401,13 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                     Container(
                       width: itemWidth,
                       height: itemWidth,
-                      padding: EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(4),
                       child: IconButton.filledTonal(
+                        style: IconButton.styleFrom(
+                          visualDensity: VisualDensity.compact,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          shape: const CircleBorder(),
+                        ),
                         onPressed: _handleAdd,
                         iconSize: 32,
                         icon: Icon(
