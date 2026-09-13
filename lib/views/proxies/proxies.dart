@@ -90,7 +90,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
               },
             ),
             PopupMenuItemData(
-              icon: Icons.settings_suggest_outlined,
+              icon: Icons.settings_suggest_rounded,
               label: appLocalizations.advancedSettings,
               onPressed: () {
                 showExtend(
