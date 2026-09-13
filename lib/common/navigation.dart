@@ -21,7 +21,7 @@ class Navigation {
             DashboardView(key: const GlobalObjectKey(PageLabel.dashboard)),
       ),
       NavigationItem(
-        icon: const Icon(Icons.rocket_launch_rounded),
+        icon: const Icon(Icons.explore_rounded),
         label: PageLabel.proxies,
         builder: (_) => ProviderScope(
           overrides: [queryProvider.overrideWith(() => Query())],
