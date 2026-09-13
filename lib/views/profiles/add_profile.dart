@@ -138,7 +138,7 @@ class AddProfileView extends StatelessWidget {
                 endIndent: 16,
               ),
               ListItem(
-                leading: const Icon(Icons.upload_file_sharp),
+                leading: const Icon(Icons.file_open_rounded),
                 title: Text(appLocalizations.file),
                 subtitle: Text(appLocalizations.fileDesc),
                 onTap: _handleAddProfileFormFile,
