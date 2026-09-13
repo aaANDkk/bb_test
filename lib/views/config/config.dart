@@ -151,7 +151,7 @@ class _ConfigViewState extends State<ConfigView> {
       ListItem.next(
         title: const Text('Hosts'),
         subtitle: Text(appLocalizations.hostsDesc),
-        leading: const Icon(Icons.view_list_outlined),
+        leading: const Icon(Icons.view_list_rounded),
         delegate: NextDelegate(
           blur: false,
           title: 'Hosts',

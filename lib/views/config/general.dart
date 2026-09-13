@@ -234,7 +234,7 @@ class TestUrlItem extends ConsumerWidget {
     );
 
     return ListItem(
-      leading: const Icon(Icons.timeline_rounded),
+      leading: const Icon(Icons.timeline),
       title: Text(appLocalizations.testUrl),
       subtitle: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

@@ -43,7 +43,7 @@ class NetworkSpeedSmall extends ConsumerWidget {
           },
           info: Info(
             label: appLocalizations.networkSpeed,
-            iconData: Icons.speed_sharp,
+            iconData: Icons.speed_rounded,
           ),
           child: ValueListenableBuilder<int>(
             valueListenable: dashboardRefreshManager.tick1s,

@@ -284,7 +284,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
           if (operatorText.isNotEmpty)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.business_outlined),
+              leading: const Icon(Icons.business_rounded),
               title: Text(appLocalizations.operatorOrAsn),
               subtitle: Text(operatorText),
             ),
