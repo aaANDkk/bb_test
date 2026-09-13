@@ -91,7 +91,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
             ),
             if (_hasProviders)
               PopupMenuItemData(
-                icon: Icons.poll_outlined,
+                icon: Icons.stream_rounded,
                 label: appLocalizations.providers,
                 onPressed: () {
                   showExtend(

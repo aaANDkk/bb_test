@@ -229,7 +229,7 @@ class _ToolViewState extends ConsumerState<ToolsView> {
         title: appLocalizations.theme,
         subtitle: appLocalizations.themeDesc,
         category: settingsCategory,
-        leading: const Icon(Icons.style_rounded),
+        leading: const Icon(Icons.brush_rounded),
         onTap: (context, _) =>
             _pushPage(context, appLocalizations.theme, const ThemeView()),
       ),
@@ -1488,7 +1488,7 @@ class _ThemeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListItem.next(
-      leading: const Icon(Icons.style_rounded),
+      leading: const Icon(Icons.brush_rounded),
       title: Text(appLocalizations.theme),
       subtitle: Text(appLocalizations.themeDesc),
       delegate: NextDelegate(

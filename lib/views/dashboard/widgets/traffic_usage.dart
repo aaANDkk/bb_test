@@ -95,7 +95,7 @@ class _TrafficUsageState extends State<TrafficUsage> {
       child: CommonCard(
         info: Info(
           label: appLocalizations.trafficUsage,
-          iconData: Icons.data_saver_off_rounded,
+          iconData: Icons.data_usage_rounded,
         ),
         onPressed: () {},
         child: Consumer(

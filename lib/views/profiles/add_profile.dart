@@ -108,7 +108,7 @@ class AddProfileView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListItem(
-                leading: const Icon(Icons.qr_code_sharp),
+                leading: const Icon(Icons.qr_code_rounded),
                 title: Text(appLocalizations.qrcode),
                 subtitle: Text(appLocalizations.qrcodeDesc),
                 onTap: _toScan,

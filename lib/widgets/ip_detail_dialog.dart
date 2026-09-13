@@ -265,7 +265,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
           if (countryText.isNotEmpty || flagEmoji.isNotEmpty)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.flag_outlined),
+              leading: const Icon(Icons.emoji_flags_rounded),
               title: Text(appLocalizations.countryOrRegion),
               subtitle: EmojiText(
                 flagEmoji.isNotEmpty ? '$flagEmoji $countryText' : countryText,

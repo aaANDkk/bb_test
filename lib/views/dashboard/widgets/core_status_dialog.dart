@@ -576,7 +576,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
 
     final metricItems = <_MetricItem>[
       _MetricItem(
-        icon: Icons.format_list_bulleted_rounded,
+        icon: Icons.format_list_numbered_rounded,
         label: appLocalizations.proxiesCount,
         value: proxiesText,
       ),
