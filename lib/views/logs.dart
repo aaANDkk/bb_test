@@ -116,7 +116,7 @@ class _LogsViewState extends ConsumerState<LogsView> {
               : null,
           onPressed: _toggleAutoScroll,
           tooltip: appLocalizations.autoScroll,
-          icon: const Icon(Icons.vertical_align_top_outlined),
+          icon: const Icon(Icons.vertical_align_top_rounded),
         ),
         Tooltip(
           message: appLocalizations.export,

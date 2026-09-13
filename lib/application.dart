@@ -253,6 +253,12 @@ class ApplicationState extends ConsumerState<Application>
                   primaryColor: themeProps.primaryColor,
                 ),
                 fontFamily: fontFamily,
+                actionIconTheme: ActionIconThemeData(
+                  backButtonIconBuilder: (BuildContext context) =>
+                      const Icon(Icons.arrow_back_rounded),
+                  closeButtonIconBuilder: (BuildContext context) =>
+                      const Icon(Icons.close_rounded),
+                ),
                 floatingActionButtonTheme: FloatingActionButtonThemeData(
                   shape: RoundedSuperellipseBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -364,6 +370,12 @@ class ApplicationState extends ConsumerState<Application>
                   primaryColor: themeProps.primaryColor,
                 ).toPureBlack(themeProps.pureBlack),
                 fontFamily: fontFamily,
+                actionIconTheme: ActionIconThemeData(
+                  backButtonIconBuilder: (BuildContext context) =>
+                      const Icon(Icons.arrow_back_rounded),
+                  closeButtonIconBuilder: (BuildContext context) =>
+                      const Icon(Icons.close_rounded),
+                ),
                 floatingActionButtonTheme: FloatingActionButtonThemeData(
                   shape: RoundedSuperellipseBorder(
                     borderRadius: BorderRadius.circular(20),

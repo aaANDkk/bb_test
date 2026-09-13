@@ -181,7 +181,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
     _keywordsNotifier.value = keywords;
   }
 
-  Widget? _buildLeading() {
+  Widget? _buildLeading([bool canPop = false]) {
     if (_isEdit) {
       return IconButton(
         onPressed: _appBarState.value.editState?.onExit,
@@ -196,7 +196,17 @@ class CommonScaffoldState extends State<CommonScaffold> {
         tooltip: appLocalizations.back,
       );
     }
-    return widget.leading;
+    if (widget.leading != null) {
+      return widget.leading;
+    }
+    if (canPop) {
+      return IconButton(
+        onPressed: () => Navigator.maybePop(context),
+        icon: const Icon(Icons.arrow_back_rounded),
+        tooltip: appLocalizations.back,
+      );
+    }
+    return null;
   }
 
   Widget _buildTitle(AppBarSearchState? startState) {
@@ -298,7 +308,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
                 builder: (context, state, _) {
                   final parentRoute = ModalRoute.of(context);
                   final canPop = parentRoute?.canPop ?? false;
-                  final leading = _buildLeading();
+                  final leading = _buildLeading(canPop);
                   final hasLeading = leading != null || canPop;
                   return _buildAppBarWrap(
                     AppBar(
