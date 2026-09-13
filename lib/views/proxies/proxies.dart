@@ -57,7 +57,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
       if (hasCustom)
         IconButton(
           onPressed: _handleCustomOptions,
-          icon: const Icon(Icons.stream_rounded),
+          icon: const Icon(Icons.tune_rounded),
           tooltip: appLocalizations.custom,
         ),
       CommonPopupBox(
@@ -73,7 +73,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
         popup: CommonPopupMenu(
           items: [
             PopupMenuItemData(
-              icon: Icons.tune_rounded,
+              icon: Icons.stream_rounded,
               label: appLocalizations.styleSetting,
               onPressed: () {
                 showSheet(

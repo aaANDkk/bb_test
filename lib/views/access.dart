@@ -389,7 +389,7 @@ class _AccessViewState extends ConsumerState<AccessView>
           _intelligentSelected();
         }
       },
-      icon: const Icon(Icons.tune_rounded),
+      icon: const Icon(Icons.stream_rounded),
     );
   }
 
