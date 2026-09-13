@@ -300,7 +300,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
           if (domainText.isNotEmpty)
             ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.link_outlined),
+              leading: const Icon(Icons.link_rounded),
               title: Text(appLocalizations.domain),
               subtitle: Text(domainText),
             ),

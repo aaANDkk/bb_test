@@ -156,7 +156,7 @@ class _ConcurrencyLimitItem extends ConsumerWidget {
     );
 
     return ListItem<int>.options(
-      leading: const Icon(Icons.speed_rounded),
+      leading: const Icon(Icons.traffic_rounded),
       title: Text(appLocalizations.concurrencyLimit),
       subtitle: Text(appLocalizations.concurrencyLimitDesc),
       delegate: OptionsDelegate(

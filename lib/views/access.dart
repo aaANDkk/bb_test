@@ -878,8 +878,8 @@ class AccessControlPanel extends ConsumerStatefulWidget {
 class _AccessControlPanelState extends ConsumerState<AccessControlPanel> {
   IconData _getIconWithAccessControlMode(AccessControlMode mode) {
     return switch (mode) {
-      AccessControlMode.acceptSelected => Icons.adjust_outlined,
-      AccessControlMode.rejectSelected => Icons.block_outlined,
+      AccessControlMode.acceptSelected => Icons.check_circle_outline_rounded,
+      AccessControlMode.rejectSelected => Icons.block_rounded,
     };
   }
 
@@ -900,7 +900,7 @@ class _AccessControlPanelState extends ConsumerState<AccessControlPanel> {
 
   IconData _getIconWithProxiesSortType(AccessSortType type) {
     return switch (type) {
-      AccessSortType.none => Icons.sort_rounded,
+      AccessSortType.none => Icons.align_horizontal_left_rounded,
       AccessSortType.installTime => Icons.install_mobile_rounded,
       AccessSortType.updateTime => Icons.update_rounded,
     };
