@@ -348,9 +348,19 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                         clipBehavior: Clip.none,
                         children: [
                           EffectGestureDetector(
+                            onLongPress: () {
+                              setState(() {
+                                _removablePrimaryColor = color;
+                              });
+                            },
                             child: ColorSchemeBox(
                               isSelected: color == primaryColor,
                               primaryColor: color != null ? Color(color) : null,
+                              onLongPress: () {
+                                setState(() {
+                                  _removablePrimaryColor = color;
+                                });
+                              },
                               onPressed: () {
                                 setState(() {
                                   _removablePrimaryColor = null;
@@ -363,11 +373,6 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                                     );
                               },
                             ),
-                            onLongPress: () {
-                              setState(() {
-                                _removablePrimaryColor = color;
-                              });
-                            },
                           ),
                           if (_removablePrimaryColor != null &&
                               _removablePrimaryColor == color)
