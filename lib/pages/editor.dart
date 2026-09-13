@@ -447,7 +447,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                             : null,
                         onPressed: canSave ? () => _handleSave(context) : null,
                         tooltip: appLocalizations.save,
-                        icon: const Icon(Icons.save_sharp),
+                        icon: const Icon(Icons.save_rounded),
                       );
                     },
                   ),
