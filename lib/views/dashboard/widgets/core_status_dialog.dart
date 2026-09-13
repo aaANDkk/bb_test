@@ -586,7 +586,7 @@ class _CoreStatusDialogState extends State<CoreStatusDialog> {
         value: proxyGroupsText,
       ),
       _MetricItem(
-        icon: Icons.horizontal_split_rounded,
+        icon: Icons.flight_takeoff_rounded,
         label: appLocalizations.proxyProvidersCount,
         value: proxyProvidersText,
       ),

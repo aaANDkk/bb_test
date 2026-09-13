@@ -227,7 +227,7 @@ class _ConnectionsViewState extends ConsumerState<ConnectionsView>
                   selectedSortType;
             }
           },
-          icon: const Icon(Icons.sort),
+          icon: const Icon(Icons.sort_rounded),
         ),
       ],
       body: Consumer(
@@ -262,7 +262,7 @@ class _ConnectionsViewState extends ConsumerState<ConnectionsView>
                     style: const ButtonStyle(
                       minimumSize: WidgetStatePropertyAll(Size.zero),
                     ),
-                    icon: const Icon(Icons.block),
+                    icon: const Icon(Icons.block_rounded),
                     onPressed: () => _handleBlockConnection(trackerInfo.id),
                   ),
                   detailTitle: appLocalizations.details,

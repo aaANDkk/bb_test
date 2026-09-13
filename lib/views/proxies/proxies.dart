@@ -52,12 +52,12 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
             _proxiesTabKey.currentState?.scrollToGroupSelected();
           },
           tooltip: appLocalizations.locate,
-          icon: const Icon(Icons.adjust, weight: 1),
+          icon: const Icon(Icons.adjust_rounded, weight: 1),
         ),
       if (hasCustom)
         IconButton(
           onPressed: _handleCustomOptions,
-          icon: const Icon(Icons.tune),
+          icon: const Icon(Icons.tune_rounded),
           tooltip: appLocalizations.custom,
         ),
       CommonPopupBox(
@@ -67,7 +67,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
               open(offset: const Offset(0, 20));
             },
             tooltip: appLocalizations.more,
-            icon: const Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert_rounded),
           );
         },
         popup: CommonPopupMenu(
@@ -103,7 +103,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
                 },
               ),
             PopupMenuItemData(
-              icon: Icons.settings_suggest,
+              icon: Icons.settings_suggest_rounded,
               label: appLocalizations.advancedSettings,
               onPressed: () {
                 showExtend(
@@ -137,8 +137,8 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
               ),
             PopupMenuItemData(
               icon: showHiddenItems
-                  ? Icons.radio_button_checked
-                  : Icons.radio_button_unchecked,
+                  ? Icons.radio_button_checked_rounded
+                  : Icons.radio_button_unchecked_rounded,
               label: appLocalizations.showHiddenItems,
               onPressed: () {
                 ref

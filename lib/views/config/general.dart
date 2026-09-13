@@ -18,7 +18,7 @@ class LogLevelItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.logLevel),
     );
     return ListItem<LogLevel>.options(
-      leading: const Icon(Icons.info_outline),
+      leading: const Icon(Icons.info_outline_rounded),
       title: Text(appLocalizations.logLevel),
       subtitle: Text(logLevel.name),
       delegate: OptionsDelegate<LogLevel>(
@@ -234,7 +234,7 @@ class TestUrlItem extends ConsumerWidget {
     );
 
     return ListItem(
-      leading: const Icon(Icons.timeline),
+      leading: const Icon(Icons.timeline_rounded),
       title: Text(appLocalizations.testUrl),
       subtitle: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -426,7 +426,7 @@ class PortItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.mixedPort),
     );
     return ListItem(
-      leading: const Icon(Icons.adjust_outlined),
+      leading: const Icon(Icons.hdr_strong_rounded),
       title: Text(appLocalizations.port),
       subtitle: Text('$mixedPort'),
       onTap: () {
@@ -445,7 +445,7 @@ class Ipv6Item extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.ipv6),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.filter_6_rounded),
+      leading: const Icon(Icons.looks_6_outlined),
       title: const Text('IPv6'),
       subtitle: Text(appLocalizations.ipv6Desc),
       delegate: SwitchDelegate(
@@ -469,7 +469,7 @@ class AllowLanItem extends ConsumerWidget {
       patchClashConfigProvider.select((state) => state.allowLan),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.device_hub),
+      leading: const Icon(Icons.device_hub_rounded),
       title: Text(appLocalizations.allowLan),
       subtitle: Text(appLocalizations.allowLanDesc),
       delegate: SwitchDelegate(
@@ -577,7 +577,7 @@ class GeodataLoaderItem extends ConsumerWidget {
       ),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.memory),
+      leading: const Icon(Icons.memory_rounded),
       title: Text(appLocalizations.geodataLoader),
       subtitle: Text(appLocalizations.geodataLoaderDesc),
       delegate: SwitchDelegate(
@@ -670,7 +670,7 @@ class ExternalControllerItem extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.open_in_new),
+                        icon: const Icon(Icons.open_in_new_rounded),
                         tooltip: appLocalizations.onlinePanel,
                         onPressed: () async {
                           final uri = Uri.parse(
@@ -685,7 +685,7 @@ class ExternalControllerItem extends ConsumerWidget {
                         },
                       ),
                       IconButton(
-                        icon: const Icon(Icons.copy),
+                        icon: const Icon(Icons.copy_rounded),
                         tooltip: appLocalizations.copy,
                         onPressed: () {
                           Clipboard.setData(ClipboardData(text: secret));

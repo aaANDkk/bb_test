@@ -167,7 +167,7 @@ class _StartFabState extends ConsumerState<StartFab> {
         final labelText = displayStart
             ? _formatRunTime(runTime)
             : appLocalizations.startRunning;
-        final icon = displayStart ? Icons.pause : Icons.play_arrow;
+        final icon = displayStart ? Icons.pause_rounded : Icons.play_arrow_rounded;
         final startRunningWidth =
             _computeWidth(context, appLocalizations.startRunning);
         final hasThreeDigitHours =

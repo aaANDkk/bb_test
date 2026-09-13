@@ -95,7 +95,7 @@ class _TrafficUsageState extends State<TrafficUsage> {
       child: CommonCard(
         info: Info(
           label: appLocalizations.trafficUsage,
-          iconData: Icons.data_saver_off,
+          iconData: Icons.data_saver_off_rounded,
         ),
         onPressed: () {},
         child: Consumer(
@@ -208,14 +208,14 @@ class _TrafficUsageState extends State<TrafficUsage> {
                       ),
                       _buildTrafficDataItem(
                         context,
-                        Icon(Icons.arrow_upward, color: primaryColor, size: 14),
+                        Icon(Icons.arrow_upward_rounded, color: primaryColor, size: 14),
                         upTotalTrafficValue,
                       ),
                       const SizedBox(height: 8),
                       _buildTrafficDataItem(
                         context,
                         Icon(
-                          Icons.arrow_downward,
+                          Icons.arrow_downward_rounded,
                           color: secondaryColor,
                           size: 14,
                         ),

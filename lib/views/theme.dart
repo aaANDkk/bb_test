@@ -103,17 +103,17 @@ class _ThemeModeItem extends ConsumerWidget {
     );
     List<ThemeModeItem> themeModeItems = [
       ThemeModeItem(
-        iconData: Icons.auto_mode,
+        iconData: Icons.auto_mode_rounded,
         label: appLocalizations.auto,
         themeMode: ThemeMode.system,
       ),
       ThemeModeItem(
-        iconData: Icons.light_mode,
+        iconData: Icons.light_mode_rounded,
         label: appLocalizations.light,
         themeMode: ThemeMode.light,
       ),
       ThemeModeItem(
-        iconData: Icons.dark_mode,
+        iconData: Icons.dark_mode_rounded,
         label: appLocalizations.dark,
         themeMode: ThemeMode.dark,
       ),
@@ -121,7 +121,7 @@ class _ThemeModeItem extends ConsumerWidget {
     return ItemCard(
       info: Info(
         label: appLocalizations.themeMode,
-        iconData: Icons.brightness_high,
+        iconData: Icons.brightness_high_rounded,
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -300,7 +300,7 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
         return true;
       },
       child: ItemCard(
-        info: Info(label: appLocalizations.themeColor, iconData: Icons.palette),
+        info: Info(label: appLocalizations.themeColor, iconData: Icons.palette_rounded),
         actions: genActions([
           if (_removablePrimaryColor == null)
             FilledButton(
@@ -324,7 +324,7 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
               padding: EdgeInsets.all(4),
               visualDensity: VisualDensity.compact,
               onPressed: _handleReset,
-              icon: Icon(Icons.replay),
+              icon: Icon(Icons.replay_rounded),
             ),
         ], space: 8),
         child: Container(
@@ -380,7 +380,7 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                                 iconSize: 30,
                                 icon: Icon(
                                   color: context.colorScheme.primary,
-                                  Icons.delete,
+                                  Icons.delete_rounded,
                                 ),
                               ),
                             ),
@@ -397,7 +397,7 @@ class _PrimaryColorItemState extends ConsumerState<_PrimaryColorItem> {
                         iconSize: 32,
                         icon: Icon(
                           color: context.colorScheme.primary,
-                          Icons.add,
+                          Icons.add_rounded,
                         ),
                       ),
                     ),
@@ -420,7 +420,7 @@ class _PrueBlackItem extends ConsumerWidget {
       themeSettingProvider.select((state) => state.pureBlack),
     );
     return ListItem.switchItem(
-      leading: Icon(Icons.contrast),
+      leading: Icon(Icons.contrast_rounded),
       horizontalTitleGap: 12,
       title: Text(
         appLocalizations.pureBlackMode,
@@ -733,7 +733,7 @@ class _TrayIconInvertItem extends ConsumerWidget {
       themeSettingProvider.select((state) => state.invertTrayIcon),
     );
     return ListItem.switchItem(
-      leading: Icon(Icons.invert_colors),
+      leading: Icon(Icons.invert_colors_rounded),
       horizontalTitleGap: 12,
       title: Text(
         appLocalizations.trayIconInvert,
@@ -775,7 +775,7 @@ class _TextScaleFactorItem extends ConsumerWidget {
         Padding(
           padding: EdgeInsets.only(bottom: 8),
           child: ListItem.switchItem(
-            leading: Icon(Icons.text_fields),
+            leading: Icon(Icons.text_fields_rounded),
             horizontalTitleGap: 12,
             title: Text(
               appLocalizations.textScale,

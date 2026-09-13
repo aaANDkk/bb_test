@@ -614,7 +614,7 @@ class _GroupHeader extends ConsumerWidget {
                   key: ValueKey('locate_${group.name}'),
                   style: _circleButtonStyle,
                   iconSize: 19,
-                  icon: const Icon(Icons.adjust),
+                  icon: const Icon(Icons.adjust_rounded),
                   onPressed: onScrollToSelected,
                   tooltip: appLocalizations.locate,
                 ),
@@ -639,7 +639,7 @@ class _GroupHeader extends ConsumerWidget {
                                 size: 18,
                               ),
                             )
-                          : const Icon(Icons.network_ping),
+                          : const Icon(Icons.network_ping_rounded),
                       onPressed: delayTestCoordinator.isTesting
                           ? null
                           : () => _delayTest(context),

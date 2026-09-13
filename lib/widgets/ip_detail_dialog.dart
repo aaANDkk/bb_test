@@ -208,7 +208,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
           _buildIpTile(context),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.stacked_line_chart),
+            leading: const Icon(Icons.stacked_line_chart_rounded),
             title: Text(appLocalizations.tunVirtualAddress),
             subtitle: Text(
               'TUN Virtual Network Adapter',
@@ -227,7 +227,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
           _buildIpTile(context),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.shuffle),
+            leading: const Icon(Icons.shuffle_rounded),
             title: Text(appLocalizations.privateIp),
             subtitle: Text(
               'LAN / Private Network',
@@ -246,7 +246,7 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
           _buildIpTile(context),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.error_outline, color: Colors.red),
+            leading: const Icon(Icons.error_outline_rounded, color: Colors.red),
             title: Text(
               _errorMessage!,
               style: context.textTheme.bodyMedium?.copyWith(color: Colors.red),

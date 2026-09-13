@@ -96,7 +96,7 @@ class _AccessViewState extends ConsumerState<AccessView>
                     _requestedPackageListPermission = true;
                     await app.requestPackageListPermission();
                   },
-                  icon: const Icon(Icons.settings),
+                  icon: const Icon(Icons.settings_rounded),
                   label: Text(appLocalizations.openSettings),
                 ),
               ],
@@ -268,7 +268,7 @@ class _AccessViewState extends ConsumerState<AccessView>
           }
         });
       },
-      icon: const Icon(Icons.search),
+      icon: const Icon(Icons.search_rounded),
     );
   }
 
@@ -303,7 +303,7 @@ class _AccessViewState extends ConsumerState<AccessView>
           });
         }
       },
-      icon: const Icon(Icons.sync),
+      icon: const Icon(Icons.sync_rounded),
     );
   }
 
@@ -334,8 +334,8 @@ class _AccessViewState extends ConsumerState<AccessView>
         });
       },
       icon: isSelectedAll
-          ? const Icon(Icons.deselect)
-          : const Icon(Icons.select_all),
+          ? const Icon(Icons.deselect_rounded)
+          : const Icon(Icons.select_all_rounded),
     );
   }
 
@@ -389,7 +389,7 @@ class _AccessViewState extends ConsumerState<AccessView>
           _intelligentSelected();
         }
       },
-      icon: const Icon(Icons.tune),
+      icon: const Icon(Icons.tune_rounded),
     );
   }
 
@@ -724,7 +724,7 @@ class PackageListItem extends ConsumerWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Icon(
-        Icons.apps,
+        Icons.apps_rounded,
         size: 24,
         color: Theme.of(context).colorScheme.onSurfaceVariant,
       ),
@@ -752,7 +752,7 @@ class AccessControlSearchDelegate extends SearchDelegate {
           }
           query = '';
         },
-        icon: const Icon(Icons.clear),
+        icon: const Icon(Icons.clear_rounded),
       ),
       const SizedBox(width: 8),
     ];
@@ -764,7 +764,7 @@ class AccessControlSearchDelegate extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: const Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back_rounded),
     );
   }
 
@@ -900,9 +900,9 @@ class _AccessControlPanelState extends ConsumerState<AccessControlPanel> {
 
   IconData _getIconWithProxiesSortType(AccessSortType type) {
     return switch (type) {
-      AccessSortType.none => Icons.sort,
-      AccessSortType.installTime => Icons.install_mobile,
-      AccessSortType.updateTime => Icons.update,
+      AccessSortType.none => Icons.sort_rounded,
+      AccessSortType.installTime => Icons.install_mobile_rounded,
+      AccessSortType.updateTime => Icons.update_rounded,
     };
   }
 
@@ -1104,19 +1104,19 @@ class _AccessControlPanelState extends ConsumerState<AccessControlPanel> {
             spacing: 16,
             children: [
               CommonChip(
-                avatar: const Icon(Icons.auto_awesome),
+                avatar: const Icon(Icons.auto_awesome_rounded),
                 label: appLocalizations.intelligentSelected,
                 onPressed: () {
                   Navigator.of(context).pop(1);
                 },
               ),
               CommonChip(
-                avatar: const Icon(Icons.paste),
+                avatar: const Icon(Icons.paste_rounded),
                 label: appLocalizations.clipboardImport,
                 onPressed: _pasteToClipboard,
               ),
               CommonChip(
-                avatar: const Icon(Icons.content_copy),
+                avatar: const Icon(Icons.content_copy_rounded),
                 label: appLocalizations.clipboardExport,
                 onPressed: _copyToClipboard,
               ),

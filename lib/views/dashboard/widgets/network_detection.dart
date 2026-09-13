@@ -34,7 +34,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.sync),
+              leading: Icon(Icons.sync_rounded),
               title: Text(appLocalizations.manualRefreshIp),
               onTap: () {
                 Navigator.of(context, rootNavigator: true).pop();
@@ -43,7 +43,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
             ),
             if (isZh)
               ListTile(
-                leading: Icon(Icons.public),
+                leading: Icon(Icons.public_rounded),
                 title: Text(appLocalizations.switchToDomesticIp),
                 onTap: () {
                   Navigator.of(context, rootNavigator: true).pop();
@@ -51,7 +51,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                 },
               ),
             ListTile(
-              leading: Icon(Icons.security),
+              leading: Icon(Icons.security_rounded),
               title: Text(appLocalizations.ipPrivacyProtection),
               onTap: () {
                 Navigator.of(context, rootNavigator: true).pop();
@@ -99,7 +99,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                                   ?.toLight,
                             )
                           : Icon(
-                              Icons.network_check,
+                              Icons.network_check_rounded,
                               color: Theme.of(
                                 context,
                               ).colorScheme.onSurfaceVariant,

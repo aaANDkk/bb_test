@@ -13,7 +13,7 @@ class SnifferOverride extends StatelessWidget {
     return SizedBox(
       height: getWidgetHeight(1),
       child: CommonCard(
-        info: Info(label: 'Sniffer', iconData: Icons.radar),
+        info: Info(label: 'Sniffer', iconData: Icons.radar_rounded),
         onPressed: () {
           // Open Sniffer settings
           showExtend(

@@ -185,14 +185,14 @@ class CommonScaffoldState extends State<CommonScaffold> {
     if (_isEdit) {
       return IconButton(
         onPressed: _appBarState.value.editState?.onExit,
-        icon: const Icon(Icons.close),
+        icon: const Icon(Icons.close_rounded),
         tooltip: appLocalizations.cancel,
       );
     }
     if (_isSearch) {
       return IconButton(
         onPressed: _handleExitSearching,
-        icon: const Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back_rounded),
         tooltip: appLocalizations.back,
       );
     }
@@ -230,7 +230,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
       return genActions([
         IconButton(
           onPressed: _handleClear,
-          icon: const Icon(Icons.close),
+          icon: const Icon(Icons.close_rounded),
           tooltip: appLocalizations.clear,
         ),
       ]);
@@ -247,7 +247,7 @@ class CommonScaffoldState extends State<CommonScaffold> {
               });
             });
           },
-          icon: const Icon(Icons.search),
+          icon: const Icon(Icons.search_rounded),
           tooltip: appLocalizations.search,
         ),
       ...actions,

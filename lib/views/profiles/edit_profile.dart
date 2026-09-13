@@ -341,8 +341,8 @@ class EditProfileViewState extends State<EditProfileView> {
               suffixIcon: IconButton(
                 icon: Icon(
                   _obscureAgeSecretKey
-                      ? Icons.visibility
-                      : Icons.visibility_off,
+                      ? Icons.visibility_rounded
+                      : Icons.visibility_off_rounded,
                 ),
                 onPressed: () {
                   setState(() {
@@ -412,12 +412,12 @@ class EditProfileViewState extends State<EditProfileView> {
                             spacing: 12,
                             children: [
                               CommonChip(
-                                avatar: const Icon(Icons.edit),
+                                avatar: const Icon(Icons.edit_rounded),
                                 label: appLocalizations.edit,
                                 onPressed: _editProfileFile,
                               ),
                               CommonChip(
-                                avatar: const Icon(Icons.upload),
+                                avatar: const Icon(Icons.upload_rounded),
                                 label: appLocalizations.upload,
                                 onPressed: _uploadProfileFile,
                               ),
@@ -488,7 +488,7 @@ class EditProfileViewState extends State<EditProfileView> {
                   fontVariations: const [FontVariation('wght', 700)],
                 ),
               ),
-              icon: const Icon(Icons.save),
+              icon: const Icon(Icons.save_rounded),
             ),
           ),
         ),
@@ -647,7 +647,7 @@ class _AgeKeyGeneratorDialogState extends State<_AgeKeyGeneratorDialog> {
               floatingLabelBehavior: FloatingLabelBehavior.always,
               labelText: appLocalizations.agePrivateKeyLabel,
               suffixIcon: IconButton(
-                icon: const Icon(Icons.copy),
+                icon: const Icon(Icons.copy_rounded),
                 onPressed: () => _copyToClipboard(_privateKeyController.text),
               ),
             ),
@@ -674,7 +674,7 @@ class _AgeKeyGeneratorDialogState extends State<_AgeKeyGeneratorDialog> {
                         ? TextStyle(color: context.colorScheme.primary)
                         : null),
               suffixIcon: IconButton(
-                icon: const Icon(Icons.copy),
+                icon: const Icon(Icons.copy_rounded),
                 onPressed: () => _copyToClipboard(_publicKeyController.text),
               ),
             ),

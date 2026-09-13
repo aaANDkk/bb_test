@@ -39,26 +39,26 @@ class AboutView extends StatelessWidget {
         _LinkGridRow(
           left: _LinkGridTile(
             title: 'Github Releases',
-            icon: Icons.star,
+            icon: Icons.star_rounded,
             onTap: () =>
                 globalState.openUrl('https://github.com/appshubcc/Bettbox'),
           ),
           right: _LinkGridTile(
             title: appLocalizations.checkUpdate,
-            icon: Icons.refresh,
+            icon: Icons.refresh_rounded,
             onTap: () => _checkUpdate(context),
           ),
         ),
         _LinkGridRow(
           left: _LinkGridTile(
             title: 'Telegram Group',
-            icon: Icons.launch,
+            icon: Icons.launch_rounded,
             onTap: () =>
                 globalState.openUrl('https://telegram.me/appshub_chat'),
           ),
           right: _LinkGridTile(
             title: 'Channel',
-            icon: Icons.launch,
+            icon: Icons.launch_rounded,
             onTap: () =>
                 globalState.openUrl('https://telegram.me/appshub_channel'),
           ),
@@ -66,13 +66,13 @@ class AboutView extends StatelessWidget {
         _LinkGridRow(
           left: _LinkGridTile(
             title: 'FlClash',
-            icon: Icons.launch,
+            icon: Icons.launch_rounded,
             onTap: () =>
                 globalState.openUrl('https://github.com/chen08209/FlClash'),
           ),
           right: _LinkGridTile(
             title: 'Mihomo',
-            icon: Icons.launch,
+            icon: Icons.launch_rounded,
             onTap: () =>
                 globalState.openUrl('https://github.com/MetaCubeX/mihomo'),
           ),

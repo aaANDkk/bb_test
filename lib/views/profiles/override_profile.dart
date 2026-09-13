@@ -142,7 +142,7 @@ class _OverrideProfileViewState extends State<OverrideProfileView> {
                       title: Row(
                         spacing: 8,
                         children: [
-                          Icon(Icons.info),
+                          Icon(Icons.info_rounded),
                           Text(appLocalizations.overrideInvalidTip),
                         ],
                       ),
@@ -232,7 +232,7 @@ class _OverrideProfileViewState extends State<OverrideProfileView> {
                         }
                         _handleSave(ref, newOverrideData);
                       },
-                      icon: Icon(Icons.save),
+                      icon: Icon(Icons.save_rounded),
                     ),
                   if (editCount == 1)
                     IconButton(
@@ -249,14 +249,14 @@ class _OverrideProfileViewState extends State<OverrideProfileView> {
                         }
                         globalState.appController.handleAddOrUpdate(ref, rule);
                       },
-                      icon: Icon(Icons.edit),
+                      icon: Icon(Icons.edit_rounded),
                     ),
                   if (editCount > 0)
                     IconButton(
                       onPressed: () {
                         _handleDelete(ref);
                       },
-                      icon: Icon(Icons.delete),
+                      icon: Icon(Icons.delete_rounded),
                     ),
                 ],
                 editState: AppBarEditState(
@@ -367,7 +367,7 @@ class RuleTitle extends ConsumerWidget {
             if (!isEdit)
               IconButton.filledTonal(
                 icon: Icon(
-                  isOverrideRule ? Icons.edit_document : Icons.note_add,
+                  isOverrideRule ? Icons.edit_document : Icons.note_add_rounded,
                 ),
                 onPressed: () {
                   _handleChangeType(ref, isOverrideRule);
@@ -780,7 +780,7 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
                                           : _ruleProviderController.text,
                                       style: context.textTheme.bodyLarge,
                                     ),
-                                    const Icon(Icons.arrow_drop_down),
+                                    const Icon(Icons.arrow_drop_down_rounded),
                                   ],
                                 ),
                               );
@@ -869,7 +869,7 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
                                           : _subRuleController.text,
                                       style: context.textTheme.bodyLarge,
                                     ),
-                                    const Icon(Icons.arrow_drop_down),
+                                    const Icon(Icons.arrow_drop_down_rounded),
                                   ],
                                 ),
                               );
@@ -936,7 +936,7 @@ class _AddRuleDialogState extends State<AddRuleDialog> {
                                           : _ruleTargetController.text,
                                       style: context.textTheme.bodyLarge,
                                     ),
-                                    const Icon(Icons.arrow_drop_down),
+                                    const Icon(Icons.arrow_drop_down_rounded),
                                   ],
                                 ),
                               );

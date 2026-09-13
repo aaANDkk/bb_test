@@ -30,7 +30,7 @@ class AddProfileView extends StatelessWidget {
           type: type,
           actions: [
             IconButton(
-              icon: const Icon(Icons.security),
+              icon: const Icon(Icons.security_rounded),
               tooltip: appLocalizations.ageKeyGenerateTitle,
               onPressed: () {
                 editKey.currentState?.showAgeKeyGenerator();
@@ -123,7 +123,7 @@ class AddProfileView extends StatelessWidget {
                 endIndent: 16,
               ),
               ListItem(
-                leading: const Icon(Icons.content_paste),
+                leading: const Icon(Icons.content_paste_rounded),
                 title: Text(appLocalizations.clipboard),
                 subtitle: Text(appLocalizations.clipboardDesc),
                 onTap: _handleAddProfileFromClipboard,

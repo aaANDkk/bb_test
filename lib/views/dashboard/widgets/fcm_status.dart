@@ -139,7 +139,7 @@ class _FcmStatusState extends State<FcmStatus> {
                         onPressed: () => _showFcmInfoDialog(context),
                         icon: Icon(
                           size: 16.ap,
-                          Icons.info_outline,
+                          Icons.info_outline_rounded,
                           color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),

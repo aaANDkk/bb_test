@@ -143,7 +143,7 @@ class _MemoryInfoState extends State<MemoryInfo> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Icon(
-                    Icons.memory,
+                    Icons.memory_rounded,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   const SizedBox(width: 8),
@@ -168,7 +168,7 @@ class _MemoryInfoState extends State<MemoryInfo> {
                       onPressed: () => _showMemoryInfoDialog(context),
                       icon: Icon(
                         size: 16.ap,
-                        Icons.info_outline,
+                        Icons.info_outline_rounded,
                         color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),

@@ -67,7 +67,7 @@ class ColorSchemeBox extends StatelessWidget {
                   const Positioned(
                     bottom: 4,
                     right: 4,
-                    child: Icon(Icons.colorize, size: 20),
+                    child: Icon(Icons.colorize_rounded, size: 20),
                   ),
               ],
             );

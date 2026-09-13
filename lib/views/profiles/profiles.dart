@@ -74,7 +74,7 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
         onPressed: () {
           _updateProfiles();
         },
-        icon: const Icon(Icons.sync),
+        icon: const Icon(Icons.sync_rounded),
         tooltip: appLocalizations.syncAll,
       ),
       IconButton(
@@ -93,7 +93,7 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
               scriptStateProvider.select((state) => state.realId != null),
             );
             return Icon(
-              Icons.functions,
+              Icons.functions_rounded,
               color: isScriptMode ? context.colorScheme.primary : null,
             );
           },
@@ -110,7 +110,7 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
           );
         },
         tooltip: appLocalizations.sort,
-        icon: const Icon(Icons.sort),
+        icon: const Icon(Icons.sort_rounded),
         iconSize: 26,
       ),
     ];
@@ -155,7 +155,7 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
           clipBehavior: Clip.none,
           heroTag: null,
           onPressed: _handleShowAddExtendPage,
-          icon: const Icon(Icons.add),
+          icon: const Icon(Icons.add_rounded),
           label: Text(
             appLocalizations.addProfile,
             style: TextStyle(
@@ -320,7 +320,7 @@ class ProfileItem extends StatelessWidget {
           type: type,
           actions: [
             IconButton(
-              icon: const Icon(Icons.security),
+              icon: const Icon(Icons.security_rounded),
               tooltip: appLocalizations.ageKeyGenerateTitle,
               onPressed: () {
                 editKey.currentState?.showAgeKeyGenerator();
@@ -589,7 +589,7 @@ class ProfileItem extends StatelessWidget {
                       open();
                     },
                     tooltip: appLocalizations.more,
-                    icon: const Icon(Icons.more_vert, size: 20),
+                    icon: const Icon(Icons.more_vert_rounded, size: 20),
                   );
                 },
               ),
@@ -637,7 +637,7 @@ class ProfileItem extends StatelessWidget {
         ),
         IconButton(
           onPressed: () => _showTVMenu(context),
-          icon: const Icon(Icons.more_vert),
+          icon: const Icon(Icons.more_vert_rounded),
         ),
       ],
     );
@@ -712,7 +712,7 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
             Navigator.of(context).pop();
             globalState.appController.setProfiles(profiles);
           },
-          icon: Icon(Icons.save),
+          icon: Icon(Icons.save_rounded),
         ),
       ],
       body: ReorderableListView.builder(
@@ -742,7 +742,7 @@ class _ReorderableProfilesSheetState extends State<ReorderableProfilesSheet> {
                 title: EmojiText(profile.label ?? profile.id),
                 trailing: ReorderableDragStartListener(
                   index: index,
-                  child: const Icon(Icons.drag_handle),
+                  child: const Icon(Icons.drag_handle_rounded),
                 ),
               ),
             ),

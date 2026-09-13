@@ -389,8 +389,8 @@ class TrackerInfoDetailView extends ConsumerWidget {
   }) {
     final category = utils.classifyIp(ip);
     final IconData icon = switch (category) {
-      IpCategory.tun => Icons.stacked_line_chart,
-      IpCategory.lan => Icons.shuffle,
+      IpCategory.tun => Icons.stacked_line_chart_rounded,
+      IpCategory.lan => Icons.shuffle_rounded,
       IpCategory.public => Icons.search_rounded,
     };
 
@@ -476,7 +476,7 @@ class TrackerInfoDetailView extends ConsumerWidget {
                   child: IconButton(
                     visualDensity: VisualDensity.compact,
                     padding: EdgeInsets.zero,
-                    icon: Icon(Icons.content_copy, size: 18),
+                    icon: Icon(Icons.content_copy_rounded, size: 18),
                     onPressed: () {},
                   ),
                 ),

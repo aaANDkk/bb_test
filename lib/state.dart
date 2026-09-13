@@ -541,7 +541,7 @@ class GlobalState {
                     child: const Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.check_circle_outline),
+                        Icon(Icons.check_circle_outline_rounded),
                         SizedBox(height: 8),
                         Text('warmup'),
                       ],

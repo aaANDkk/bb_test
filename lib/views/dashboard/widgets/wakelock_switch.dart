@@ -33,7 +33,7 @@ class WakelockSwitch extends StatelessWidget {
         child: CommonCard(
           info: Info(
             label: appLocalizations.wakelock,
-            iconData: Icons.lightbulb_outline,
+            iconData: Icons.lightbulb_outline_rounded,
           ),
           onPressed: () async {
             // click: show function description dialog

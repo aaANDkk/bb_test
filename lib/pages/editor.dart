@@ -304,32 +304,32 @@ class _EditorPageState extends ConsumerState<EditorPage> {
         !readOnly && !_disableSyntaxHighlight && _languageMode() != null;
     final menuItems = <PopupMenuItemData>[
       PopupMenuItemData(
-        icon: Icons.search,
+        icon: Icons.search_rounded,
         label: appLocalizations.search,
         onPressed: _handleSearch,
       ),
       if (canReplace)
         PopupMenuItemData(
-          icon: Icons.find_replace,
+          icon: Icons.find_replace_rounded,
           label: appLocalizations.replace,
           onPressed: _handleReplace,
         ),
       PopupMenuItemData(
-        icon: Icons.undo,
+        icon: Icons.undo_rounded,
         label: appLocalizations.undo,
         onPressed: _undoController.canUndo
             ? () => _undoController.undo()
             : null,
       ),
       PopupMenuItemData(
-        icon: Icons.redo,
+        icon: Icons.redo_rounded,
         label: appLocalizations.redo,
         onPressed: _undoController.canRedo
             ? () => _undoController.redo()
             : null,
       ),
       PopupMenuItemData(
-        icon: _lineWrap ? Icons.check : Icons.wrap_text,
+        icon: _lineWrap ? Icons.check_rounded : Icons.wrap_text_rounded,
         label: appLocalizations.lineWrap,
         onPressed: _isLineWrapDisabled ? null : _toggleLineWrap,
       ),
@@ -455,7 +455,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                   IconButton(
                     onPressed: _isLoading ? null : _handleImport,
                     tooltip: appLocalizations.download,
-                    icon: const Icon(Icons.arrow_downward),
+                    icon: const Icon(Icons.arrow_downward_rounded),
                   ),
                 ListenableBuilder(
                   listenable: _undoController,
@@ -468,7 +468,7 @@ class _EditorPageState extends ConsumerState<EditorPage> {
                                 open(offset: const Offset(-20, 20));
                               },
                         tooltip: appLocalizations.more,
-                        icon: const Icon(Icons.more_vert),
+                        icon: const Icon(Icons.more_vert_rounded),
                       );
                     },
                     popup: CommonPopupMenu(items: menuItems),
@@ -664,27 +664,27 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: controller.matchCount == 0
                       ? null
                       : controller.previous,
-                  icon: Icons.keyboard_arrow_up,
+                  icon: Icons.keyboard_arrow_up_rounded,
                 ),
                 _buildIconButton(
                   onPressed: controller.matchCount == 0
                       ? null
                       : controller.next,
-                  icon: Icons.keyboard_arrow_down,
+                  icon: Icons.keyboard_arrow_down_rounded,
                 ),
                 if (isMobileView && showReplace) ...[
                   _buildIconButton(
                     onPressed: controller.matchCount == 0
                         ? null
                         : controller.replace,
-                    icon: Icons.find_replace,
+                    icon: Icons.find_replace_rounded,
                     tooltip: appLocalizations.replace,
                   ),
                   _buildIconButton(
                     onPressed: controller.matchCount == 0
                         ? null
                         : controller.replaceAll,
-                    icon: Icons.published_with_changes,
+                    icon: Icons.published_with_changes_rounded,
                     tooltip: appLocalizations.replaceAll,
                   ),
                 ],
@@ -692,8 +692,8 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
                   _buildIconButton(
                     onPressed: () => controller.toggleReplaceMode(),
                     icon: controller.isReplaceMode
-                        ? Icons.unfold_less
-                        : Icons.unfold_more,
+                        ? Icons.unfold_less_rounded
+                        : Icons.unfold_more_rounded,
                     tooltip: appLocalizations.replace,
                   ),
                 const SizedBox(width: 2),
@@ -709,7 +709,7 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     padding: const WidgetStatePropertyAll(EdgeInsets.all(0)),
                   ),
-                  icon: const Icon(Icons.close, size: 16),
+                  icon: const Icon(Icons.close_rounded, size: 16),
                 ),
               ],
             ),
@@ -762,14 +762,14 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
           const SizedBox(width: 10),
           _buildIconButton(
             onPressed: controller.matchCount == 0 ? null : controller.replace,
-            icon: Icons.find_replace,
+            icon: Icons.find_replace_rounded,
             tooltip: appLocalizations.replace,
           ),
           _buildIconButton(
             onPressed: controller.matchCount == 0
                 ? null
                 : controller.replaceAll,
-            icon: Icons.published_with_changes,
+            icon: Icons.published_with_changes_rounded,
             tooltip: appLocalizations.replaceAll,
           ),
         ],
@@ -784,7 +784,7 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
         _buildTextField(
           context: context,
           hintText: appLocalizations.search,
-          prefixIcon: Icons.search,
+          prefixIcon: Icons.search_rounded,
           onSubmitted: () {
             if (controller.matchCount == 0) {
               return;
@@ -822,7 +822,7 @@ class FindPanel extends StatelessWidget implements PreferredSizeWidget {
     return _buildTextField(
       context: context,
       hintText: appLocalizations.replace,
-      prefixIcon: Icons.find_replace,
+      prefixIcon: Icons.find_replace_rounded,
       onSubmitted: () {
         if (controller.matchCount == 0) return;
         controller.replace();

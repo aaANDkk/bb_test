@@ -107,7 +107,7 @@ class ProxyCard extends StatelessWidget {
               height: measure.labelSmallHeight,
               width: measure.labelSmallHeight,
               child: IconButton(
-                icon: const Icon(Icons.bolt),
+                icon: const Icon(Icons.bolt_rounded),
                 iconSize: measure.labelSmallHeight,
                 padding: EdgeInsets.zero,
                 tooltip: appLocalizations.startTest,
@@ -386,7 +386,7 @@ class _ProxyComputedMarkIcon extends StatelessWidget {
           color: Theme.of(context).colorScheme.secondaryContainer,
         ),
         child: Icon(
-          Icons.lock_outline,
+          Icons.lock_outline_rounded,
           size: 18,
           color: Theme.of(context).colorScheme.onSecondaryContainer,
         ),

@@ -324,7 +324,7 @@ class ListInputPage extends StatelessWidget {
           onPressed: () async {
             _handleAddOrEdit();
           },
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.add_rounded),
         ),
       ),
       child: items.isEmpty
@@ -349,7 +349,7 @@ class ListInputPage extends StatelessWidget {
                             ? subtitleBuilder!(e)
                             : null,
                         trailing: IconButton(
-                          icon: const Icon(Icons.delete_outline),
+                          icon: const Icon(Icons.delete_outline_rounded),
                           onPressed: () {
                             _handleDelete(e);
                           },
@@ -467,7 +467,7 @@ class MapInputPage extends StatelessWidget {
           onPressed: () async {
             _handleAddOrEdit();
           },
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.add_rounded),
         ),
       ),
       child: items.isEmpty
@@ -494,7 +494,7 @@ class MapInputPage extends StatelessWidget {
                             : null,
                         trailing: (canDelete == null || canDelete!(e))
                             ? IconButton(
-                                icon: const Icon(Icons.delete_outline),
+                                icon: const Icon(Icons.delete_outline_rounded),
                                 onPressed: () {
                                   _handleDelete(e);
                                 },

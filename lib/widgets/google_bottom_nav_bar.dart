@@ -21,9 +21,9 @@ class GoogleBottomNavBar extends ConsumerWidget {
 
   IconData _extractIconData(Widget iconWidget) {
     if (iconWidget is Icon) {
-      return iconWidget.icon ?? Icons.home;
+      return iconWidget.icon ?? Icons.home_rounded;
     }
-    return Icons.home;
+    return Icons.home_rounded;
   }
 
   @override
