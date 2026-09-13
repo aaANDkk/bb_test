@@ -697,7 +697,7 @@ class _DarkIconItem extends ConsumerWidget {
       themeSettingProvider.select((state) => state.useDarkIcon),
     );
     return ListItem.switchItem(
-      leading: const Icon(Icons.dark_mode_outlined),
+      leading: const Icon(Icons.join_left_rounded),
       horizontalTitleGap: 12,
       title: Text(
         appLocalizations.darkIcon,
