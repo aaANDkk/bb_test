@@ -32,7 +32,7 @@ class Navigation {
             : [],
       ),
       NavigationItem(
-        icon: const Icon(Icons.inventory_2_rounded),
+        icon: const Icon(Icons.create_new_folder_rounded),
         label: PageLabel.profiles,
         builder: (_) =>
             ProfilesView(key: const GlobalObjectKey(PageLabel.profiles)),
