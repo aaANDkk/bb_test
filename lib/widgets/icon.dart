@@ -1,13 +1,15 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
+
 import 'package:bett_box/common/common.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:xml/xml.dart';
-import 'package:crypto/crypto.dart';
-import 'dart:convert';
 import 'package:path/path.dart' as path;
+import 'package:xml/xml.dart';
 
 class CommonTargetIcon extends StatefulWidget {
   final String src;
@@ -25,11 +27,17 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
   int? _cachedSize; // Cached size
   bool _didSyncCheck = false; // Guard for didChangeDependencies
 
+  String? _currentSubscribedUrl;
+  void Function(File?)? _urlListener;
+  Timer? _retryTimer;
+
   static final Map<String, File?> _moduleFileCache = {};
   static final Map<String, bool> _moduleSvgValidCache = {};
-  static final Map<String, DateTime> _moduleFailureCache = {};
+  static final Map<String, DateTime> _urlFailureCache = {};
+  static final Map<String, Set<void Function(File?)>> _urlListeners = {};
+  static final Map<String, Future<File?>> _inFlightDownloads = {};
   static const _maxCacheEntries = 256;
-  static const _failureCooldownSeconds = 10;
+  static const _failureCooldownSeconds = 8;
 
   String _moduleCacheKey(int cacheSize) {
     if (widget.src.isSvg) return 'svg|${widget.src}';
@@ -45,15 +53,101 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
     }
   }
 
-  bool _shouldRetry(String mKey) {
-    final failedAt = _moduleFailureCache[mKey];
+  static bool _shouldRetry(String url) {
+    final failedAt = _urlFailureCache[url];
     if (failedAt == null) return true;
     if (DateTime.now().difference(failedAt).inSeconds <
         _failureCooldownSeconds) {
       return false;
     }
-    _moduleFailureCache.remove(mKey);
+    _urlFailureCache.remove(url);
     return true;
+  }
+
+  static void _addListener(String url, void Function(File?) listener) {
+    _urlListeners.putIfAbsent(url, () => {}).add(listener);
+  }
+
+  static void _removeListener(String url, void Function(File?) listener) {
+    final set = _urlListeners[url];
+    if (set != null) {
+      set.remove(listener);
+      if (set.isEmpty) {
+        _urlListeners.remove(url);
+      }
+    }
+  }
+
+  static void _notifyUrlUpdated(String url, File? file) {
+    final listeners = _urlListeners[url]?.toList();
+    if (listeners != null) {
+      for (final listener in listeners) {
+        listener(file);
+      }
+    }
+  }
+
+  void _subscribeToUrl(String url) {
+    if (url.isEmpty || url.getBase64 != null) return;
+    if (_currentSubscribedUrl == url) return;
+    _unsubscribeFromUrl();
+    _currentSubscribedUrl = url;
+    _urlListener = (File? file) {
+      if (!mounted) return;
+      _onUrlUpdated(file);
+    };
+    _addListener(url, _urlListener!);
+  }
+
+  void _unsubscribeFromUrl() {
+    if (_currentSubscribedUrl != null && _urlListener != null) {
+      _removeListener(_currentSubscribedUrl!, _urlListener!);
+      _urlListener = null;
+      _currentSubscribedUrl = null;
+    }
+  }
+
+  void _onUrlUpdated(File? file) {
+    if (!mounted || widget.src.isEmpty) return;
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final cacheSize = (widget.size * devicePixelRatio).ceil();
+    final key = _moduleCacheKey(cacheSize);
+
+    final exact = _moduleFileCache[key];
+    if (exact != null) {
+      if (_file?.path != exact.path) {
+        setState(() {
+          _file = exact;
+          _cachedSrc = widget.src;
+          _cachedSize = cacheSize;
+        });
+      }
+      return;
+    }
+
+    final anyFile = file ?? _findCachedFileForSrc(widget.src);
+    if (anyFile != null && _file == null) {
+      setState(() {
+        _file = anyFile;
+        _cachedSrc = widget.src;
+        _cachedSize = null;
+      });
+    }
+
+    _init(cacheSize);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _subscribeToUrl(widget.src);
+  }
+
+  @override
+  void dispose() {
+    _retryTimer?.cancel();
+    _unsubscribeFromUrl();
+    super.dispose();
   }
 
   void _syncCheckAndInit() {
@@ -83,10 +177,19 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
   @override
   void didUpdateWidget(covariant CommonTargetIcon oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.src != widget.src || oldWidget.size != widget.size) {
-      _file = null;
-      _cachedSrc = null;
-      _cachedSize = null;
+    if (oldWidget.src != widget.src) {
+      _retryTimer?.cancel();
+      _subscribeToUrl(widget.src);
+      final newCacheSize =
+          (widget.size * MediaQuery.of(context).devicePixelRatio).ceil();
+      final exact = _moduleFileCache[_moduleCacheKey(newCacheSize)];
+      final fallback = exact ?? _findCachedFileForSrc(widget.src);
+      _file = fallback;
+      _cachedSrc = fallback != null ? widget.src : null;
+      _cachedSize = exact != null ? newCacheSize : null;
+      _didSyncCheck = true;
+      _syncCheckAndInit();
+    } else if (oldWidget.size != widget.size) {
       _didSyncCheck = true;
       _syncCheckAndInit();
     }
@@ -112,11 +215,21 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
     _syncCheckAndInit();
   }
 
-  /// Generate resized cache path
+  /// Generate resized cache path (persisted in data directory, fallback to temp)
   Future<String> _getResizedCachePath(String originalPath, int size) async {
     final hash = md5.convert(utf8.encode('${originalPath}_$size')).toString();
-    final tempDir = await appPath.tempPath;
-    return path.join(tempDir, 'resized_icons', '$hash.png');
+    try {
+      final dataDirectory = await appPath.dataDir.future;
+      return path.join(
+        dataDirectory.path,
+        'cache',
+        'resized_icons',
+        '$hash.png',
+      );
+    } catch (_) {
+      final tempDir = await appPath.tempPath;
+      return path.join(tempDir, 'resized_icons', '$hash.png');
+    }
   }
 
   /// Decode, resize and cache image to disk, preserving aspect ratio
@@ -240,10 +353,7 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
   }
 
   Future<void> _init(int cacheSize) async {
-    if (widget.src.isEmpty) {
-      return;
-    }
-    if (widget.src.getBase64 != null) {
+    if (widget.src.isEmpty || widget.src.getBase64 != null) {
       return;
     }
 
@@ -271,24 +381,94 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
       return;
     }
 
-    if (!_shouldRetry(mKey)) return;
+    // 1. Try local cache from DefaultCacheManager (Stale-While-Revalidate: disk cache priority)
+    FileInfo? fileInfo;
+    try {
+      fileInfo = await DefaultCacheManager().getFileFromCache(widget.src);
+    } catch (_) {}
 
-    // Get from cache first, no network check
-    final fileInfo = await DefaultCacheManager().getFileFromCache(widget.src);
     if (fileInfo != null && mounted && widget.src.isNotEmpty) {
+      // Immediately render local disk file so UI never flashes or falls back to target icon
+      if (_file == null && mounted) {
+        setState(() {
+          _file = fileInfo.file;
+          _cachedSrc = widget.src;
+          _cachedSize = null;
+        });
+      }
       await _processFile(fileInfo.file, cacheSize, mKey);
+
+      // Check validity: if not expired, we are done!
+      final isExpired = DateTime.now().isAfter(fileInfo.validTill);
+      if (!isExpired) {
+        return;
+      }
+
+      // If expired, trigger background revalidation (Stale-While-Revalidate)
+      if (!_shouldRetry(widget.src)) return;
+      _revalidateInBackground(cacheSize, mKey);
       return;
     }
 
-    // Download if cache not exists
+    // 2. If no local file on disk, check URL failure cooldown before attempting network
+    if (!_shouldRetry(widget.src)) {
+      _scheduleAutoRetry(cacheSize);
+      return;
+    }
+
+    // 3. Download via Single-Flight deduplication
     try {
-      final file = await DefaultCacheManager().getSingleFile(widget.src);
-      if (mounted && widget.src.isNotEmpty) {
+      final file = await _downloadFileSingleFlight(widget.src);
+      if (file != null && mounted && widget.src.isNotEmpty) {
         await _processFile(file, cacheSize, mKey);
       }
     } catch (e) {
-      // Transient network failure: record cooldown, do not mark permanent.
-      _moduleFailureCache[mKey] = DateTime.now();
+      _urlFailureCache[widget.src] = DateTime.now();
+      _scheduleAutoRetry(cacheSize);
+    }
+  }
+
+  Future<void> _revalidateInBackground(int cacheSize, String mKey) async {
+    try {
+      final newFile = await _downloadFileSingleFlight(widget.src);
+      if (newFile != null && mounted && widget.src.isNotEmpty) {
+        await _processFile(newFile, cacheSize, mKey);
+      }
+    } catch (_) {
+      // Background revalidation failure (e.g. offline, hotspot disconnect):
+      // Keep displaying the stale disk image, do NOT clear _file!
+      _urlFailureCache[widget.src] = DateTime.now();
+    }
+  }
+
+  void _scheduleAutoRetry(int cacheSize) {
+    _retryTimer?.cancel();
+    _retryTimer =
+        Timer(const Duration(seconds: _failureCooldownSeconds + 1), () {
+      if (mounted && _file == null && widget.src.isNotEmpty) {
+        _init(cacheSize);
+      }
+    });
+  }
+
+  static Future<File?> _downloadFileSingleFlight(String url) {
+    final inFlight = _inFlightDownloads[url];
+    if (inFlight != null) {
+      return inFlight;
+    }
+    final future = _doDownload(url);
+    _inFlightDownloads[url] = future;
+    return future;
+  }
+
+  static Future<File?> _doDownload(String url) async {
+    try {
+      final file = await DefaultCacheManager().getSingleFile(url);
+      _urlFailureCache.remove(url);
+      _notifyUrlUpdated(url, file);
+      return file;
+    } finally {
+      _inFlightDownloads.remove(url);
     }
   }
 
@@ -298,7 +478,7 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
       if (!isValid) {
         await DefaultCacheManager().removeFile(widget.src);
         _moduleFileCache[mKey] = null;
-        _moduleFailureCache.remove(mKey);
+        _urlFailureCache.remove(widget.src);
         if (mounted) {
           setState(() {
             _file = null;
@@ -310,8 +490,9 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
       }
       _moduleFileCache[mKey] = file;
       _moduleSvgValidCache[widget.src] = true;
-      _moduleFailureCache.remove(mKey);
+      _urlFailureCache.remove(widget.src);
       _ensureCacheLimit();
+      _notifyUrlUpdated(widget.src, file);
       if (mounted) {
         setState(() {
           _file = file;
@@ -324,8 +505,9 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
 
     final displayFile = (await _resizeAndCacheImage(file, cacheSize)) ?? file;
     _moduleFileCache[mKey] = displayFile;
-    _moduleFailureCache.remove(mKey);
+    _urlFailureCache.remove(widget.src);
     _ensureCacheLimit();
+    _notifyUrlUpdated(widget.src, displayFile);
     if (mounted) {
       setState(() {
         _file = displayFile;
@@ -373,7 +555,7 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
             commonPrint.log('Failed to load SVG: $e');
             _moduleFileCache.remove(mKey);
             _moduleSvgValidCache.remove(widget.src);
-            _moduleFailureCache.remove(mKey);
+            _urlFailureCache.remove(widget.src);
             return _defaultIcon();
           }
         }
@@ -424,7 +606,7 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
         fit: BoxFit.contain,
         errorBuilder: (_, _, _) {
           _moduleFileCache.remove(mKey);
-          _moduleFailureCache.remove(mKey);
+          _urlFailureCache.remove(widget.src);
           return _defaultIcon();
         },
       );
