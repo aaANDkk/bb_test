@@ -86,14 +86,14 @@ class ProxyEmptyIllustration extends StatelessWidget {
       decoration: ShapeDecoration(
         color: context.colorScheme.secondaryContainer,
         shape: const StarBorder(
-          points: 12,
-          innerRadiusRatio: 0.8,
-          pointRounding: 0.5,
-          valleyRounding: 0.4,
-          squash: 0.6,
+          points: 7,
+          innerRadiusRatio: 0.3,
+          pointRounding: 0.9,
+          valleyRounding: 0.1,
+          squash: 0,
         ),
       ),
-      child: const _ThemeAwareSvg('assets/images/empty/proxy.svg'),
+      child: const _ThemeAwareSvg('assets/images/empty/rule.svg'),
     );
   }
 }

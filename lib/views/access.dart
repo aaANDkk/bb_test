@@ -60,49 +60,17 @@ class _AccessViewState extends ConsumerState<AccessView>
   }
 
   Widget _buildPackageListPermissionDeniedView() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.apps_rounded,
-              size: 72,
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              appLocalizations.packageListPermissionDenied,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              appLocalizations.packageListPermissionRequired,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              alignment: WrapAlignment.center,
-              children: [
-                FilledButton.tonalIcon(
-                  onPressed: () async {
-                    _requestedPackageListPermission = true;
-                    await app.requestPackageListPermission();
-                  },
-                  icon: const Icon(Icons.settings_rounded),
-                  label: Text(appLocalizations.openSettings),
-                ),
-              ],
-            ),
-          ],
-        ),
+    return NullStatus(
+      label: appLocalizations.packageListPermissionDenied,
+      description: appLocalizations.packageListPermissionRequired,
+      illustration: const DataEmptyIllustration(),
+      action: FilledButton.tonalIcon(
+        onPressed: () async {
+          _requestedPackageListPermission = true;
+          await app.requestPackageListPermission();
+        },
+        icon: const Icon(Icons.settings_rounded),
+        label: Text(appLocalizations.openSettings),
       ),
     );
   }
