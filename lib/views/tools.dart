@@ -1315,7 +1315,7 @@ class _ToolViewState extends ConsumerState<ToolsView> {
     }).toList();
 
     if (filtered.isEmpty) {
-      return [Center(child: NullStatus(label: appLocalizations.noData))];
+      return [];
     }
 
     final groups = <String, List<_SearchItem>>{};
@@ -1356,10 +1356,11 @@ class _ToolViewState extends ConsumerState<ToolsView> {
     final moreItems = ref.watch(
       moreToolsSelectorStateProvider.select((state) => state.navigationItems),
     );
-    final searchItems = _getSearchItems(moreItems);
-    final searchResults = _query.isEmpty
-        ? const <Widget>[]
-        : _buildSearchResults(searchItems);
+    final isSearching = _query.isNotEmpty;
+    final searchResults = isSearching
+        ? _buildSearchResults(searchItems)
+        : const <Widget>[];
+    final isSearchEmpty = isSearching && searchResults.isEmpty;
 
     final items = [
       Consumer(
@@ -1402,19 +1403,24 @@ class _ToolViewState extends ConsumerState<ToolsView> {
     return CommonScaffold(
       title: appLocalizations.tools,
       searchState: AppBarSearchState(onSearch: _onSearchChanged),
-      body: ListView.builder(
-        key: _query.isEmpty ? toolsStoreKey : null,
-        itemCount: _query.isEmpty ? items.length : searchResults.length,
-        itemBuilder: (_, index) {
-          return _query.isEmpty ? items[index] : searchResults[index];
-        },
-        padding: EdgeInsets.only(
-          bottom:
-              (globalState.isAndroidTV ? 80.0 : 20.0) +
-              (isMobileView ? getFloatingBottomBarReserveHeight(context) : 0),
-          top: 8,
-        ),
-      ),
+      body: isSearchEmpty
+          ? NullStatus(
+              label: appLocalizations.noData,
+              illustration: const RuleEmptyIllustration(),
+            )
+          : ListView.builder(
+              key: _query.isEmpty ? toolsStoreKey : null,
+              itemCount: _query.isEmpty ? items.length : searchResults.length,
+              itemBuilder: (_, index) {
+                return _query.isEmpty ? items[index] : searchResults[index];
+              },
+              padding: EdgeInsets.only(
+                bottom:
+                    (globalState.isAndroidTV ? 80.0 : 20.0) +
+                    (isMobileView ? getFloatingBottomBarReserveHeight(context) : 0),
+                top: 8,
+              ),
+            ),
     );
   }
 }
