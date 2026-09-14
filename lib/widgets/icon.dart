@@ -388,15 +388,16 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
     } catch (_) {}
 
     if (fileInfo != null && mounted && widget.src.isNotEmpty) {
+      final cachedFile = fileInfo.file;
       // Immediately render local disk file so UI never flashes or falls back to target icon
       if (_file == null && mounted) {
         setState(() {
-          _file = fileInfo.file;
+          _file = cachedFile;
           _cachedSrc = widget.src;
           _cachedSize = null;
         });
       }
-      await _processFile(fileInfo.file, cacheSize, mKey);
+      await _processFile(cachedFile, cacheSize, mKey);
 
       // Check validity: if not expired, we are done!
       final isExpired = DateTime.now().isAfter(fileInfo.validTill);
