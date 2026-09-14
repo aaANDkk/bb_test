@@ -180,7 +180,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "システムアプリ除外を解除",
     ),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("全選択解除"),
+    "categoryAi": MessageLookupByLibrary.simpleMessage("AI"),
+    "categoryAll": MessageLookupByLibrary.simpleMessage("すべて"),
+    "categoryChina": MessageLookupByLibrary.simpleMessage("中国直通"),
+    "categoryCrypto": MessageLookupByLibrary.simpleMessage("暗号資産"),
+    "categoryDeveloper": MessageLookupByLibrary.simpleMessage("開発者"),
+    "categoryGaming": MessageLookupByLibrary.simpleMessage("ゲームセンター"),
+    "categorySocial": MessageLookupByLibrary.simpleMessage("コミュニティ"),
+    "categoryStreaming": MessageLookupByLibrary.simpleMessage("動画配信"),
     "checkError": MessageLookupByLibrary.simpleMessage("確認失敗"),
+    "checkFailed": MessageLookupByLibrary.simpleMessage("Timeout"),
     "checkOrAddProfile": MessageLookupByLibrary.simpleMessage(
       "最初にプロファイルを追加してください",
     ),
@@ -405,6 +414,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "findProcessModeDesc": MessageLookupByLibrary.simpleMessage(
       "プロセス名をマッチングして検索",
     ),
+    "flagged": MessageLookupByLibrary.simpleMessage("フラグ付き"),
     "fontFamily": MessageLookupByLibrary.simpleMessage("フォント"),
     "forceDnsMapping": MessageLookupByLibrary.simpleMessage("強制DNSマッピング"),
     "forceDnsMappingDesc": MessageLookupByLibrary.simpleMessage(
@@ -427,7 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "geodataLoaderDesc": MessageLookupByLibrary.simpleMessage(
       "メモリ消費を抑えたGEOローダーを使用",
     ),
-    "geodataUse": MessageLookupByLibrary.simpleMessage("Geo読込"),
+    "geodataUse": MessageLookupByLibrary.simpleMessage("GEO読込"),
     "geoipCode": MessageLookupByLibrary.simpleMessage("GeoIPコード"),
     "getOriginRules": MessageLookupByLibrary.simpleMessage("元のルールを取得"),
     "global": MessageLookupByLibrary.simpleMessage("グローバル"),
@@ -500,6 +510,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "layout": MessageLookupByLibrary.simpleMessage("レイアウト"),
     "leftClickBehavior": MessageLookupByLibrary.simpleMessage("左クリック"),
     "light": MessageLookupByLibrary.simpleMessage("ライト"),
+    "limitedUnlock": MessageLookupByLibrary.simpleMessage("自作のみ"),
     "lineWrap": MessageLookupByLibrary.simpleMessage("折り返し"),
     "list": MessageLookupByLibrary.simpleMessage("リスト"),
     "listen": MessageLookupByLibrary.simpleMessage("リスニング"),
@@ -520,6 +531,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "loose": MessageLookupByLibrary.simpleMessage("ルーズ"),
     "manualRefreshIp": MessageLookupByLibrary.simpleMessage("IPを再取得"),
     "maximize": MessageLookupByLibrary.simpleMessage("最大化"),
+    "mediaUnlock": MessageLookupByLibrary.simpleMessage("接続性テスト"),
+    "mediaUnlockDetails": MessageLookupByLibrary.simpleMessage("接続性テスト詳細"),
+    "mediaUnlockPinnedSettings": MessageLookupByLibrary.simpleMessage("常駐表示設定"),
+    "mediaUnlockPinnedSettingsDesc": MessageLookupByLibrary.simpleMessage(
+      "ウィジェットに常駐表示する最大4項目を選択できます",
+    ),
+    "mediaUnlockSelectLimit": MessageLookupByLibrary.simpleMessage(
+      "最大4項目まで選択できます",
+    ),
+    "mediaUnlocked": MessageLookupByLibrary.simpleMessage("ロック解除済み"),
     "memoryAndRuntime": MessageLookupByLibrary.simpleMessage("メモリとランタイム"),
     "memoryInfo": MessageLookupByLibrary.simpleMessage("メモリ情報"),
     "memoryInfoDesc": MessageLookupByLibrary.simpleMessage(
@@ -600,6 +621,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "none": MessageLookupByLibrary.simpleMessage("なし"),
     "notRecommended": MessageLookupByLibrary.simpleMessage("非推奨"),
     "notSelectedTip": MessageLookupByLibrary.simpleMessage("選択できないプロキシグループです"),
+    "notUnlocked": MessageLookupByLibrary.simpleMessage("未解除"),
     "notificationHighPriority": MessageLookupByLibrary.simpleMessage("高優先度"),
     "notificationHighPriorityDesc": MessageLookupByLibrary.simpleMessage(
       "現在の通知バーをフォアグラウンド高優先度に調整",
@@ -925,6 +947,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tcpConcurrent": MessageLookupByLibrary.simpleMessage("TCP並列接続"),
     "tcpConcurrentDesc": MessageLookupByLibrary.simpleMessage("TCPの同時並列接続を許可"),
     "testUrl": MessageLookupByLibrary.simpleMessage("テストURL"),
+    "testing": MessageLookupByLibrary.simpleMessage("検出中"),
     "textScale": MessageLookupByLibrary.simpleMessage("テキスト倍率"),
     "theme": MessageLookupByLibrary.simpleMessage("テーマ"),
     "themeColor": MessageLookupByLibrary.simpleMessage("テーマカラー"),
@@ -991,6 +1014,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ハンドシェイク等の追加レイテンシを除外",
     ),
     "unknown": MessageLookupByLibrary.simpleMessage("不明"),
+    "unlocked": MessageLookupByLibrary.simpleMessage("完了"),
     "unnamed": MessageLookupByLibrary.simpleMessage("無題"),
     "unpin": MessageLookupByLibrary.simpleMessage("固定解除"),
     "update": MessageLookupByLibrary.simpleMessage("更新"),

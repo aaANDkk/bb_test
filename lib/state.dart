@@ -647,7 +647,7 @@ class GlobalState {
   }) async {
     final targetProfile = profile ?? config.currentProfile;
     if (targetProfile == null) {
-      return {};
+      return <String, dynamic>{};
     }
     final profileId = targetProfile.id;
     final configMap = await getProfileConfig(profileId);
@@ -705,7 +705,7 @@ class GlobalState {
     rawConfig['allow-lan'] = realPatchConfig.allowLan;
     rawConfig['mode'] = realPatchConfig.mode.name;
     if (rawConfig['tun'] == null) {
-      rawConfig['tun'] = {};
+      rawConfig['tun'] = <String, dynamic>{};
     }
     rawConfig['tun']['enable'] = realPatchConfig.tun.enable;
     rawConfig['tun']['device'] = realPatchConfig.tun.device;
@@ -737,7 +737,7 @@ class GlobalState {
       }
     }
     if (rawConfig['profile'] == null) {
-      rawConfig['profile'] = {};
+      rawConfig['profile'] = <String, dynamic>{};
     }
     if (rawConfig['proxy-providers'] != null) {
       final proxyProviders = rawConfig['proxy-providers'] as Map;
@@ -782,7 +782,7 @@ class GlobalState {
     rawConfig['geox-url'] = realPatchConfig.geoXUrl.toJson();
     rawConfig['global-ua'] = realPatchConfig.globalUa;
     if (rawConfig['hosts'] == null) {
-      rawConfig['hosts'] = {};
+      rawConfig['hosts'] = <String, dynamic>{};
     }
     for (final host in realPatchConfig.hosts.entries) {
       rawConfig['hosts'][host.key] = host.value.splitByMultipleSeparators;
@@ -794,7 +794,7 @@ class GlobalState {
     ];
 
     if (rawConfig['dns'] == null) {
-      rawConfig['dns'] = {};
+      rawConfig['dns'] = <String, dynamic>{};
     }
     final isEnableDns = rawConfig['dns']['enable'] == true;
     final overrideDns = globalState.config.overrideDns;
@@ -812,7 +812,7 @@ class GlobalState {
         false => realPatchConfig.dns,
       };
       rawConfig['dns'] = dns.toJson();
-      rawConfig['dns']['nameserver-policy'] = {};
+      rawConfig['dns']['nameserver-policy'] = <String, dynamic>{};
       for (final entry in dns.nameserverPolicy.entries) {
         rawConfig['dns']['nameserver-policy'][entry.key] =
             entry.value.splitByMultipleSeparators;
@@ -1040,7 +1040,7 @@ class GlobalState {
         final realityOpts = proxy['reality-opts'];
         if (realityOpts is Map) {
           final shortId = realityOpts['short-id'];
-          if (shortId is num) {
+          if (shortId is int) {
             realityOpts['short-id'] = shortId.toString();
           }
         }
@@ -1101,7 +1101,7 @@ class GlobalState {
 
       if (profile != null && !profile.useScriptOverride) return config;
 
-      config['proxy-providers'] ??= {};
+      config['proxy-providers'] ??= <String, dynamic>{};
 
       try {
         return await JavaScriptRuntimeManager.evaluateScript(
@@ -1411,3 +1411,127 @@ class DetectionState {
 }
 
 final detectionState = DetectionState();
+
+class MediaUnlockStateNotifier {
+  static MediaUnlockStateNotifier? _instance;
+  final _checker = MediaUnlockChecker();
+
+  final state = ValueNotifier<MediaUnlockState>(
+    const MediaUnlockState(),
+  );
+
+  MediaUnlockStateNotifier._internal();
+
+  factory MediaUnlockStateNotifier() {
+    _instance ??= MediaUnlockStateNotifier._internal();
+    return _instance!;
+  }
+
+  void checkSingle(MediaPlatform platform) async {
+    if (state.value.testingPlatforms.contains(platform)) return;
+    final currentTesting =
+        Set<MediaPlatform>.from(state.value.testingPlatforms)..add(platform);
+    state.value = state.value.copyWith(testingPlatforms: currentTesting);
+
+    try {
+      final res = await _checker.checkPlatform(platform);
+      final finalMap =
+          Map<MediaPlatform, MediaUnlockResult>.from(state.value.results);
+      finalMap[platform] = res;
+      final nextTesting =
+          Set<MediaPlatform>.from(state.value.testingPlatforms)..remove(platform);
+      state.value = state.value.copyWith(
+        results: finalMap,
+        testingPlatforms: nextTesting,
+        lastChecked: DateTime.now(),
+      );
+    } catch (_) {
+      final finalMap =
+          Map<MediaPlatform, MediaUnlockResult>.from(state.value.results);
+      finalMap[platform] = MediaUnlockResult(
+        platform: platform,
+        status: MediaUnlockStatus.failed,
+      );
+      final nextTesting =
+          Set<MediaPlatform>.from(state.value.testingPlatforms)..remove(platform);
+      state.value = state.value.copyWith(
+        results: finalMap,
+        testingPlatforms: nextTesting,
+      );
+    }
+  }
+
+  void checkAll({
+    bool force = false,
+    List<MediaPlatform>? platforms,
+  }) async {
+    final isRunning = globalState.appState.runTime != null;
+    if (!isRunning && !force) return;
+    if (state.value.isLoading) return;
+
+    final targetPlatforms = platforms ?? MediaPlatform.values;
+    final pendingTesting = Set<MediaPlatform>.from(targetPlatforms);
+
+    state.value = state.value.copyWith(
+      isLoading: true,
+      testingPlatforms: pendingTesting,
+    );
+
+    Timer? throttleTimer;
+    final pendingResults =
+        Map<MediaPlatform, MediaUnlockResult>.from(state.value.results);
+
+    void flushUpdates() {
+      throttleTimer?.cancel();
+      throttleTimer = null;
+      state.value = state.value.copyWith(
+        results: Map<MediaPlatform, MediaUnlockResult>.from(pendingResults),
+        testingPlatforms: Set<MediaPlatform>.from(pendingTesting),
+      );
+    }
+
+    try {
+      final results = await _checker.checkAll(
+        platforms: targetPlatforms,
+        onProgress: (res) {
+          pendingResults[res.platform] = res;
+          pendingTesting.remove(res.platform);
+          throttleTimer ??= Timer(
+            const Duration(milliseconds: 100),
+            flushUpdates,
+          );
+        },
+      );
+      flushUpdates();
+      final merged =
+          Map<MediaPlatform, MediaUnlockResult>.from(state.value.results);
+      merged.addAll(results);
+      state.value = MediaUnlockState(
+        isLoading: false,
+        results: merged,
+        testingPlatforms: const {},
+        lastChecked: DateTime.now(),
+      );
+    } catch (_) {
+      throttleTimer?.cancel();
+      state.value = state.value.copyWith(
+        isLoading: false,
+        testingPlatforms: const {},
+      );
+    }
+  }
+
+  void tryStartCheck() {
+    final isRunning = globalState.appState.runTime != null;
+    if (!isRunning) return;
+    if (state.value.isLoading) return;
+    if (state.value.lastChecked != null &&
+        DateTime.now().difference(state.value.lastChecked!).inSeconds < 10) {
+      return;
+    }
+    checkAll();
+  }
+}
+
+final mediaUnlockState = MediaUnlockStateNotifier();
+

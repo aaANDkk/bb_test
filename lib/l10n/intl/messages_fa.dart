@@ -225,7 +225,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "لغو فیلتر برنامه‌های سیستم",
     ),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("لغو انتخاب همه"),
+    "categoryAi": MessageLookupByLibrary.simpleMessage("AI"),
+    "categoryAll": MessageLookupByLibrary.simpleMessage("همه"),
+    "categoryChina": MessageLookupByLibrary.simpleMessage("مستقیم چین"),
+    "categoryCrypto": MessageLookupByLibrary.simpleMessage("ارز دیجیتال"),
+    "categoryDeveloper": MessageLookupByLibrary.simpleMessage("توسعه‌دهندگان"),
+    "categoryGaming": MessageLookupByLibrary.simpleMessage("مرکز بازی"),
+    "categorySocial": MessageLookupByLibrary.simpleMessage(
+      "پلتفرم‌های اجتماعی",
+    ),
+    "categoryStreaming": MessageLookupByLibrary.simpleMessage("رسانه‌های جاری"),
     "checkError": MessageLookupByLibrary.simpleMessage("بررسی ناموفق بود"),
+    "checkFailed": MessageLookupByLibrary.simpleMessage("Timeout"),
     "checkOrAddProfile": MessageLookupByLibrary.simpleMessage(
       "لطفاً ابتدا یک پروفایل اضافه کنید",
     ),
@@ -500,6 +511,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "findProcessModeDesc": MessageLookupByLibrary.simpleMessage(
       "امکان جستجو و تطبیق پردازش‌ها",
     ),
+    "flagged": MessageLookupByLibrary.simpleMessage("نشانه‌گذاری‌شده"),
     "fontFamily": MessageLookupByLibrary.simpleMessage("فونت"),
     "forceDnsMapping": MessageLookupByLibrary.simpleMessage("نگاشت اجباری DNS"),
     "forceDnsMappingDesc": MessageLookupByLibrary.simpleMessage(
@@ -530,7 +542,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "geodataLoaderDesc": MessageLookupByLibrary.simpleMessage(
       "استفاده از لودر کم‌مصرف داده‌های GEO",
     ),
-    "geodataUse": MessageLookupByLibrary.simpleMessage("بارگذاری Geo"),
+    "geodataUse": MessageLookupByLibrary.simpleMessage("بارگذاری GEO"),
     "geoipCode": MessageLookupByLibrary.simpleMessage("کد GeoIP"),
     "getOriginRules": MessageLookupByLibrary.simpleMessage(
       "دریافت قوانین اصلی",
@@ -627,6 +639,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "layout": MessageLookupByLibrary.simpleMessage("چیدمان"),
     "leftClickBehavior": MessageLookupByLibrary.simpleMessage("کلیک چپ"),
     "light": MessageLookupByLibrary.simpleMessage("روشن"),
+    "limitedUnlock": MessageLookupByLibrary.simpleMessage("فقط اختصاصی"),
     "lineWrap": MessageLookupByLibrary.simpleMessage("شکستن خطوط"),
     "list": MessageLookupByLibrary.simpleMessage("فهرست"),
     "listen": MessageLookupByLibrary.simpleMessage("شنود"),
@@ -659,6 +672,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "loose": MessageLookupByLibrary.simpleMessage("باز"),
     "manualRefreshIp": MessageLookupByLibrary.simpleMessage("دریافت مجدد IP"),
     "maximize": MessageLookupByLibrary.simpleMessage("بزرگ کردن"),
+    "mediaUnlock": MessageLookupByLibrary.simpleMessage("تست اتصال"),
+    "mediaUnlockDetails": MessageLookupByLibrary.simpleMessage(
+      "جزئیات تست اتصال",
+    ),
+    "mediaUnlockPinnedSettings": MessageLookupByLibrary.simpleMessage(
+      "تنظیمات نمایش پین‌شده",
+    ),
+    "mediaUnlockPinnedSettingsDesc": MessageLookupByLibrary.simpleMessage(
+      "امکان انتخاب حداکثر ۴ مورد برای پین کردن در ویجت",
+    ),
+    "mediaUnlockSelectLimit": MessageLookupByLibrary.simpleMessage(
+      "حداکثر می‌توانید ۴ مورد را انتخاب کنید",
+    ),
+    "mediaUnlocked": MessageLookupByLibrary.simpleMessage("قفل‌گشایی شده"),
     "memoryAndRuntime": MessageLookupByLibrary.simpleMessage(
       "حافظه و زمان اجرا",
     ),
@@ -759,6 +786,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "notSelectedTip": MessageLookupByLibrary.simpleMessage(
       "گروه پروکسی فعلی قابل انتخاب نیست",
     ),
+    "notUnlocked": MessageLookupByLibrary.simpleMessage("مسدود"),
     "notificationHighPriority": MessageLookupByLibrary.simpleMessage(
       "اولویت بالا",
     ),
@@ -1188,6 +1216,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "اجازه به اتصال‌های همزمان TCP",
     ),
     "testUrl": MessageLookupByLibrary.simpleMessage("آدرس تست"),
+    "testing": MessageLookupByLibrary.simpleMessage("در حال بررسی"),
     "textScale": MessageLookupByLibrary.simpleMessage("مقیاس متن"),
     "theme": MessageLookupByLibrary.simpleMessage("پوسته"),
     "themeColor": MessageLookupByLibrary.simpleMessage("رنگ پوسته"),
@@ -1270,6 +1299,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "حذف تاخیرهای اضافی دست‌تکانی",
     ),
     "unknown": MessageLookupByLibrary.simpleMessage("نامشخص"),
+    "unlocked": MessageLookupByLibrary.simpleMessage("تکمیل شد"),
     "unnamed": MessageLookupByLibrary.simpleMessage("بدون نام"),
     "unpin": MessageLookupByLibrary.simpleMessage("برداشتن پین"),
     "update": MessageLookupByLibrary.simpleMessage("بروزرسانی"),

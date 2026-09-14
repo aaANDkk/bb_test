@@ -52,6 +52,7 @@ class _AppStateManagerState extends ConsumerState<AppStateManager>
     ref.listenManual(checkIpProvider, (prev, next) {
       if (next.b && (prev?.a != next.a)) {
         detectionState.startCheck();
+        mediaUnlockState.tryStartCheck();
       }
     });
     ref.listenManual(configStateProvider, (prev, next) {
@@ -62,6 +63,7 @@ class _AppStateManagerState extends ConsumerState<AppStateManager>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateDashboardRefreshState();
       detectionState.tryStartCheck();
+      mediaUnlockState.tryStartCheck();
       globalState.appController.updateGroupsDebounce();
     });
     if (window == null) {

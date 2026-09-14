@@ -5799,14 +5799,9 @@ class AppLocalizations {
     );
   }
 
-  /// `Heap Objects`
+  /// `Objects`
   String get heapObjects {
-    return Intl.message(
-      'Heap Objects',
-      name: 'heapObjects',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Objects', name: 'heapObjects', desc: '', args: []);
   }
 
   /// `Profile & Rules`
@@ -5859,9 +5854,9 @@ class AppLocalizations {
     );
   }
 
-  /// `Geo Load`
+  /// `GEO Load`
   String get geodataUse {
-    return Intl.message('Geo Load', name: 'geodataUse', desc: '', args: []);
+    return Intl.message('GEO Load', name: 'geodataUse', desc: '', args: []);
   }
 
   /// `{count}`
@@ -5872,6 +5867,166 @@ class AppLocalizations {
       desc: '',
       args: [count],
     );
+  }
+
+  /// `Connectivity Test`
+  String get mediaUnlock {
+    return Intl.message(
+      'Connectivity Test',
+      name: 'mediaUnlock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connectivity Test Details`
+  String get mediaUnlockDetails {
+    return Intl.message(
+      'Connectivity Test Details',
+      name: 'mediaUnlockDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pinned Platforms`
+  String get mediaUnlockPinnedSettings {
+    return Intl.message(
+      'Pinned Platforms',
+      name: 'mediaUnlockPinnedSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select up to 4 items to pin on the widget`
+  String get mediaUnlockPinnedSettingsDesc {
+    return Intl.message(
+      'Select up to 4 items to pin on the widget',
+      name: 'mediaUnlockPinnedSettingsDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can select up to 4 items`
+  String get mediaUnlockSelectLimit {
+    return Intl.message(
+      'You can select up to 4 items',
+      name: 'mediaUnlockSelectLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get categoryAll {
+    return Intl.message('All', name: 'categoryAll', desc: '', args: []);
+  }
+
+  /// `AI`
+  String get categoryAi {
+    return Intl.message('AI', name: 'categoryAi', desc: '', args: []);
+  }
+
+  /// `Streaming`
+  String get categoryStreaming {
+    return Intl.message(
+      'Streaming',
+      name: 'categoryStreaming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `China Direct`
+  String get categoryChina {
+    return Intl.message(
+      'China Direct',
+      name: 'categoryChina',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Social Platforms`
+  String get categorySocial {
+    return Intl.message(
+      'Social Platforms',
+      name: 'categorySocial',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Developer`
+  String get categoryDeveloper {
+    return Intl.message(
+      'Developer',
+      name: 'categoryDeveloper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gaming Center`
+  String get categoryGaming {
+    return Intl.message(
+      'Gaming Center',
+      name: 'categoryGaming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crypto`
+  String get categoryCrypto {
+    return Intl.message('Crypto', name: 'categoryCrypto', desc: '', args: []);
+  }
+
+  /// `Completed`
+  String get unlocked {
+    return Intl.message('Completed', name: 'unlocked', desc: '', args: []);
+  }
+
+  /// `Unlocked`
+  String get mediaUnlocked {
+    return Intl.message('Unlocked', name: 'mediaUnlocked', desc: '', args: []);
+  }
+
+  /// `Originals Only`
+  String get limitedUnlock {
+    return Intl.message(
+      'Originals Only',
+      name: 'limitedUnlock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not Unlocked`
+  String get notUnlocked {
+    return Intl.message(
+      'Not Unlocked',
+      name: 'notUnlocked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Timeout`
+  String get checkFailed {
+    return Intl.message('Timeout', name: 'checkFailed', desc: '', args: []);
+  }
+
+  /// `Testing`
+  String get testing {
+    return Intl.message('Testing', name: 'testing', desc: '', args: []);
+  }
+
+  /// `Flagged`
+  String get flagged {
+    return Intl.message('Flagged', name: 'flagged', desc: '', args: []);
   }
 
   /// `Fading Cube`
@@ -5963,7 +6118,6 @@ class AppLocalizations {
       args: [],
     );
   }
-
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
