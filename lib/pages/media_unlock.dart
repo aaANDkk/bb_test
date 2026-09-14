@@ -52,28 +52,43 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
         itemBuilder: (context, index) {
           final cat = categories[index];
           final isSelected = _selectedCategory == cat;
-          return FilterChip(
-            selected: isSelected,
-            showCheckmark: false,
-            label: Text(_getCategoryLabel(cat)),
-            labelStyle: context.textTheme.labelMedium?.copyWith(
-              color: isSelected
-                  ? context.colorScheme.onPrimary
-                  : context.colorScheme.onSurfaceVariant,
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-            ),
-            backgroundColor: context.colorScheme.surfaceContainerHigh,
-            selectedColor: context.colorScheme.primary,
-            side: BorderSide.none,
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            shape: RoundedSuperellipseBorder(
+          return Material(
+            color: Colors.transparent,
+            child: InkWell(
               borderRadius: BorderRadius.circular(10),
+              customBorder: RoundedSuperellipseBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              onTap: () {
+                setState(() {
+                  _selectedCategory = cat;
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                decoration: ShapeDecoration(
+                  color: isSelected
+                      ? context.colorScheme.primary
+                      : context.colorScheme.surfaceContainerHigh,
+                  shape: RoundedSuperellipseBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  _getCategoryLabel(cat),
+                  style: context.textTheme.labelMedium?.copyWith(
+                    color: isSelected
+                        ? context.colorScheme.onPrimary
+                        : context.colorScheme.onSurfaceVariant,
+                    fontWeight:
+                        isSelected ? FontWeight.w600 : FontWeight.normal,
+                  ),
+                ),
+              ),
             ),
-            onSelected: (_) {
-              setState(() {
-                _selectedCategory = cat;
-              });
-            },
           );
         },
       ),
@@ -305,11 +320,13 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: context.colorScheme.outlineVariant.withValues(alpha: 0.3),
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(
+            color: context.colorScheme.outlineVariant.withValues(alpha: 0.3),
+          ),
         ),
       ),
       child: Row(
@@ -410,9 +427,11 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
       key: ValueKey(platform),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(14),
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
       ),
       child: Row(
         children: [
@@ -471,9 +490,11 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                             horizontal: 4,
                             vertical: 1,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: ShapeDecoration(
                             color: context.colorScheme.surfaceContainerHighest,
-                            borderRadius: BorderRadius.circular(4),
+                            shape: RoundedSuperellipseBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
                           ),
                           child: Text(
                             colo,
@@ -490,9 +511,11 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                             horizontal: 4,
                             vertical: 1,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: ShapeDecoration(
                             color: Colors.orange.withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(4),
+                            shape: RoundedSuperellipseBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
                           ),
                           child: Text(
                             'WARP',
@@ -541,9 +564,8 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                   SizedBox(
                     width: 10,
                     height: 10,
-                    child: SpinKitRing(
+                    child: SpinKitFadingCircle(
                       color: color,
-                      lineWidth: 1.2,
                       size: 10,
                     ),
                   ),
@@ -697,9 +719,8 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                   ? SizedBox(
                       width: 16,
                       height: 16,
-                      child: SpinKitRing(
+                      child: SpinKitFadingCircle(
                         color: context.colorScheme.primary,
-                        lineWidth: 1.5,
                         size: 16,
                       ),
                     )

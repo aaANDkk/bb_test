@@ -17,13 +17,6 @@ class MediaUnlockSmall extends ConsumerStatefulWidget {
 }
 
 class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
-  static const _monochromeFilter = ColorFilter.matrix(<double>[
-    0.2126, 0.7152, 0.0722, 0, 0,
-    0.2126, 0.7152, 0.0722, 0, 0,
-    0.2126, 0.7152, 0.0722, 0, 0,
-    0,      0,      0,      1, 0,
-  ]);
-
   Color _getStatusColor(MediaUnlockStatus status, BuildContext context) {
     switch (status) {
       case MediaUnlockStatus.unlocked:
@@ -64,19 +57,16 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
         height: 16.ap,
         fit: BoxFit.contain,
         colorFilter: ColorFilter.mode(
-          context.colorScheme.onSurfaceVariant,
+          context.colorScheme.onSurface,
           BlendMode.srcIn,
         ),
       );
     } else {
-      icon = ColorFiltered(
-        colorFilter: _monochromeFilter,
-        child: SvgPicture.asset(
-          'assets/images/platforms/${platform.name}.svg',
-          width: 16.ap,
-          height: 16.ap,
-          fit: BoxFit.contain,
-        ),
+      icon = SvgPicture.asset(
+        'assets/images/platforms/${platform.name}.svg',
+        width: 16.ap,
+        height: 16.ap,
+        fit: BoxFit.contain,
       );
     }
 
@@ -113,9 +103,8 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
                   ? SizedBox(
                       width: 10.ap,
                       height: 10.ap,
-                      child: SpinKitRing(
+                      child: SpinKitFadingCircle(
                         color: context.colorScheme.primary,
-                        lineWidth: 1.5,
                         size: 10.ap,
                       ),
                     )
@@ -175,12 +164,11 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
                             : () => mediaUnlockState.checkAll(force: true),
                         icon: state.isLoading
                             ? SizedBox(
-                                width: 14.ap,
-                                height: 14.ap,
-                                child: SpinKitRing(
+                                width: 16.ap,
+                                height: 16.ap,
+                                child: SpinKitFadingCircle(
                                   color: context.colorScheme.primary,
-                                  lineWidth: 1.5,
-                                  size: 14.ap,
+                                  size: 16.ap,
                                 ),
                               )
                             : Icon(
