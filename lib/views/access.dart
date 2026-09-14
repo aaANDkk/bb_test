@@ -832,6 +832,13 @@ class AccessControlSearchDelegate extends SearchDelegate {
                   )
                   .toList();
 
+        if (queryPackages.isEmpty) {
+          return NullStatus(
+            label: context.appLocalizations.noData,
+            illustration: const DataEmptyIllustration(),
+          );
+        }
+
         final isAccessControl = vm3.b;
         final currentList = vm3.c;
         final packageNameList = packages.map((e) => e.packageName).toList();
