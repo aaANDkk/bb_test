@@ -93,11 +93,9 @@ class _MediaUnlockState extends ConsumerState<MediaUnlock> {
 
     return Container(
       height: 6.ap,
-      decoration: ShapeDecoration(
+      decoration: BoxDecoration(
         color: context.colorScheme.primary.withValues(alpha: 0.12),
-        shape: RoundedSuperellipseBorder(
-          borderRadius: BorderRadius.circular(3.ap),
-        ),
+        borderRadius: BorderRadius.circular(3.ap),
       ),
       alignment: Alignment.centerLeft,
       child: widthFactor > 0
@@ -105,11 +103,9 @@ class _MediaUnlockState extends ConsumerState<MediaUnlock> {
               widthFactor: widthFactor,
               heightFactor: 1.0,
               child: Container(
-                decoration: ShapeDecoration(
+                decoration: BoxDecoration(
                   color: context.colorScheme.primary.withValues(alpha: 0.6),
-                  shape: RoundedSuperellipseBorder(
-                    borderRadius: BorderRadius.circular(3.ap),
-                  ),
+                  borderRadius: BorderRadius.circular(3.ap),
                 ),
               ),
             )

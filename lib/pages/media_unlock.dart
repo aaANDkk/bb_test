@@ -305,13 +305,11 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      decoration: ShapeDecoration(
+      decoration: BoxDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        shape: RoundedSuperellipseBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: BorderSide(
-            color: context.colorScheme.outlineVariant.withValues(alpha: 0.3),
-          ),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: context.colorScheme.outlineVariant.withValues(alpha: 0.3),
         ),
       ),
       child: Row(
@@ -412,11 +410,9 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
       key: ValueKey(platform),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: ShapeDecoration(
+      decoration: BoxDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        shape: RoundedSuperellipseBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
+        borderRadius: BorderRadius.circular(14),
       ),
       child: Row(
         children: [

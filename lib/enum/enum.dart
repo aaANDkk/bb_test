@@ -334,10 +334,7 @@ enum DashboardWidget {
   fcmStatus(GridItem(crossAxisCellCount: 4, child: FcmStatus())),
   onlinePanel(GridItem(crossAxisCellCount: 4, child: OnlinePanel())),
   mediaUnlock(GridItem(crossAxisCellCount: 8, child: MediaUnlock())),
-  mediaUnlockSmall(GridItem(crossAxisCellCount: 4, child: MediaUnlockSmall())),
-  startButton(
-    GridItem(crossAxisCellCount: 4, isDeletable: false, child: StartButton()),
-  );
+  mediaUnlockSmall(GridItem(crossAxisCellCount: 4, child: MediaUnlockSmall()));
 
   final GridItem widget;
   final List<SupportPlatform> platforms;

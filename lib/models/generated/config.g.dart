@@ -120,7 +120,6 @@ const _$DashboardWidgetEnumMap = {
   DashboardWidget.onlinePanel: 'onlinePanel',
   DashboardWidget.mediaUnlock: 'mediaUnlock',
   DashboardWidget.mediaUnlockSmall: 'mediaUnlockSmall',
-  DashboardWidget.startButton: 'startButton',
 };
 
 const _$MediaPlatformEnumMap = {
