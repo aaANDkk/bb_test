@@ -834,7 +834,7 @@ class AccessControlSearchDelegate extends SearchDelegate {
 
         if (queryPackages.isEmpty) {
           return NullStatus(
-            label: context.appLocalizations.noData,
+            label: appLocalizations.noData,
             illustration: const DataEmptyIllustration(),
           );
         }

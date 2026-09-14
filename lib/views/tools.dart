@@ -1356,6 +1356,7 @@ class _ToolViewState extends ConsumerState<ToolsView> {
     final moreItems = ref.watch(
       moreToolsSelectorStateProvider.select((state) => state.navigationItems),
     );
+    final searchItems = _getSearchItems(moreItems);
     final isSearching = _query.isNotEmpty;
     final searchResults = isSearching
         ? _buildSearchResults(searchItems)
