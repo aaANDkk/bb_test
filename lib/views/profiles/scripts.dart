@@ -165,6 +165,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
         if (scripts.isEmpty) {
           return NullStatus(
             label: appLocalizations.nullTip(appLocalizations.script),
+            illustration: const ScriptEmptyIllustration(),
           );
         }
         return CommonScrollBar(
@@ -443,7 +444,10 @@ class _ScriptSettingsSheet extends ConsumerWidget {
     return AdaptiveSheetScaffold(
       type: type,
       body: profiles.isEmpty
-          ? NullStatus(label: appLocalizations.nullProfileDesc)
+          ? NullStatus(
+              label: appLocalizations.nullProfileDesc,
+              illustration: const ProfileEmptyIllustration(),
+            )
           : ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
               itemCount: profiles.length,

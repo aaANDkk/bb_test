@@ -238,6 +238,7 @@ class _ConnectionsViewState extends ConsumerState<ConnectionsView>
           if (!hasConnections) {
             return NullStatus(
               label: appLocalizations.nullTip(appLocalizations.connections),
+              illustration: const ConnectionEmptyIllustration(),
             );
           }
 

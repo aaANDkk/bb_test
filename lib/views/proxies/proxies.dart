@@ -242,7 +242,10 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
       title: appLocalizations.proxies,
       searchState: AppBarSearchState(onSearch: _onSearch),
       body: switch (hasGroups) {
-        false => NullStatus(label: appLocalizations.noProxy),
+        false => NullStatus(
+            label: appLocalizations.noProxy,
+            illustration: const ProxyEmptyIllustration(),
+          ),
         true => switch (proxiesType) {
           ProxiesType.tab => ProxiesTabView(key: _proxiesTabKey),
           ProxiesType.list => const ProxiesListView(),

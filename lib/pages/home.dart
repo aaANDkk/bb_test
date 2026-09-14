@@ -118,8 +118,13 @@ class _HomePageState extends State<HomePage> {
               );
               return Stack(
                 children: [
-                  Positioned.fill(child: pageContent),
-                  Positioned(left: 0, right: 0, bottom: 0, child: navBar),
+                  Positioned.fill(child: RepaintBoundary(child: pageContent)),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: RepaintBoundary(child: navBar),
+                  ),
                 ],
               );
             }
@@ -373,8 +378,8 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
       if (_pageController.hasClients) {
         await _pageController.animateToPage(
           index,
-          duration: const Duration(milliseconds: 350),
-          curve: Curves.easeOutCubic,
+          duration: kTabScrollDuration,
+          curve: Curves.easeOut,
         );
       }
     } else {

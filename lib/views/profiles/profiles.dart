@@ -184,7 +184,10 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
           );
           final isMobileView = ref.watch(isMobileViewProvider);
           if (profilesSelectorState.profiles.isEmpty) {
-            return NullStatus(label: appLocalizations.nullProfileDesc);
+            return NullStatus(
+              label: appLocalizations.nullProfileDesc,
+              illustration: const ProfileEmptyIllustration(),
+            );
           }
           final columns = profilesSelectorState.profiles.length <
                   profilesSelectorState.columns

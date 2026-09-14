@@ -228,6 +228,7 @@ class ProxiesTabViewState extends ConsumerState<ProxiesTabView>
     if (groups.isEmpty) {
       return NullStatus(
         label: appLocalizations.nullTip(appLocalizations.proxies),
+        illustration: const ProxyEmptyIllustration(),
       );
     }
     // Safety check: ensure controller matches groups count

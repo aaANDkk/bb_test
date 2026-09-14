@@ -85,6 +85,7 @@ class _RequestsViewState extends ConsumerState<RequestsView> {
       body: !hasRequests
           ? NullStatus(
               label: appLocalizations.nullTip(appLocalizations.requests),
+              illustration: const ConnectionEmptyIllustration(),
             )
           : CommonScrollBar(
               trackVisibility: false,
