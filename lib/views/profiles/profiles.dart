@@ -165,7 +165,7 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
           if (profilesSelectorState.profiles.isEmpty) {
             return NullStatus(
               label: appLocalizations.nullProfileDesc,
-              illustration: const ProfileEmptyIllustration(),
+              illustration: NullStatusIllustration.profile,
             );
           }
           final columns = profilesSelectorState.profiles.length <

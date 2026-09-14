@@ -63,7 +63,7 @@ class _AccessViewState extends ConsumerState<AccessView>
     return NullStatus(
       label: appLocalizations.packageListPermissionDenied,
       description: appLocalizations.packageListPermissionRequired,
-      illustration: const AccessEmptyIllustration(),
+      illustration: NullStatusIllustration.permission,
       action: FilledButton.tonalIcon(
         onPressed: () async {
           _requestedPackageListPermission = true;
@@ -544,7 +544,7 @@ class _AccessViewState extends ConsumerState<AccessView>
                       return packages.isEmpty
                           ? NullStatus(
                               label: appLocalizations.noData,
-                              illustration: const AccessEmptyIllustration(),
+                              illustration: NullStatusIllustration.apps,
                             )
                           : CommonScrollBar(
                               controller: _controller,
@@ -803,7 +803,7 @@ class AccessControlSearchDelegate extends SearchDelegate {
         if (queryPackages.isEmpty) {
           return NullStatus(
             label: appLocalizations.noData,
-            illustration: const AccessEmptyIllustration(),
+            illustration: NullStatusIllustration.search,
           );
         }
 

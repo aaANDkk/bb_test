@@ -244,7 +244,7 @@ class _ProxiesViewState extends ConsumerState<ProxiesView> {
       body: switch (hasGroups) {
         false => NullStatus(
             label: appLocalizations.noProxy,
-            illustration: const ProxyEmptyIllustration(),
+            illustration: NullStatusIllustration.proxies,
           ),
         true => switch (proxiesType) {
           ProxiesType.tab => ProxiesTabView(key: _proxiesTabKey),

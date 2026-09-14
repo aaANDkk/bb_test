@@ -247,20 +247,19 @@ class FadeSlideEnterTransition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final slide = Tween<double>(
-      begin: -distance,
-      end: 0,
+    final begin = axis == Axis.horizontal
+        ? Offset(-distance, 0)
+        : Offset(0, distance);
+    final slide = Tween<Offset>(
+      begin: begin,
+      end: Offset.zero,
     ).chain(_slideInCurve).animate(animation);
     return FadeTransition(
       opacity: _fadeInTransition.animate(animation),
       child: AnimatedBuilder(
         animation: slide,
-        builder: (_, child) {
-          return Transform.translate(
-            offset: Offset(0, slide.value),
-            child: child,
-          );
-        },
+        builder: (_, child) =>
+            Transform.translate(offset: slide.value, child: child),
         child: child,
       ),
     );

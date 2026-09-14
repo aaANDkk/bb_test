@@ -28,7 +28,7 @@ class ProxiesListView extends ConsumerWidget {
     if (state.groups.isEmpty) {
       return NullStatus(
         label: appLocalizations.nullTip(appLocalizations.proxies),
-        illustration: const ProxyEmptyIllustration(),
+        illustration: NullStatusIllustration.proxies,
       );
     }
 

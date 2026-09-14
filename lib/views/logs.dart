@@ -137,7 +137,7 @@ class _LogsViewState extends ConsumerState<LogsView> {
       body: !hasLogs
           ? NullStatus(
               label: appLocalizations.nullTip(appLocalizations.logs),
-              illustration: const LogEmptyIllustration(),
+              illustration: NullStatusIllustration.logs,
             )
           : ScrollToEndBox(
               onCancelToEnd: _cancelAutoScroll,

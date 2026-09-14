@@ -244,7 +244,7 @@ class TunnelListView extends ConsumerWidget {
           ? Center(
               child: NullStatus(
                 label: appLocalizations.noData,
-                illustration: const ConnectionEmptyIllustration(),
+                illustration: NullStatusIllustration.connections,
               ),
             )
           : ListView(
