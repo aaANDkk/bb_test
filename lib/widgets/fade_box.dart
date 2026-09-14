@@ -180,12 +180,14 @@ const _defaultSlideDistance = 24.0;
 class FadeSlideEnterBox extends StatefulWidget {
   final Duration delay;
   final double distance;
+  final Axis axis;
   final Widget child;
 
   const FadeSlideEnterBox({
     super.key,
     this.delay = Duration.zero,
     this.distance = _defaultSlideDistance,
+    this.axis = Axis.horizontal,
     required this.child,
   });
 
@@ -221,6 +223,7 @@ class _FadeSlideEnterBoxState extends State<FadeSlideEnterBox>
     return FadeSlideEnterTransition(
       animation: _animation,
       distance: widget.distance,
+      axis: widget.axis,
       child: widget.child,
     );
   }
@@ -231,11 +234,13 @@ class FadeSlideEnterTransition extends StatelessWidget {
     super.key,
     required this.animation,
     this.distance = _defaultSlideDistance,
+    this.axis = Axis.horizontal,
     this.child,
   });
 
   final Animation<double> animation;
   final double distance;
+  final Axis axis;
   final Widget? child;
 
   static final Animatable<double> _fadeInTransition = CurveTween(
