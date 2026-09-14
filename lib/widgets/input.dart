@@ -320,11 +320,20 @@ class ListInputPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatLayout(
       floatingWidget: FloatWrapper(
-        child: FloatingActionButton(
-          onPressed: () async {
-            _handleAddOrEdit();
-          },
-          child: const Icon(Icons.add_rounded),
+        child: DecoratedBox(
+          decoration: getCommonFabDecoration(context),
+          child: FloatingActionButton(
+            elevation: 0,
+            hoverElevation: 0,
+            highlightElevation: 0,
+            focusElevation: 0,
+            clipBehavior: Clip.none,
+            heroTag: null,
+            onPressed: () async {
+              _handleAddOrEdit();
+            },
+            child: const Icon(Icons.add_rounded),
+          ),
         ),
       ),
       child: items.isEmpty
@@ -463,11 +472,20 @@ class MapInputPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatLayout(
       floatingWidget: FloatWrapper(
-        child: FloatingActionButton(
-          onPressed: () async {
-            _handleAddOrEdit();
-          },
-          child: const Icon(Icons.add_rounded),
+        child: DecoratedBox(
+          decoration: getCommonFabDecoration(context),
+          child: FloatingActionButton(
+            elevation: 0,
+            hoverElevation: 0,
+            highlightElevation: 0,
+            focusElevation: 0,
+            clipBehavior: Clip.none,
+            heroTag: null,
+            onPressed: () async {
+              _handleAddOrEdit();
+            },
+            child: const Icon(Icons.add_rounded),
+          ),
         ),
       ),
       child: items.isEmpty

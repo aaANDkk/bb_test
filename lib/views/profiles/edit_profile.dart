@@ -444,33 +444,7 @@ class EditProfileViewState extends State<EditProfileView> {
       child: FloatLayout(
         floatingWidget: FloatWrapper(
           child: DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              shadows: [
-                BoxShadow(
-                  color: Colors.black.withValues(
-                    alpha: Theme.of(context).colorScheme.brightness ==
-                            Brightness.dark
-                        ? 0.35
-                        : 0.14,
-                  ),
-                  blurRadius: 14,
-                  offset: const Offset(0, 4),
-                ),
-                BoxShadow(
-                  color: Colors.black.withValues(
-                    alpha: Theme.of(context).colorScheme.brightness ==
-                            Brightness.dark
-                        ? 0.20
-                        : 0.06,
-                  ),
-                  blurRadius: 4,
-                  offset: const Offset(0, 1),
-                ),
-              ],
-            ),
+            decoration: getCommonFabDecoration(context),
             child: FloatingActionButton.extended(
               elevation: 0,
               hoverElevation: 0,

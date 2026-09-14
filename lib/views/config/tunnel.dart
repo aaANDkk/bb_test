@@ -212,6 +212,26 @@ class _TunnelDialogState extends State<_TunnelDialog> {
 class TunnelListView extends ConsumerWidget {
   const TunnelListView({super.key});
 
+  Widget _buildFAB(
+    BuildContext context,
+    WidgetRef ref,
+    List<TunnelEntry> tunnels,
+  ) {
+    return DecoratedBox(
+      decoration: getCommonFabDecoration(context),
+      child: FloatingActionButton(
+        elevation: 0,
+        hoverElevation: 0,
+        highlightElevation: 0,
+        focusElevation: 0,
+        clipBehavior: Clip.none,
+        heroTag: null,
+        onPressed: () => _showTunnelDialog(context, ref, tunnels),
+        child: const Icon(Icons.add_rounded),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, ref) {
     final tunnels = ref.watch(
@@ -221,15 +241,17 @@ class TunnelListView extends ConsumerWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: tunnels.isEmpty
-          ? Center(child: NullStatus(label: appLocalizations.noData))
+          ? Center(
+              child: NullStatus(
+                label: appLocalizations.noData,
+                illustration: const ConnectionEmptyIllustration(),
+              ),
+            )
           : ListView(
               padding: const EdgeInsets.only(top: 16),
               children: [const TunnelListWidget()],
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showTunnelDialog(context, ref, tunnels),
-        child: const Icon(Icons.add_rounded),
-      ),
+      floatingActionButton: _buildFAB(context, ref, tunnels),
     );
   }
 

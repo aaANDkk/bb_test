@@ -118,7 +118,6 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
 
   Widget _buildFAB() {
     final isMobileView = ref.watch(isMobileViewProvider);
-    final isDark = Theme.of(context).colorScheme.brightness == Brightness.dark;
     return Padding(
       padding: EdgeInsets.only(
         bottom: isMobileView
@@ -126,27 +125,7 @@ class _ProfilesViewState extends ConsumerState<ProfilesView> {
             : 0,
       ),
       child: DecoratedBox(
-        decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          shadows: [
-            BoxShadow(
-              color: Colors.black.withValues(
-                alpha: isDark ? 0.35 : 0.14,
-              ),
-              blurRadius: 14,
-              offset: const Offset(0, 4),
-            ),
-            BoxShadow(
-              color: Colors.black.withValues(
-                alpha: isDark ? 0.20 : 0.06,
-              ),
-              blurRadius: 4,
-              offset: const Offset(0, 1),
-            ),
-          ],
-        ),
+        decoration: getCommonFabDecoration(context),
         child: FloatingActionButton.extended(
           elevation: 0,
           hoverElevation: 0,

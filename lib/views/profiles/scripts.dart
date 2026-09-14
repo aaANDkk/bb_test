@@ -407,16 +407,27 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
     }
   }
 
+  Widget _buildFAB() {
+    return DecoratedBox(
+      decoration: getCommonFabDecoration(context),
+      child: FloatingActionButton(
+        elevation: 0,
+        hoverElevation: 0,
+        highlightElevation: 0,
+        focusElevation: 0,
+        clipBehavior: Clip.none,
+        heroTag: null,
+        onPressed: _handleImport,
+        child: const Icon(Icons.add_rounded),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _handleImport();
-        },
-        child: Icon(Icons.add_rounded),
-      ),
+      floatingActionButton: _buildFAB(),
       actions: [
         IconButton(
           onPressed: _handleShowScriptSettings,
@@ -651,7 +662,10 @@ class __ScriptCustomOptionsSheetState
                 ),
               Expanded(
                 child: keys.isEmpty
-                    ? NullStatus(label: appLocalizations.noStatusAvailable)
+                    ? NullStatus(
+                        label: appLocalizations.noStatusAvailable,
+                        illustration: const ScriptEmptyIllustration(),
+                      )
                     : RepaintBoundary(
                         child: ListView.builder(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
@@ -941,7 +955,10 @@ class _GroupSwitchOptionsSheetState
                 ),
               Expanded(
                 child: keys.isEmpty
-                    ? NullStatus(label: appLocalizations.noStatusAvailable)
+                    ? NullStatus(
+                        label: appLocalizations.noStatusAvailable,
+                        illustration: const ScriptEmptyIllustration(),
+                      )
                     : RepaintBoundary(
                         child: ListView.builder(
                           padding: const EdgeInsets.symmetric(

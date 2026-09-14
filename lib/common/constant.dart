@@ -73,6 +73,31 @@ double getFloatingBottomBarFABReserveHeight(BuildContext context) {
   return 84.0 - min(viewBottom, 12.0);
 }
 
+Decoration getCommonFabDecoration(BuildContext context) {
+  final isDark = Theme.of(context).colorScheme.brightness == Brightness.dark;
+  return ShapeDecoration(
+    shape: RoundedSuperellipseBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    shadows: [
+      BoxShadow(
+        color: Colors.black.withValues(
+          alpha: isDark ? 0.35 : 0.14,
+        ),
+        blurRadius: 14,
+        offset: const Offset(0, 4),
+      ),
+      BoxShadow(
+        color: Colors.black.withValues(
+          alpha: isDark ? 0.20 : 0.06,
+        ),
+        blurRadius: 4,
+        offset: const Offset(0, 1),
+      ),
+    ],
+  );
+}
+
 const defaultTestUrl = 'https://www.apple.com/library/test/success.html';
 
 // Preset test URLs
