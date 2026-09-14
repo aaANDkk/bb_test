@@ -207,7 +207,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
                       popup: CommonPopupMenu(
                         items: [
                           PopupMenuItemData(
-                            icon: Icons.edit_rounded,
+                            icon: Icons.edit_outlined,
                             label: appLocalizations.edit,
                             onPressed: () {
                               _handleToEditor(script: script);
@@ -230,7 +230,7 @@ class _ScriptsViewState extends ConsumerState<ScriptsView> {
                               },
                             ),
                           PopupMenuItemData(
-                            icon: Icons.delete_rounded,
+                            icon: Icons.delete_outlined,
                             label: appLocalizations.delete,
                             onPressed: () {
                               _handleDelScript(script.label);

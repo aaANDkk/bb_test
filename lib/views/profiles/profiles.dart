@@ -513,7 +513,7 @@ class ProfileItem extends StatelessWidget {
       ),
       if (profile.type == ProfileType.url) ...[
         PopupMenuItemData(
-          icon: Icons.sync_alt_sharp,
+          icon: Icons.sync_rounded,
           label: appLocalizations.sync,
           onPressed: () {
             updateProfile();

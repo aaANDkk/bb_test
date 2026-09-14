@@ -67,7 +67,7 @@ class _AccessViewState extends ConsumerState<AccessView>
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.apps_outlined,
+              Icons.apps_rounded,
               size: 72,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
@@ -389,7 +389,7 @@ class _AccessViewState extends ConsumerState<AccessView>
           _intelligentSelected();
         }
       },
-      icon: const Icon(Icons.stream_rounded),
+      icon: const Icon(Icons.build_circle_outlined),
     );
   }
 

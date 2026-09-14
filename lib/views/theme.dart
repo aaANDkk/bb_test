@@ -478,7 +478,7 @@ class _CustomFontItem extends ConsumerWidget {
         }
 
         return ListItem.switchItem(
-          leading: const Icon(Icons.font_download_outlined),
+          leading: const Icon(Icons.font_download_rounded),
           horizontalTitleGap: 12,
           title: Text(
             appLocalizations.harmonyFont,
@@ -543,7 +543,7 @@ class _SelectCustomFontItem extends ConsumerWidget {
       builder: (context, _, _) {
         final fontName = FontManager.customFontName;
         return ListItem(
-          leading: const Icon(Icons.folder_open_outlined),
+          leading: const Icon(Icons.folder_open_rounded),
           horizontalTitleGap: 12,
           title: Text(
             appLocalizations.selectCustomFont,
@@ -582,7 +582,7 @@ class _EmojiStyleItem extends StatelessWidget {
       valueListenable: EmojiManager.emojiStyleNotifier,
       builder: (context, currentStyle, _) {
         return ListItem(
-          leading: const Icon(Icons.sentiment_satisfied_alt_outlined),
+          leading: const Icon(Icons.sentiment_very_satisfied_rounded),
           horizontalTitleGap: 12,
           title: Text(
             appLocalizations.emojiStyle,
