@@ -187,7 +187,7 @@ class FadeSlideEnterBox extends StatefulWidget {
     super.key,
     this.delay = Duration.zero,
     this.distance = _defaultSlideDistance,
-    this.axis = Axis.horizontal,
+    this.axis = Axis.vertical,
     required this.child,
   });
 
@@ -234,7 +234,7 @@ class FadeSlideEnterTransition extends StatelessWidget {
     super.key,
     required this.animation,
     this.distance = _defaultSlideDistance,
-    this.axis = Axis.horizontal,
+    this.axis = Axis.vertical,
     this.child,
   });
 
@@ -254,7 +254,7 @@ class FadeSlideEnterTransition extends StatelessWidget {
   Widget build(BuildContext context) {
     final begin = axis == Axis.horizontal
         ? Offset(-distance, 0)
-        : Offset(0, distance);
+        : Offset(0, -distance);
     final slide = Tween<Offset>(
       begin: begin,
       end: Offset.zero,
