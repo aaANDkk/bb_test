@@ -1,0 +1,23 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Card Base -->
+    <rect x="75" y="50" width="150" height="180" rx="24" fill="#FDF7FF" stroke="#E8DEF8" stroke-width="2"/>
+
+    <!-- App Item 1 -->
+    <rect x="95" y="84" width="26" height="26" rx="7" fill="#E8DEF8"/>
+    <rect x="130" y="91" width="65" height="12" rx="6" fill="#E8DEF8"/>
+
+    <!-- App Item 2 -->
+    <rect x="95" y="120" width="26" height="26" rx="7" fill="#E8DEF8" opacity="0.8"/>
+    <rect x="130" y="127" width="75" height="12" rx="6" fill="#E8DEF8" opacity="0.8"/>
+
+    <!-- App Item 3 -->
+    <rect x="95" y="156" width="26" height="26" rx="7" fill="#E8DEF8" opacity="0.6"/>
+    <rect x="130" y="163" width="55" height="12" rx="6" fill="#E8DEF8" opacity="0.6"/>
+
+    <!-- Badge: Security Shield & Checkmark -->
+    <g transform="translate(210, 210)">
+        <circle cx="0" cy="0" r="36" fill="#6750A4" stroke="#FDF7FF" stroke-width="6"/>
+        <path d="M0 -18 L16 -12 V0 C16 11 8 19 0 22 C-8 19 -16 11 -16 0 V-12 Z" stroke="#FDF7FF" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
+        <path d="M-6 1 L-2 5 L7 -4" stroke="#FDF7FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+</svg>

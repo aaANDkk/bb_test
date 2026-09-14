@@ -204,6 +204,48 @@ class ConnectionEmptyIllustration extends StatelessWidget {
   }
 }
 
+class AccessEmptyIllustration extends StatelessWidget {
+  const AccessEmptyIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.secondaryContainer,
+        shape: const StarBorder(
+          points: 6,
+          innerRadiusRatio: 0.7,
+          pointRounding: 0.6,
+          valleyRounding: 0.2,
+          squash: 0,
+        ),
+      ),
+      child: const _ThemeAwareSvg('assets/images/empty/access.svg'),
+    );
+  }
+}
+
+class SearchEmptyIllustration extends StatelessWidget {
+  const SearchEmptyIllustration({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: ShapeDecoration(
+        color: context.colorScheme.secondaryContainer,
+        shape: const StarBorder(
+          points: 8,
+          innerRadiusRatio: 0.75,
+          pointRounding: 0.5,
+          valleyRounding: 0.3,
+          squash: 0,
+        ),
+      ),
+      child: const _ThemeAwareSvg('assets/images/empty/search.svg'),
+    );
+  }
+}
+
 class _ThemeAwareSvg extends StatelessWidget {
   final String assetPath;
 

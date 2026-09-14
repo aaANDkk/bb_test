@@ -1,0 +1,23 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Card Base -->
+    <rect x="75" y="50" width="150" height="180" rx="24" fill="#FDF7FF" stroke="#E8DEF8" stroke-width="2"/>
+
+    <!-- Search Input Bar on Card -->
+    <rect x="92" y="80" width="116" height="24" rx="12" fill="#E8DEF8"/>
+    <circle cx="106" cy="92" r="4.5" stroke="#FDF7FF" stroke-width="2" fill="none"/>
+    <line x1="110" y1="95.5" x2="114" y2="99.5" stroke="#FDF7FF" stroke-width="2" stroke-linecap="round"/>
+    <rect x="120" y="89" width="45" height="6" rx="3" fill="#FDF7FF"/>
+
+    <!-- Placeholder List Items -->
+    <rect x="95" y="122" width="75" height="12" rx="6" fill="#E8DEF8" opacity="0.8"/>
+    <rect x="95" y="146" width="60" height="12" rx="6" fill="#E8DEF8" opacity="0.6"/>
+    <rect x="95" y="170" width="90" height="12" rx="6" fill="#E8DEF8" opacity="0.4"/>
+
+    <!-- Badge: Magnifying Glass -->
+    <g transform="translate(210, 210)">
+        <circle cx="0" cy="0" r="36" fill="#6750A4" stroke="#FDF7FF" stroke-width="6"/>
+        <circle cx="-4" cy="-4" r="14" stroke="#FDF7FF" stroke-width="4" fill="none"/>
+        <line x1="6" y1="6" x2="18" y2="18" stroke="#FDF7FF" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M-9 -6 C-9 -9 -6 -11 -3 -11" stroke="#FDF7FF" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+</svg>

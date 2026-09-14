@@ -1407,7 +1407,7 @@ class _ToolViewState extends ConsumerState<ToolsView> {
       body: isSearchEmpty
           ? NullStatus(
               label: appLocalizations.noData,
-              illustration: const DataEmptyIllustration(),
+              illustration: const SearchEmptyIllustration(),
             )
           : ListView.builder(
               key: _query.isEmpty ? toolsStoreKey : null,
