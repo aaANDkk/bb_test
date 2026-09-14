@@ -478,7 +478,7 @@ class _CustomFontItem extends ConsumerWidget {
         }
 
         return ListItem.switchItem(
-          leading: const Icon(Icons.font_download_rounded),
+          leading: const Icon(Icons.font_download_outlined),
           horizontalTitleGap: 12,
           title: Text(
             appLocalizations.harmonyFont,
