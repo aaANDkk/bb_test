@@ -181,6 +181,7 @@ class FadeSlideEnterBox extends StatefulWidget {
   final Duration delay;
   final double distance;
   final Axis axis;
+  final bool reverse;
   final Widget child;
 
   const FadeSlideEnterBox({
@@ -188,6 +189,7 @@ class FadeSlideEnterBox extends StatefulWidget {
     this.delay = Duration.zero,
     this.distance = _defaultSlideDistance,
     this.axis = Axis.vertical,
+    this.reverse = false,
     required this.child,
   });
 
@@ -224,6 +226,7 @@ class _FadeSlideEnterBoxState extends State<FadeSlideEnterBox>
       animation: _animation,
       distance: widget.distance,
       axis: widget.axis,
+      reverse: widget.reverse,
       child: widget.child,
     );
   }
@@ -235,12 +238,14 @@ class FadeSlideEnterTransition extends StatelessWidget {
     required this.animation,
     this.distance = _defaultSlideDistance,
     this.axis = Axis.vertical,
+    this.reverse = false,
     this.child,
   });
 
   final Animation<double> animation;
   final double distance;
   final Axis axis;
+  final bool reverse;
   final Widget? child;
 
   static final Animatable<double> _fadeInTransition = CurveTween(
@@ -253,8 +258,8 @@ class FadeSlideEnterTransition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final begin = axis == Axis.horizontal
-        ? Offset(-distance, 0)
-        : Offset(0, -distance);
+        ? Offset(reverse ? distance : -distance, 0)
+        : Offset(0, reverse ? distance : -distance);
     final slide = Tween<Offset>(
       begin: begin,
       end: Offset.zero,

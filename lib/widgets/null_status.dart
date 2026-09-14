@@ -204,6 +204,7 @@ class _EnterItemState extends State<_EnterItem>
       animation: animation,
       distance: _enterRise,
       axis: Axis.vertical,
+      reverse: true,
       child: widget.child,
     );
   }
