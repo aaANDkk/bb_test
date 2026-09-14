@@ -138,7 +138,7 @@ class AddProfileView extends StatelessWidget {
                 endIndent: 16,
               ),
               ListItem(
-                leading: const Icon(Icons.link_rounded),
+                leading: const Icon(Icons.cloud_download_rounded),
                 title: Text(appLocalizations.url),
                 subtitle: Text(appLocalizations.urlDesc),
                 onTap: _toAdd,

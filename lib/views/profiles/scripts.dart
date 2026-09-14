@@ -515,7 +515,7 @@ class _ScriptImportOptionsDialog extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop(ImportOption.url);
             },
-            leading: const Icon(Icons.link_rounded),
+            leading: const Icon(Icons.cloud_download_rounded),
             title: Text(appLocalizations.importUrl),
           ),
           ListItem(

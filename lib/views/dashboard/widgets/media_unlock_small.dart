@@ -158,56 +158,42 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
             },
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(16.ap, 10.ap, 8.ap, 6.ap),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.link_rounded,
-                        size: 18.ap,
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          appLocalizations.mediaUnlock,
-                          style: context.textTheme.titleSmall?.copyWith(
-                            color: context.colorScheme.onSurfaceVariant,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 24.ap,
-                        height: 24.ap,
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: state.isLoading
-                              ? null
-                              : () => mediaUnlockState.checkAll(force: true),
-                          icon: state.isLoading
-                              ? SizedBox(
-                                  width: 13.ap,
-                                  height: 13.ap,
-                                  child: SpinKitRing(
-                                    color: context.colorScheme.primary,
-                                    lineWidth: 1.5,
-                                    size: 13.ap,
-                                  ),
-                                )
-                              : Icon(
-                                  Icons.sync,
-                                  size: 16.ap,
-                                  color: context.colorScheme.onSurfaceVariant,
-                                ),
-                        ),
-                      ),
-                    ],
+                InfoHeader(
+                  padding: baseInfoEdgeInsets.copyWith(bottom: 0),
+                  info: Info(
+                    label: appLocalizations.mediaUnlock,
+                    iconData: Icons.link_rounded,
                   ),
+                  actions: [
+                    SizedBox(
+                      width: 24.ap,
+                      height: 24.ap,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: state.isLoading
+                            ? null
+                            : () => mediaUnlockState.checkAll(force: true),
+                        icon: state.isLoading
+                            ? SizedBox(
+                                width: 14.ap,
+                                height: 14.ap,
+                                child: SpinKitRing(
+                                  color: context.colorScheme.primary,
+                                  lineWidth: 1.5,
+                                  size: 14.ap,
+                                ),
+                              )
+                            : Icon(
+                                Icons.sync_rounded,
+                                size: 18.ap,
+                                color: context.colorScheme.onSurfaceVariant,
+                              ),
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.ap),
+                  padding: EdgeInsets.fromLTRB(16.ap, 8.ap, 16.ap, 4.ap),
                   child: Divider(
                     height: 1,
                     thickness: 1,
@@ -218,7 +204,7 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(16.ap, 6.ap, 16.ap, 8.ap),
+                    padding: EdgeInsets.fromLTRB(16.ap, 2.ap, 16.ap, 8.ap),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

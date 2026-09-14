@@ -66,7 +66,7 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
             selectedColor: context.colorScheme.primary,
             side: BorderSide.none,
             padding: const EdgeInsets.symmetric(horizontal: 4),
-            shape: RoundedRectangleBorder(
+            shape: RoundedSuperellipseBorder(
               borderRadius: BorderRadius.circular(10),
             ),
             onSelected: (_) {
@@ -305,11 +305,13 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: context.colorScheme.outlineVariant.withValues(alpha: 0.3),
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: context.colorScheme.outlineVariant.withValues(alpha: 0.3),
+          ),
         ),
       ),
       child: Row(
@@ -410,9 +412,11 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
       key: ValueKey(platform),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: context.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(14),
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(14),
+        ),
       ),
       child: Row(
         children: [
@@ -528,9 +532,11 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
+            decoration: ShapeDecoration(
               color: color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(8),
+              shape: RoundedSuperellipseBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -701,7 +707,7 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                         size: 16,
                       ),
                     )
-                  : const Icon(Icons.sync),
+                  : const Icon(Icons.sync_rounded),
             ),
           ],
           body: CustomScrollView(
@@ -719,7 +725,7 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
               const SliverToBoxAdapter(child: SizedBox(height: 8)),
               ..._buildStatusSectionSlivers(
                 title: appLocalizations.notUnlocked,
-                icon: Icons.cancel_outlined,
+                icon: Icons.cancel_rounded,
                 color: context.colorScheme.error,
                 platforms: blockedList,
                 state: state,

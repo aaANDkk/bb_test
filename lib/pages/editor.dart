@@ -992,12 +992,14 @@ class _ImportOptionsDialogState extends State<_ImportOptionsDialog> {
             onTap: () {
               _handleOnTab(ImportOption.url);
             },
+            leading: const Icon(Icons.cloud_download_rounded),
             title: Text(appLocalizations.importUrl),
           ),
           ListItem(
             onTap: () {
               _handleOnTab(ImportOption.file);
             },
+            leading: const Icon(Icons.file_open_rounded),
             title: Text(appLocalizations.importFile),
           ),
         ],
