@@ -16,22 +16,12 @@ class MediaUnlockSmall extends ConsumerStatefulWidget {
   ConsumerState<MediaUnlockSmall> createState() => _MediaUnlockSmallState();
 }
 
-class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
-  Color _getStatusColor(MediaUnlockStatus status, BuildContext context) {
-    switch (status) {
-      case MediaUnlockStatus.unlocked:
-        return const Color(0xFF10B981);
-      case MediaUnlockStatus.limited:
-      case MediaUnlockStatus.flagged:
-        return const Color(0xFFF59E0B);
-      case MediaUnlockStatus.blocked:
-      case MediaUnlockStatus.failed:
-        return context.colorScheme.error;
-      case MediaUnlockStatus.testing:
-        return context.colorScheme.primary;
-      case MediaUnlockStatus.unknown:
-        return context.colorScheme.outlineVariant;
-    }
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      mediaUnlockState.tryStartCheck();
+    });
   }
 
   Widget _buildPlatformRow(
@@ -47,7 +37,7 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
     final status = isTesting
         ? MediaUnlockStatus.testing
         : (result?.status ?? (isLoading ? MediaUnlockStatus.testing : MediaUnlockStatus.unknown));
-    final color = _getStatusColor(status, context);
+    final color = status.statusColor(context.colorScheme);
 
     final double iconSize = 16.ap;
 
@@ -140,6 +130,8 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
       child: ValueListenableBuilder<MediaUnlockState>(
         valueListenable: mediaUnlockState.state,
         builder: (context, state, _) {
+          final isWidgetLoading =
+              displayedPlatforms.any(state.testingPlatforms.contains);
           return CommonCard(
             onPressed: () {
               showExtend(
@@ -161,10 +153,13 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
                       height: 24.ap,
                       child: IconButton(
                         padding: EdgeInsets.zero,
-                        onPressed: state.isLoading
+                        onPressed: isWidgetLoading
                             ? null
-                            : () => mediaUnlockState.checkAll(force: true),
-                        icon: state.isLoading
+                            : () => mediaUnlockState.checkPlatforms(
+                                  displayedPlatforms,
+                                  force: true,
+                                ),
+                        icon: isWidgetLoading
                             ? SizedBox(
                                 width: 16.ap,
                                 height: 16.ap,
