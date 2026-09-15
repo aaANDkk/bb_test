@@ -141,7 +141,7 @@ class _MediaUnlockState extends ConsumerState<MediaUnlock> {
         status == MediaUnlockStatus.failed;
 
     final double iconSize =
-        platform == MediaPlatform.youtube ? 13.5.ap : 16.ap;
+        platform == MediaPlatform.youtube ? 11.5.ap : 16.ap;
 
     final Widget icon;
     if (platform.isMonochrome) {

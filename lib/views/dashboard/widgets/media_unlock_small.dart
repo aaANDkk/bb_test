@@ -50,7 +50,7 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
     final color = _getStatusColor(status, context);
 
     final double iconSize =
-        platform == MediaPlatform.youtube ? 13.5.ap : 16.ap;
+        platform == MediaPlatform.youtube ? 11.5.ap : 16.ap;
 
     final Widget icon;
     if (platform.isMonochrome) {

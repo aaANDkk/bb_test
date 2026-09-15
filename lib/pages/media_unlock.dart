@@ -52,13 +52,27 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
         itemBuilder: (context, index) {
           final cat = categories[index];
           final isSelected = _selectedCategory == cat;
+          final shape = RoundedSuperellipseBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(
+              color: isSelected
+                  ? context.colorScheme.primary
+                  : context.colorScheme.outlineVariant.withValues(
+                      alpha: context.colorScheme.brightness == Brightness.light
+                          ? 0.45
+                          : 0.3,
+                    ),
+              width: 1,
+            ),
+          );
           return Material(
-            color: Colors.transparent,
+            color: isSelected
+                ? context.colorScheme.primary
+                : context.colorScheme.surfaceContainerHigh,
+            shape: shape,
+            clipBehavior: Clip.antiAlias,
             child: InkWell(
-              borderRadius: BorderRadius.circular(12),
-              customBorder: RoundedSuperellipseBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+              customBorder: shape,
               onTap: () {
                 setState(() {
                   _selectedCategory = cat;
@@ -68,14 +82,6 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                 duration: const Duration(milliseconds: 200),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                decoration: ShapeDecoration(
-                  color: isSelected
-                      ? context.colorScheme.primary
-                      : context.colorScheme.surfaceContainerHigh,
-                  shape: RoundedSuperellipseBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
                 alignment: Alignment.center,
                 child: Text(
                   _getCategoryLabel(cat),

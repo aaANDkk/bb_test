@@ -16,7 +16,6 @@ enum MediaPlatform {
   openrouter,
   poe,
   suno,
-  cloudflare,
   perplexity,
   netflix,
   disney,
@@ -44,6 +43,7 @@ enum MediaPlatform {
   wikipedia,
   apple,
   onetrust,
+  cloudflare,
   gitlab,
   npm,
   jsdelivr,
@@ -176,10 +176,11 @@ extension MediaPlatformExt on MediaPlatform {
       };
 
   bool get isMonochrome => switch (this) {
+        MediaPlatform.openai ||
+        MediaPlatform.suno ||
         MediaPlatform.github ||
         MediaPlatform.wikipedia ||
         MediaPlatform.apple ||
-        MediaPlatform.x ||
         MediaPlatform.tiktok ||
         MediaPlatform.medium ||
         MediaPlatform.grok ||
