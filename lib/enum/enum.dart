@@ -323,6 +323,10 @@ enum DashboardWidget {
   memoryInfo(GridItem(crossAxisCellCount: 4, child: MemoryInfo())),
   connectionsCount(GridItem(crossAxisCellCount: 4, child: ConnectionsCount())),
   ipv6Switch(GridItem(crossAxisCellCount: 4, child: Ipv6Switch())),
+  accessControlSwitch(
+    GridItem(crossAxisCellCount: 4, child: AccessControlSwitch()),
+    platforms: [SupportPlatform.Android],
+  ),
   wakelockSwitch(
     GridItem(crossAxisCellCount: 4, child: WakelockSwitch()),
     platforms: desktopPlatforms,
@@ -332,7 +336,10 @@ enum DashboardWidget {
   ntpOverride(GridItem(crossAxisCellCount: 4, child: NtpOverride())),
   scriptOverride(GridItem(crossAxisCellCount: 4, child: ScriptOverride())),
   providersInfo(GridItem(crossAxisCellCount: 4, child: ProvidersInfo())),
-  fcmStatus(GridItem(crossAxisCellCount: 4, child: FcmStatus())),
+  fcmStatus(
+    GridItem(crossAxisCellCount: 4, child: FcmStatus()),
+    platforms: [SupportPlatform.Android],
+  ),
   onlinePanel(GridItem(crossAxisCellCount: 4, child: OnlinePanel())),
   mediaUnlock(GridItem(crossAxisCellCount: 8, child: MediaUnlock())),
   mediaUnlockSmall(GridItem(crossAxisCellCount: 4, child: MediaUnlockSmall()));

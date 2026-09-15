@@ -111,6 +111,7 @@ const _$DashboardWidgetEnumMap = {
   DashboardWidget.memoryInfo: 'memoryInfo',
   DashboardWidget.connectionsCount: 'connectionsCount',
   DashboardWidget.ipv6Switch: 'ipv6Switch',
+  DashboardWidget.accessControlSwitch: 'accessControlSwitch',
   DashboardWidget.wakelockSwitch: 'wakelockSwitch',
   DashboardWidget.dnsOverride: 'dnsOverride',
   DashboardWidget.snifferOverride: 'snifferOverride',
