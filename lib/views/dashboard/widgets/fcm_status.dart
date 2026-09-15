@@ -107,45 +107,27 @@ class _FcmStatusState extends State<FcmStatus> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: globalState.measure.titleMediumHeight + 16,
+              InfoHeader(
                 padding: baseInfoEdgeInsets.copyWith(bottom: 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(
-                      Icons.cloud_outlined,
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
-                    const SizedBox(width: 8),
-                    Flexible(
-                      flex: 1,
-                      child: TooltipText(
-                        text: Text(
-                          'FCM',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: context.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 2),
-                    AspectRatio(
-                      aspectRatio: 1,
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () => _showFcmInfoDialog(context),
-                        icon: Icon(
-                          size: 16.ap,
-                          Icons.info_outline_rounded,
-                          color: context.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ],
+                info: const Info(
+                  label: 'FCM',
+                  iconData: Icons.cloud_outlined,
                 ),
+                actions: [
+                  SizedBox(
+                    width: 24.ap,
+                    height: 24.ap,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () => _showFcmInfoDialog(context),
+                      icon: Icon(
+                        size: 18.ap,
+                        Icons.info_outline_rounded,
+                        color: context.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Container(
                 padding: baseInfoEdgeInsets.copyWith(top: 0),

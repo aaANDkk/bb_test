@@ -8,8 +8,13 @@ import 'text.dart';
 class Info {
   final String label;
   final IconData? iconData;
+  final Widget? icon;
 
-  const Info({required this.label, this.iconData});
+  const Info({
+    required this.label,
+    this.iconData,
+    this.icon,
+  });
 }
 
 class InfoHeader extends StatelessWidget {
@@ -29,7 +34,7 @@ class InfoHeader extends StatelessWidget {
     return Padding(
       padding: padding ?? baseInfoEdgeInsets,
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
@@ -37,7 +42,10 @@ class InfoHeader extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (info.iconData != null) ...[
+                if (info.icon != null) ...[
+                  info.icon!,
+                  const SizedBox(width: 8),
+                ] else if (info.iconData != null) ...[
                   Icon(
                     info.iconData,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -60,12 +68,14 @@ class InfoHeader extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 8),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [...actions],
-          ),
+          if (actions.isNotEmpty) ...[
+            const SizedBox(width: 8),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [...actions],
+            ),
+          ],
         ],
       ),
     );
@@ -123,6 +133,7 @@ class CommonCard extends StatelessWidget {
     this.padding,
     this.enterAnimated = false,
     this.info,
+    this.actions,
   }) : isSelected = isSelected ?? false;
 
   final bool enterAnimated;
@@ -133,6 +144,7 @@ class CommonCard extends StatelessWidget {
   final Widget child;
   final EdgeInsets? padding;
   final Info? info;
+  final List<Widget>? actions;
   final CommonCardType type;
   final double? radius;
 
@@ -188,6 +200,7 @@ class CommonCard extends StatelessWidget {
           InfoHeader(
             padding: baseInfoEdgeInsets.copyWith(bottom: 0),
             info: info!,
+            actions: actions,
           ),
           Flexible(flex: 1, child: child),
         ],

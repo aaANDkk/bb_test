@@ -535,7 +535,7 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
             decoration: ShapeDecoration(
               color: color.withValues(alpha: 0.12),
               shape: RoundedSuperellipseBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
             child: Row(
