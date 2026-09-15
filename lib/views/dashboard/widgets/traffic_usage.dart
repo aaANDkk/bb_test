@@ -16,11 +16,34 @@ class TrafficUsage extends ConsumerStatefulWidget {
   ConsumerState<TrafficUsage> createState() => _TrafficUsageState();
 }
 
-class _TrafficUsageState extends ConsumerState<TrafficUsage> {
+class _TrafficUsageState extends ConsumerState<TrafficUsage>
+    with WidgetsBindingObserver {
   final _donutKey = GlobalKey<DonutChartState>();
   // cache text measurement results
   Size? _uploadTextSize;
   Size? _downloadTextSize;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      final currentPage = ref.read(currentPageLabelProvider);
+      if (currentPage == PageLabel.dashboard) {
+        _donutKey.currentState?.replayEntryAnimation();
+      }
+    }
+  }
 
   @override
   void didChangeDependencies() {

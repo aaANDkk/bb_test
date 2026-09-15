@@ -21,7 +21,9 @@ class _MediaUnlockState extends ConsumerState<MediaUnlock> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      mediaUnlockState.tryStartCheck();
+      if (mediaUnlockState.state.value.lastChecked == null) {
+        mediaUnlockState.tryStartCheck();
+      }
     });
   }
 
