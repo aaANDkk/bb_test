@@ -54,16 +54,6 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
           final isSelected = _selectedCategory == cat;
           final shape = RoundedSuperellipseBorder(
             borderRadius: BorderRadius.circular(12),
-            side: BorderSide(
-              color: isSelected
-                  ? context.colorScheme.primary
-                  : context.colorScheme.outlineVariant.withValues(
-                      alpha: context.colorScheme.brightness == Brightness.light
-                          ? 0.45
-                          : 0.3,
-                    ),
-              width: 1,
-            ),
           );
           return Material(
             color: isSelected
@@ -558,10 +548,11 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            clipBehavior: Clip.antiAlias,
             decoration: ShapeDecoration(
               color: color.withValues(alpha: 0.12),
               shape: RoundedSuperellipseBorder(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
             child: Row(

@@ -73,7 +73,6 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
   }
 
   Future<void> _fetchIpDetail() async {
-    final stopwatch = Stopwatch()..start();
     final cat = utils.classifyIp(widget.ip);
     if (cat != IpCategory.public) {
       if (mounted) {
@@ -86,10 +85,6 @@ class _IpDetailDialogState extends State<_IpDetailDialog> {
     }
 
     final res = await request.queryIpDetail(widget.ip);
-    final elapsed = stopwatch.elapsedMilliseconds;
-    if (elapsed < 1400) {
-      await Future.delayed(Duration(milliseconds: 1400 - elapsed));
-    }
     if (!mounted) return;
 
     if (res.isError) {

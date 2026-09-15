@@ -81,23 +81,6 @@ class _MemoryInfoState extends State<MemoryInfo> {
     }
   }
 
-  Future<void> _showMemoryInfoDialog(BuildContext context) async {
-    await globalState.showCommonDialog<void>(
-      child: CommonDialog(
-        title: appLocalizations.memoryInfo,
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-            child: Text(appLocalizations.confirm),
-          ),
-        ],
-        child: Text(appLocalizations.memoryInfoDesc),
-      ),
-    );
-  }
-
   Future<void> _handleForceGC(BuildContext context) async {
     final result = await globalState.showCommonDialog<bool>(
       child: CommonDialog(
@@ -157,19 +140,6 @@ class _MemoryInfoState extends State<MemoryInfo> {
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: context.colorScheme.onSurfaceVariant,
                         ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 2),
-                  AspectRatio(
-                    aspectRatio: 1,
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () => _showMemoryInfoDialog(context),
-                      icon: Icon(
-                        size: 16.ap,
-                        Icons.info_outline_rounded,
-                        color: context.colorScheme.onSurfaceVariant,
                       ),
                     ),
                   ),
