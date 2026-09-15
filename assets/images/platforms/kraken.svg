@@ -1,4 +1,1 @@
-<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="12" cy="12" r="10" fill="#5841D8"/>
-<path d="M8 7h8a3 3 0 013 3v2a3 3 0 01-3 3h-1v2h2v1h-3v-3H8v3H5v-1h2v-2H6a3 3 0 01-3-3v-2a3 3 0 013-3h2zm0 3v3h8v-3H8z" fill="#FFFFFF"/>
-</svg>
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1789455939263" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10914" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M512 512m-447 0a447 447 0 1 0 894 0 447 447 0 1 0-894 0Z" fill="#5841D8" p-id="10915"></path><path d="M512 290.26c-154.67 0-280 126.06-280 281.5v120.65a40.06 40.06 0 0 0 80 2.23V571.76a40 40 0 1 1 80 0v120.65a40 40 0 1 0 80 0V571.76a40.06 40.06 0 1 1 80.12 0v120.65a40 40 0 1 0 80 0V571.76a40 40 0 1 1 80.09 0v120.65a40 40 0 1 0 80 0V571.76c0.01-155.44-125.42-281.5-280.21-281.5z" fill="#FFFFFF" p-id="10916"></path></svg>

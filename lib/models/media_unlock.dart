@@ -190,7 +190,6 @@ extension MediaPlatformExt on MediaPlatform {
   bool get isMonochrome => switch (this) {
         MediaPlatform.openai ||
         MediaPlatform.suno ||
-        MediaPlatform.v2ex ||
         MediaPlatform.github ||
         MediaPlatform.wikipedia ||
         MediaPlatform.apple ||

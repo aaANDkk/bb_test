@@ -23,6 +23,8 @@ class _TrafficUsageState extends ConsumerState<TrafficUsage>
   Size? _uploadTextSize;
   Size? _downloadTextSize;
 
+  bool _wasPaused = false;
+
   @override
   void initState() {
     super.initState();
@@ -37,10 +39,15 @@ class _TrafficUsageState extends ConsumerState<TrafficUsage>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      final currentPage = ref.read(currentPageLabelProvider);
-      if (currentPage == PageLabel.dashboard) {
-        _donutKey.currentState?.replayEntryAnimation();
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.hidden) {
+      _wasPaused = true;
+    } else if (state == AppLifecycleState.resumed) {
+      if (_wasPaused) {
+        _wasPaused = false;
+        final currentPage = ref.read(currentPageLabelProvider);
+        if (currentPage == PageLabel.dashboard) {
+          _donutKey.currentState?.replayEntryAnimation();
+        }
       }
     }
   }
