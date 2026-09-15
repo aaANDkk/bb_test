@@ -372,7 +372,13 @@ class _LatencyBarState extends State<_LatencyBar>
                   child: FractionallySizedBox(
                     widthFactor: _currentFactor,
                     heightFactor: 1.0,
-                    child: ColoredBox(color: fillColor),
+                    // 填充条自身保持 3.ap 圆角：右端为圆润端帽而非直角
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: fillColor,
+                        borderRadius: BorderRadius.circular(3.ap),
+                      ),
+                    ),
                   ),
                 );
               },

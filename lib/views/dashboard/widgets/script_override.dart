@@ -74,13 +74,9 @@ class ScriptOverride extends ConsumerWidget {
       child: CommonCard(
         info: Info(
           label: appLocalizations.script,
-          // 图标与配置页右上角「脚本」入口完全一致；生效中呈现主题色高亮
-          icon: Icon(
-            Icons.functions_rounded,
-            color: isEnabled
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+          // 与其它小部件保持一致：图标始终为常规 onSurfaceVariant 色，
+          // 不随开关状态改变颜色，避免与整排小部件视觉违和
+          iconData: Icons.functions_rounded,
         ),
         onPressed: () {
           _openScripts(context);

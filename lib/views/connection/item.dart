@@ -361,14 +361,24 @@ class TrackerInfoDetailView extends ConsumerWidget {
 
   Widget _buildChains(TrackerInfo info) {
     return ListItem(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-      title: Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        alignment: WrapAlignment.start,
+      title: Row(
+        spacing: 16,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          for (final chain in info.chains)
-            CommonChip(label: chain, onPressed: () {}),
+          Text(appLocalizations.proxyChains),
+          // 右侧标签流与标题保持 16px 安全间距，永不与文字发生触碰/重叠
+          Flexible(
+            child: Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              alignment: WrapAlignment.end,
+              children: [
+                for (final chain in info.chains)
+                  CommonChip(label: chain, onPressed: () {}),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -589,7 +599,7 @@ class TrackerInfoDetailView extends ConsumerWidget {
       },
     );
 
-    // Section 4: Advanced Info
+    // Section 4: Advanced Info（代理链合并进本分区，与 DNS 模式等放在一起）
     final advancedItems = <Widget>[
       if (info.metadata.destinationGeoIP.isNotEmpty)
         _buildItem(
@@ -616,10 +626,6 @@ class TrackerInfoDetailView extends ConsumerWidget {
           title: appLocalizations.specialRules,
           desc: info.metadata.specialRules,
         ),
-    ];
-
-    // Section 5: Proxy Chains
-    final chainsItems = <Widget>[
       if (info.chains.isNotEmpty) _buildChains(info),
     ];
 
@@ -639,11 +645,6 @@ class TrackerInfoDetailView extends ConsumerWidget {
         SectionContainer(
           title: appLocalizations.advancedInfo,
           items: advancedItems,
-        ),
-      if (chainsItems.isNotEmpty)
-        SectionContainer(
-          title: appLocalizations.proxyChains,
-          items: chainsItems,
         ),
     ];
 
