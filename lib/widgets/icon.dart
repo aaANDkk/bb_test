@@ -17,6 +17,15 @@ class CommonTargetIcon extends StatefulWidget {
 
   const CommonTargetIcon({super.key, required this.src, required this.size});
 
+  /// 主动预取图标（不依赖组件是否挂载或可见）。
+  ///
+  /// 策略组数据更新后（例如用户在 YAML 里更换了策略组图标）立即把所有
+  /// 图标拉取到本地缓存，避免「只有当前可见的图标才会被懒加载」，
+  /// 从而无需重启应用即可显示新图标。
+  static Future<void> prefetchAll(Iterable<String> srcs) {
+    return _CommonTargetIconState.prefetchAll(srcs);
+  }
+
   @override
   State<CommonTargetIcon> createState() => _CommonTargetIconState();
 }
