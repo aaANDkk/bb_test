@@ -109,7 +109,7 @@ class _NetworkDetectionState extends ConsumerState<NetworkDetection> {
                         onPressed: _showIpClickBehaviorSettings,
                         icon: Icon(
                           size: 18.ap,
-                          Icons.settings_rounded,
+                          Icons.settings_outlined,
                           color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
