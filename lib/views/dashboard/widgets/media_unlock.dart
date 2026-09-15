@@ -37,7 +37,8 @@ class _MediaUnlockState extends ConsumerState<MediaUnlock> {
   String _getStatusText(MediaUnlockStatus status, [MediaPlatform? platform]) {
     switch (status) {
       case MediaUnlockStatus.unlocked:
-        if (platform?.category == MediaCategory.streaming) {
+        if (platform?.category == MediaCategory.streaming ||
+            platform?.category == MediaCategory.ai) {
           return appLocalizations.mediaUnlocked;
         }
         return appLocalizations.unlocked;
@@ -139,12 +140,15 @@ class _MediaUnlockState extends ConsumerState<MediaUnlock> {
     final isError = status == MediaUnlockStatus.blocked ||
         status == MediaUnlockStatus.failed;
 
+    final double iconSize =
+        platform == MediaPlatform.youtube ? 13.5.ap : 16.ap;
+
     final Widget icon;
     if (platform.isMonochrome) {
       icon = SvgPicture.asset(
         'assets/images/platforms/${platform.name}.svg',
-        width: 16.ap,
-        height: 16.ap,
+        width: iconSize,
+        height: iconSize,
         fit: BoxFit.contain,
         colorFilter: ColorFilter.mode(
           context.colorScheme.onSurface,
@@ -154,8 +158,8 @@ class _MediaUnlockState extends ConsumerState<MediaUnlock> {
     } else {
       icon = SvgPicture.asset(
         'assets/images/platforms/${platform.name}.svg',
-        width: 16.ap,
-        height: 16.ap,
+        width: iconSize,
+        height: iconSize,
         fit: BoxFit.contain,
       );
     }

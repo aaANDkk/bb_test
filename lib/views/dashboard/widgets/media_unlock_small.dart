@@ -49,12 +49,15 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
         : (result?.status ?? (isLoading ? MediaUnlockStatus.testing : MediaUnlockStatus.unknown));
     final color = _getStatusColor(status, context);
 
+    final double iconSize =
+        platform == MediaPlatform.youtube ? 13.5.ap : 16.ap;
+
     final Widget icon;
     if (platform.isMonochrome) {
       icon = SvgPicture.asset(
         'assets/images/platforms/${platform.name}.svg',
-        width: 16.ap,
-        height: 16.ap,
+        width: iconSize,
+        height: iconSize,
         fit: BoxFit.contain,
         colorFilter: ColorFilter.mode(
           context.colorScheme.onSurface,
@@ -64,8 +67,8 @@ class _MediaUnlockSmallState extends ConsumerState<MediaUnlockSmall> {
     } else {
       icon = SvgPicture.asset(
         'assets/images/platforms/${platform.name}.svg',
-        width: 16.ap,
-        height: 16.ap,
+        width: iconSize,
+        height: iconSize,
         fit: BoxFit.contain,
       );
     }

@@ -55,9 +55,9 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
           return Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(12),
               customBorder: RoundedSuperellipseBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
               ),
               onTap: () {
                 setState(() {
@@ -73,7 +73,7 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                       ? context.colorScheme.primary
                       : context.colorScheme.surfaceContainerHigh,
                   shape: RoundedSuperellipseBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 alignment: Alignment.center,
@@ -115,7 +115,8 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
   String _getStatusText(MediaUnlockStatus status, [MediaPlatform? platform]) {
     switch (status) {
       case MediaUnlockStatus.unlocked:
-        if (platform?.category == MediaCategory.streaming) {
+        if (platform?.category == MediaCategory.streaming ||
+            platform?.category == MediaCategory.ai) {
           return appLocalizations.mediaUnlocked;
         }
         return appLocalizations.unlocked;
@@ -734,7 +735,8 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                   blockedList.length,
                   otherList.length,
                   unlockedList.length,
-                  isStreaming: effectiveCategory == MediaCategory.streaming,
+                  isStreaming: effectiveCategory == MediaCategory.streaming ||
+                      effectiveCategory == MediaCategory.ai,
                 ),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 4)),
@@ -742,7 +744,7 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
               const SliverToBoxAdapter(child: SizedBox(height: 8)),
               ..._buildStatusSectionSlivers(
                 title: appLocalizations.notUnlocked,
-                icon: Icons.cancel_rounded,
+                icon: Icons.cancel_outlined,
                 color: context.colorScheme.error,
                 platforms: blockedList,
                 state: state,
@@ -755,7 +757,8 @@ class _MediaUnlockPageState extends ConsumerState<MediaUnlockPage> {
                 state: state,
               ),
               ..._buildStatusSectionSlivers(
-                title: _selectedCategory == MediaCategory.streaming
+                title: (_selectedCategory == MediaCategory.streaming ||
+                        _selectedCategory == MediaCategory.ai)
                     ? appLocalizations.mediaUnlocked
                     : appLocalizations.unlocked,
                 icon: Icons.check_circle_outline_rounded,

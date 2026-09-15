@@ -70,7 +70,6 @@ extension MediaPlatformExt on MediaPlatform {
         MediaPlatform.openrouter ||
         MediaPlatform.poe ||
         MediaPlatform.suno ||
-        MediaPlatform.cloudflare ||
         MediaPlatform.perplexity =>
           MediaCategory.ai,
         MediaPlatform.netflix ||
@@ -102,6 +101,7 @@ extension MediaPlatformExt on MediaPlatform {
         MediaPlatform.wikipedia ||
         MediaPlatform.apple ||
         MediaPlatform.onetrust ||
+        MediaPlatform.cloudflare ||
         MediaPlatform.gitlab ||
         MediaPlatform.npm ||
         MediaPlatform.jsdelivr ||
@@ -180,6 +180,7 @@ extension MediaPlatformExt on MediaPlatform {
         MediaPlatform.wikipedia ||
         MediaPlatform.apple ||
         MediaPlatform.x ||
+        MediaPlatform.tiktok ||
         MediaPlatform.medium ||
         MediaPlatform.grok ||
         MediaPlatform.epic =>
