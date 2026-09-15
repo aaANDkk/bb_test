@@ -9,17 +9,18 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 class WakelockSwitch extends StatelessWidget {
   const WakelockSwitch({super.key});
 
-  Future<void> _toggleWakelock(BuildContext context) async {
+  Future<void> _toggleWakelock(BuildContext context, bool value) async {
     try {
-      final enabled = await WakelockPlus.enabled;
-      if (enabled) {
-        await WakelockPlus.disable();
-        globalState.appController.stopWakelockAutoRecovery();
-      } else {
+      if (value) {
         await WakelockPlus.enable();
         globalState.appController.startWakelockAutoRecovery();
+      } else {
+        await WakelockPlus.disable();
+        globalState.appController.stopWakelockAutoRecovery();
       }
-      globalState.updateWakelockState(!enabled);
+      globalState.updateWakelockState(value);
+      // 记忆开关状态：下次启动自动恢复（完全退出应用时依然会释放系统亮屏锁）
+      await preferences.setWakelockEnabled(value);
     } catch (e) {
       commonPrint.log('WakeLock toggle error: $e');
     }
@@ -77,7 +78,7 @@ class WakelockSwitch extends StatelessWidget {
                     return Switch(
                       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       value: wakelockEnabled,
-                      onChanged: (_) => _toggleWakelock(context),
+                      onChanged: (value) => _toggleWakelock(context, value),
                     );
                   },
                 ),

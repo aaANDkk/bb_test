@@ -969,5 +969,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "staggeredDotsWave": MessageLookupByLibrary.simpleMessage("错落波浪"),
     "dotsTriangle": MessageLookupByLibrary.simpleMessage("动态三角"),
     "zoom": MessageLookupByLibrary.simpleMessage("缩放"),
+    "basicInfo": MessageLookupByLibrary.simpleMessage("基本信息"),
+    "addressInfo": MessageLookupByLibrary.simpleMessage("地址信息"),
+    "traffic": MessageLookupByLibrary.simpleMessage("流量信息"),
+    "advancedInfo": MessageLookupByLibrary.simpleMessage("高级信息"),
   };
 }

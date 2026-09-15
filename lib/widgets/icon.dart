@@ -38,10 +38,38 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
   static final Map<String, Future<File?>> _inFlightDownloads = {};
   static const _maxCacheEntries = 256;
   static const _failureCooldownSeconds = 8;
+  static const _prefetchConcurrency = 4;
+  static const _maxPrefetchPerRound = 64;
 
   String _moduleCacheKey(int cacheSize) {
     if (widget.src.isSvg) return 'svg|${widget.src}';
     return 'bmp|${widget.src}|$cacheSize';
+  }
+
+  static bool _cacheKeyMatchesSrc(String key, String src) {
+    if (src.isEmpty) return false;
+    if (key == 'svg|$src') return true;
+    return key.startsWith('bmp|$src|');
+  }
+
+  /// 清除某个 URL 残留的「永久无效」标记。
+  ///
+  /// 仅清理内存中的判定标记，**绝不删除磁盘缓存文件**，因此在断网、
+  /// 弱网或上游临时异常时依旧可以回退渲染旧图（遵循 SWR 高可用原则）。
+  static bool _clearInvalidMark(String src) {
+    if (src.isEmpty) return false;
+    final poisonKeys = _moduleFileCache.entries
+        .where(
+          (entry) => entry.value == null && _cacheKeyMatchesSrc(entry.key, src),
+        )
+        .map((entry) => entry.key)
+        .toList();
+    if (poisonKeys.isEmpty) return false;
+    for (final key in poisonKeys) {
+      _moduleFileCache.remove(key);
+    }
+    _moduleSvgValidCache.remove(src);
+    return true;
   }
 
   static void _ensureCacheLimit() {
@@ -150,7 +178,7 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
     super.dispose();
   }
 
-  void _syncCheckAndInit() {
+  void _syncCheckAndInit({bool force = false}) {
     if (widget.src.isEmpty || widget.src.getBase64 != null) return;
 
     final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
@@ -162,16 +190,16 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
       _cachedSrc = widget.src;
       _cachedSize = cacheSize;
       _file = exactFile;
-      return;
+      if (!force) return;
     }
 
     final fallbackFile = _findCachedFileForSrc(widget.src);
-    if (fallbackFile != null) {
+    if (fallbackFile != null && _file == null) {
       _cachedSrc = widget.src;
       _cachedSize = null;
       _file = fallbackFile;
     }
-    _init(cacheSize);
+    _init(cacheSize, force: force);
   }
 
   @override
@@ -179,7 +207,17 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.src != widget.src) {
       _retryTimer?.cancel();
+      _unsubscribeFromUrl();
       _subscribeToUrl(widget.src);
+
+      // 配置（YAML）中更换了图标地址：必须让新地址真正走一次网络拉取，
+      // 并清掉该地址可能残留的「永久无效 / 失败冷却」标记，
+      // 否则会一直显示默认准星图标，只能靠完全重启应用才能恢复。
+      _clearInvalidMark(widget.src);
+      if (widget.src.isNotEmpty) {
+        _urlFailureCache.remove(widget.src);
+      }
+
       final newCacheSize =
           (widget.size * MediaQuery.of(context).devicePixelRatio).ceil();
       final exact = _moduleFileCache[_moduleCacheKey(newCacheSize)];
@@ -188,7 +226,7 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
       _cachedSrc = fallback != null ? widget.src : null;
       _cachedSize = exact != null ? newCacheSize : null;
       _didSyncCheck = true;
-      _syncCheckAndInit();
+      _syncCheckAndInit(force: true);
     } else if (oldWidget.size != widget.size) {
       _didSyncCheck = true;
       _syncCheckAndInit();
@@ -352,13 +390,17 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
     }
   }
 
-  Future<void> _init(int cacheSize) async {
+  Future<void> _init(int cacheSize, {bool force = false}) async {
     if (widget.src.isEmpty || widget.src.getBase64 != null) {
       return;
     }
 
     // If cached with same src and size, return directly
-    if (_cachedSrc == widget.src && _cachedSize == cacheSize && _file != null) {
+    // （force 为真时跳过该快捷返回：配置更换图标地址后必须重新走一次拉取流程）
+    if (!force &&
+        _cachedSrc == widget.src &&
+        _cachedSize == cacheSize &&
+        _file != null) {
       return;
     }
 
@@ -369,16 +411,21 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
     // The cached File is already display-ready — no async resize needed.
     if (_moduleFileCache.containsKey(mKey)) {
       final cachedFile = _moduleFileCache[mKey];
-      if (cachedFile == null) return; // permanently invalid
-
-      if (mounted) {
-        setState(() {
-          _file = cachedFile;
-          _cachedSrc = widget.src;
-          _cachedSize = cacheSize;
-        });
+      if (cachedFile == null) {
+        // 历史版本会写入 null 作为「永久无效」标记，导致该地址此后
+        // 永远不再尝试拉取（只能靠完全重启应用恢复）。这里直接剔除，
+        // 让其走正常的失败冷却 + 自动补试流程。
+        _moduleFileCache.remove(mKey);
+      } else {
+        if (mounted) {
+          setState(() {
+            _file = cachedFile;
+            _cachedSrc = widget.src;
+            _cachedSize = cacheSize;
+          });
+        }
+        return;
       }
-      return;
     }
 
     // 1. Try local cache from DefaultCacheManager (Stale-While-Revalidate: disk cache priority)
@@ -473,13 +520,68 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
     }
   }
 
+  /// 主动预取图标（不依赖组件是否挂载或可见）。
+  ///
+  /// 策略组数据更新后（例如用户在 YAML 里更换了策略组图标）立即把所有
+  /// 图标拉取到本地缓存，避免「只有当前可见的图标才会被懒加载」，
+  /// 从而无需重启应用即可显示新图标。
+  static Future<void> prefetchAll(Iterable<String> srcs) async {
+    final targets = <String>[];
+    final seen = <String>{};
+    for (final raw in srcs) {
+      final src = raw.trim();
+      if (src.isEmpty || src.getBase64 != null) continue;
+      if (!seen.add(src)) continue;
+      // 清理历史版本遗留的「永久无效」标记，否则该地址永远不会再被拉取
+      _clearInvalidMark(src);
+      if (_findCachedFileForSrc(src) != null) continue;
+      targets.add(src);
+      if (targets.length >= _maxPrefetchPerRound) break;
+    }
+    if (targets.isEmpty) return;
+    var cursor = 0;
+    Future<void> worker() async {
+      while (cursor < targets.length) {
+        final src = targets[cursor++];
+        if (!_shouldRetry(src)) continue;
+        try {
+          await _prefetchOne(src);
+        } catch (_) {
+          _urlFailureCache[src] = DateTime.now();
+        }
+      }
+    }
+
+    final workerCount = targets.length < _prefetchConcurrency
+        ? targets.length
+        : _prefetchConcurrency;
+    await Future.wait(List.generate(workerCount, (_) => worker()));
+  }
+
+  static Future<void> _prefetchOne(String url) async {
+    FileInfo? info;
+    try {
+      info = await DefaultCacheManager().getFileFromCache(url);
+    } catch (_) {}
+    if (info != null && !DateTime.now().isAfter(info.validTill)) {
+      // 本地副本仍然新鲜：直接广播给已挂载的同源组件，无需网络
+      _notifyUrlUpdated(url, info.file);
+      return;
+    }
+    // 无缓存或已过期：走 single-flight 拉取（内含 URL 级并发去重与广播）
+    await _downloadFileSingleFlight(url);
+  }
+
   Future<void> _processFile(File file, int cacheSize, String mKey) async {
     if (widget.src.isSvg) {
       final isValid = await _validateSvg(file);
       if (!isValid) {
         await DefaultCacheManager().removeFile(widget.src);
-        _moduleFileCache[mKey] = null;
-        _urlFailureCache.remove(widget.src);
+        // 不再写入 null 永久标记：仅记录失败冷却，冷却结束后自动补试，
+        // 网络恢复或上游恢复时无需重启应用即可显示图标。
+        _moduleFileCache.remove(mKey);
+        _moduleSvgValidCache.remove(widget.src);
+        _urlFailureCache[widget.src] = DateTime.now();
         if (mounted) {
           setState(() {
             _file = null;
@@ -487,6 +589,7 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
             _cachedSize = null;
           });
         }
+        _scheduleAutoRetry(cacheSize);
         return;
       }
       _moduleFileCache[mKey] = file;
@@ -556,7 +659,8 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
             commonPrint.log('Failed to load SVG: $e');
             _moduleFileCache.remove(mKey);
             _moduleSvgValidCache.remove(widget.src);
-            _urlFailureCache.remove(widget.src);
+            _urlFailureCache[widget.src] = DateTime.now();
+            _scheduleAutoRetry(cacheSize);
             return _defaultIcon();
           }
         }
@@ -573,9 +677,11 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
               DefaultCacheManager().removeFile(widget.src);
               _moduleFileCache.remove(_moduleCacheKey(cacheSize));
               _moduleSvgValidCache.remove(widget.src);
+              _urlFailureCache[widget.src] = DateTime.now();
               _file = null;
               _cachedSrc = null;
               _cachedSize = null;
+              _scheduleAutoRetry(cacheSize);
               return _defaultIcon();
             }
             _moduleSvgValidCache[widget.src] = true;
@@ -592,9 +698,11 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
               DefaultCacheManager().removeFile(widget.src);
               _moduleFileCache.remove(_moduleCacheKey(cacheSize));
               _moduleSvgValidCache.remove(widget.src);
+              _urlFailureCache[widget.src] = DateTime.now();
               _file = null;
               _cachedSrc = null;
               _cachedSize = null;
+              _scheduleAutoRetry(cacheSize);
               return _defaultIcon();
             }
           },
@@ -607,7 +715,11 @@ class _CommonTargetIconState extends State<CommonTargetIcon> {
         fit: BoxFit.contain,
         errorBuilder: (_, _, _) {
           _moduleFileCache.remove(mKey);
-          _urlFailureCache.remove(widget.src);
+          _urlFailureCache[widget.src] = DateTime.now();
+          _file = null;
+          _cachedSrc = null;
+          _cachedSize = null;
+          _scheduleAutoRetry(cacheSize);
           return _defaultIcon();
         },
       );

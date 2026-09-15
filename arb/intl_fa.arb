@@ -748,5 +748,9 @@
   "threeRotatingDots": "سه نقطه چرخان",
   "fourRotatingDots": "چهار نقطه چرخان",
   "staggeredDotsWave": "موج پلکانی",
-  "dotsTriangle": "مثلث پویا"
+  "dotsTriangle": "مثلث پویا",
+  "basicInfo": "اطلاعات پایه",
+  "addressInfo": "اطلاعات آدرس",
+  "traffic": "ترافیک",
+  "advancedInfo": "پیشرفته"
 }

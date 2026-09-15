@@ -330,6 +330,7 @@ enum DashboardWidget {
   dnsOverride(GridItem(crossAxisCellCount: 4, child: DnsOverride())),
   snifferOverride(GridItem(crossAxisCellCount: 4, child: SnifferOverride())),
   ntpOverride(GridItem(crossAxisCellCount: 4, child: NtpOverride())),
+  scriptOverride(GridItem(crossAxisCellCount: 4, child: ScriptOverride())),
   providersInfo(GridItem(crossAxisCellCount: 4, child: ProvidersInfo())),
   fcmStatus(GridItem(crossAxisCellCount: 4, child: FcmStatus())),
   onlinePanel(GridItem(crossAxisCellCount: 4, child: OnlinePanel())),

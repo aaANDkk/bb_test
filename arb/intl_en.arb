@@ -748,5 +748,9 @@
   "fourRotatingDots": "Four Rotating",
   "staggeredDotsWave": "Staggered Wave",
   "dotsTriangle": "Dots Triangle",
-  "zoom": "Zoom"
+  "zoom": "Zoom",
+  "basicInfo": "Basic Info",
+  "addressInfo": "Address Info",
+  "traffic": "Traffic",
+  "advancedInfo": "Advanced Info"
 }

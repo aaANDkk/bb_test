@@ -1372,5 +1372,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "staggeredDotsWave": MessageLookupByLibrary.simpleMessage("موج پلکانی"),
     "dotsTriangle": MessageLookupByLibrary.simpleMessage("مثلث نقطه‌ای"),
     "zoom": MessageLookupByLibrary.simpleMessage("بزرگنمایی"),
+    "basicInfo": MessageLookupByLibrary.simpleMessage("اطلاعات پایه"),
+    "addressInfo": MessageLookupByLibrary.simpleMessage("اطلاعات آدرس"),
+    "traffic": MessageLookupByLibrary.simpleMessage("ترافیک"),
+    "advancedInfo": MessageLookupByLibrary.simpleMessage("پیشرفته"),
   };
 }

@@ -752,5 +752,9 @@
   "threeRotatingDots": "Три вращающиеся точки",
   "fourRotatingDots": "Четыре вращающиеся точки",
   "staggeredDotsWave": "Ступенчатая волна",
-  "dotsTriangle": "Динамический треугольник"
+  "dotsTriangle": "Динамический треугольник",
+  "basicInfo": "Основная информация",
+  "addressInfo": "Адресная информация",
+  "traffic": "Трафик",
+  "advancedInfo": "Дополнительно"
 }

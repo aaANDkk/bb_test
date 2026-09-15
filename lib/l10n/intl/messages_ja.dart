@@ -1075,5 +1075,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "staggeredDotsWave": MessageLookupByLibrary.simpleMessage("スタッガードウェーブ"),
     "dotsTriangle": MessageLookupByLibrary.simpleMessage("ドット三角"),
     "zoom": MessageLookupByLibrary.simpleMessage("ズーム"),
+    "basicInfo": MessageLookupByLibrary.simpleMessage("基本情報"),
+    "addressInfo": MessageLookupByLibrary.simpleMessage("アドレス情報"),
+    "traffic": MessageLookupByLibrary.simpleMessage("トラフィック"),
+    "advancedInfo": MessageLookupByLibrary.simpleMessage("詳細情報"),
   };
 }

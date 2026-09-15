@@ -748,5 +748,9 @@
   "threeRotatingDots": "3점 회전",
   "fourRotatingDots": "4점 회전",
   "staggeredDotsWave": "엇갈린 파도",
-  "dotsTriangle": "동적 삼각형"
+  "dotsTriangle": "동적 삼각형",
+  "basicInfo": "기본 정보",
+  "addressInfo": "주소 정보",
+  "traffic": "트래픽",
+  "advancedInfo": "고급 정보"
 }

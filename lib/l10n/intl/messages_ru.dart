@@ -1393,5 +1393,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "staggeredDotsWave": MessageLookupByLibrary.simpleMessage("Ступенчатая волна"),
     "dotsTriangle": MessageLookupByLibrary.simpleMessage("Точечный треугольник"),
     "zoom": MessageLookupByLibrary.simpleMessage("Масштаб"),
+    "basicInfo": MessageLookupByLibrary.simpleMessage("Основная информация"),
+    "addressInfo": MessageLookupByLibrary.simpleMessage("Адресная информация"),
+    "traffic": MessageLookupByLibrary.simpleMessage("Трафик"),
+    "advancedInfo": MessageLookupByLibrary.simpleMessage("Дополнительно"),
   };
 }

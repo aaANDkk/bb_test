@@ -1087,5 +1087,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "staggeredDotsWave": MessageLookupByLibrary.simpleMessage("엇갈린 파도"),
     "dotsTriangle": MessageLookupByLibrary.simpleMessage("삼각형 점"),
     "zoom": MessageLookupByLibrary.simpleMessage("확대/축소"),
+    "basicInfo": MessageLookupByLibrary.simpleMessage("기본 정보"),
+    "addressInfo": MessageLookupByLibrary.simpleMessage("주소 정보"),
+    "traffic": MessageLookupByLibrary.simpleMessage("트래픽"),
+    "advancedInfo": MessageLookupByLibrary.simpleMessage("고급 정보"),
   };
 }

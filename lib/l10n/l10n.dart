@@ -6118,6 +6118,41 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Basic Info`
+  String get basicInfo {
+    return Intl.message(
+      'Basic Info',
+      name: 'basicInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address Info`
+  String get addressInfo {
+    return Intl.message(
+      'Address Info',
+      name: 'addressInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Traffic`
+  String get traffic {
+    return Intl.message('Traffic', name: 'traffic', desc: '', args: []);
+  }
+
+  /// `Advanced Info`
+  String get advancedInfo {
+    return Intl.message(
+      'Advanced Info',
+      name: 'advancedInfo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

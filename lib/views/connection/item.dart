@@ -360,22 +360,15 @@ class TrackerInfoDetailView extends ConsumerWidget {
   }
 
   Widget _buildChains(TrackerInfo info) {
-    final chains = Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      alignment: WrapAlignment.end,
-      children: [
-        for (final chain in info.chains)
-          CommonChip(label: chain, onPressed: () {}),
-      ],
-    );
     return ListItem(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+      title: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        alignment: WrapAlignment.start,
         children: [
-          Text(appLocalizations.proxyChains),
-          Flexible(child: chains),
+          for (final chain in info.chains)
+            CommonChip(label: chain, onPressed: () {}),
         ],
       ),
     );
@@ -393,6 +386,9 @@ class TrackerInfoDetailView extends ConsumerWidget {
       IpCategory.lan => Icons.shuffle_rounded,
       IpCategory.public => Icons.search_rounded,
     };
+    final pillShape = RoundedSuperellipseBorder(
+      borderRadius: BorderRadius.circular(8),
+    );
 
     return ListItem(
       title: Row(
@@ -407,9 +403,10 @@ class TrackerInfoDetailView extends ConsumerWidget {
               children: [
                 Material(
                   color: context.colorScheme.primary.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(6),
+                  shape: pillShape,
+                  clipBehavior: Clip.antiAlias,
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(6),
+                    customBorder: pillShape,
                     onTap: () {
                       showIpDetailDialog(context, ip);
                     },
@@ -494,7 +491,8 @@ class TrackerInfoDetailView extends ConsumerWidget {
 
     final remoteDestParsed = _parseIpAndPort(info.metadata.remoteDestination);
 
-    final items = [
+    // Section 1: Basic Info
+    final basicItems = <Widget>[
       _buildItem(
         title: appLocalizations.creationTime,
         desc: info.start.showFull,
@@ -509,6 +507,10 @@ class TrackerInfoDetailView extends ConsumerWidget {
         desc: info.metadata.network,
       ),
       _buildItem(title: appLocalizations.rule, desc: _getRuleText(info)),
+    ];
+
+    // Section 2: Address Info
+    final addressItems = <Widget>[
       if (info.metadata.host.isNotEmpty)
         _isIpAddress(info.metadata.host)
             ? _buildIpItem(
@@ -535,40 +537,60 @@ class TrackerInfoDetailView extends ConsumerWidget {
               ? info.metadata.destinationPort
               : null,
         ),
-      Consumer(
-        builder: (context, ref, _) {
-          final liveInfo = ref.watch(
-            connectionsProvider.select(
-              (list) => list.firstWhereOrNull((e) => e.id == trackerInfo.id),
-            ),
-          );
-          final upload = liveInfo?.upload ?? trackerInfo.upload;
-          final download = liveInfo?.download ?? trackerInfo.download;
-          final isAlive = liveInfo != null;
+      if (info.metadata.remoteDestination.isNotEmpty)
+        remoteDestParsed != null
+            ? _buildIpItem(
+                context,
+                title: appLocalizations.remoteDestination,
+                ip: remoteDestParsed.$1,
+                port: remoteDestParsed.$2,
+              )
+            : _buildItem(
+                title: appLocalizations.remoteDestination,
+                desc: info.metadata.remoteDestination,
+              ),
+    ];
 
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildItem(
-                title: appLocalizations.upload,
-                desc: TrafficValue(value: upload).show,
-              ),
-              _buildItem(
-                title: appLocalizations.download,
-                desc: TrafficValue(value: download).show,
-              ),
-              if (isAlive)
-                _buildItem(
-                  title: appLocalizations.realTimeSpeed,
-                  desc: Traffic(
-                    up: liveInfo.uploadSpeed,
-                    down: liveInfo.downloadSpeed,
-                  ).toString(),
-                ),
-            ],
-          );
-        },
-      ),
+    // Section 3: Traffic Info (live updating)
+    final trafficSection = Consumer(
+      builder: (context, ref, _) {
+        final liveInfo = ref.watch(
+          connectionsProvider.select(
+            (list) => list.firstWhereOrNull((e) => e.id == trackerInfo.id),
+          ),
+        );
+        final upload = liveInfo?.upload ?? trackerInfo.upload;
+        final download = liveInfo?.download ?? trackerInfo.download;
+        final isAlive = liveInfo != null;
+
+        final trafficItems = <Widget>[
+          _buildItem(
+            title: appLocalizations.upload,
+            desc: TrafficValue(value: upload).show,
+          ),
+          _buildItem(
+            title: appLocalizations.download,
+            desc: TrafficValue(value: download).show,
+          ),
+          if (isAlive)
+            _buildItem(
+              title: appLocalizations.realTimeSpeed,
+              desc: Traffic(
+                up: liveInfo.uploadSpeed,
+                down: liveInfo.downloadSpeed,
+              ).toString(),
+            ),
+        ];
+
+        return SectionContainer(
+          title: appLocalizations.traffic,
+          items: trafficItems,
+        );
+      },
+    );
+
+    // Section 4: Advanced Info
+    final advancedItems = <Widget>[
       if (info.metadata.destinationGeoIP.isNotEmpty)
         _buildItem(
           title: appLocalizations.destinationGeoIP,
@@ -594,26 +616,43 @@ class TrackerInfoDetailView extends ConsumerWidget {
           title: appLocalizations.specialRules,
           desc: info.metadata.specialRules,
         ),
-      if (info.metadata.remoteDestination.isNotEmpty)
-        remoteDestParsed != null
-            ? _buildIpItem(
-                context,
-                title: appLocalizations.remoteDestination,
-                ip: remoteDestParsed.$1,
-                port: remoteDestParsed.$2,
-              )
-            : _buildItem(
-                title: appLocalizations.remoteDestination,
-                desc: info.metadata.remoteDestination,
-              ),
-      _buildChains(info),
     ];
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      itemCount: items.length,
-      itemBuilder: (_, index) {
-        return items[index];
-      },
+
+    // Section 5: Proxy Chains
+    final chainsItems = <Widget>[
+      if (info.chains.isNotEmpty) _buildChains(info),
+    ];
+
+    final sections = <Widget>[
+      SectionContainer(
+        title: appLocalizations.basicInfo,
+        items: basicItems,
+        isFirst: true,
+      ),
+      if (addressItems.isNotEmpty)
+        SectionContainer(
+          title: appLocalizations.addressInfo,
+          items: addressItems,
+        ),
+      trafficSection,
+      if (advancedItems.isNotEmpty)
+        SectionContainer(
+          title: appLocalizations.advancedInfo,
+          items: advancedItems,
+        ),
+      if (chainsItems.isNotEmpty)
+        SectionContainer(
+          title: appLocalizations.proxyChains,
+          items: chainsItems,
+        ),
+    ];
+
+    return ListView(
+      padding: EdgeInsets.only(
+        top: 4,
+        bottom: 16 + MediaQuery.paddingOf(context).bottom,
+      ),
+      children: sections,
     );
   }
 }

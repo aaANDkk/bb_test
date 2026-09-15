@@ -748,5 +748,9 @@
   "threeRotatingDots": "3点回転",
   "fourRotatingDots": "4点回転",
   "staggeredDotsWave": "ずらした波",
-  "dotsTriangle": "動的三角形"
+  "dotsTriangle": "動的三角形",
+  "basicInfo": "基本情報",
+  "addressInfo": "アドレス情報",
+  "traffic": "トラフィック",
+  "advancedInfo": "詳細情報"
 }

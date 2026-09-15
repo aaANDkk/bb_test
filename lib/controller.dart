@@ -13,6 +13,7 @@ import 'package:bett_box/plugins/service.dart' as vpn_service;
 import 'package:bett_box/providers/providers.dart';
 import 'package:bett_box/state.dart';
 import 'package:bett_box/widgets/dialog.dart';
+import 'package:bett_box/widgets/icon.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -958,6 +959,13 @@ class AppController {
       }
 
       _ref.read(groupsProvider.notifier).value = newGroups;
+
+      // 主动预取策略组图标：配置（YAML）中新增或更换图标后立即拉取，
+      // 不再依赖组件可见时才懒加载，也无需重启应用即可生效。
+      unawaited(
+        CommonTargetIcon.prefetchAll(newGroups.map((group) => group.icon)),
+      );
+
       _updateGroupsRetryCount = 0;
       _updateGroupsRetryTimer?.cancel();
       _updateGroupsRetryTimer = null;
@@ -1055,6 +1063,13 @@ class AppController {
         }
       }
       stopWakelockAutoRecovery();
+      // 完全退出应用：主动释放系统亮屏锁，恢复系统默认息屏策略
+      // （偏好本身保留，下次启动按偏好自动恢复）
+      try {
+        await WakelockPlus.disable();
+      } catch (e) {
+        commonPrint.log('Failed to release wake lock on exit: $e');
+      }
       await globalState.handleBackground();
       if (system.isDesktop) {
         final prefs = await preferences.sharedPreferencesCompleter.future;
@@ -1272,14 +1287,21 @@ class AppController {
     }
 
     try {
-      final wakelockEnabled = await WakelockPlus.enabled;
+      // 按用户上次的偏好恢复亮屏锁（避免每次启动都要手动开启）。
+      // 完全退出应用时会主动释放系统亮屏锁，因此不会影响系统默认息屏策略。
+      final wakelockEnabled = await preferences.getWakelockEnabled();
       _ref.read(wakelockStateProvider.notifier).state = wakelockEnabled;
-
       if (wakelockEnabled) {
+        await WakelockPlus.enable();
         startWakelockAutoRecovery();
+      } else {
+        final actualEnabled = await WakelockPlus.enabled;
+        if (actualEnabled) {
+          await WakelockPlus.disable();
+        }
       }
     } catch (e) {
-      commonPrint.log('Failed to check wake lock status: $e');
+      commonPrint.log('Failed to restore wake lock status: $e');
     }
 
     await updateTray(true);
