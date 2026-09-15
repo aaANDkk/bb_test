@@ -16,6 +16,7 @@ class MediaUnlock extends ConsumerStatefulWidget {
   ConsumerState<MediaUnlock> createState() => _MediaUnlockState();
 }
 
+class _MediaUnlockState extends ConsumerState<MediaUnlock> {
   @override
   void initState() {
     super.initState();
