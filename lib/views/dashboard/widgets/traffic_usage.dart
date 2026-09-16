@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:bett_box/common/common.dart';
-import 'package:bett_box/enum/enum.dart';
 import 'package:bett_box/models/models.dart';
 import 'package:bett_box/providers/providers.dart';
 import 'package:bett_box/state.dart';
@@ -17,7 +16,6 @@ class TrafficUsage extends ConsumerStatefulWidget {
 }
 
 class _TrafficUsageState extends ConsumerState<TrafficUsage> {
-  final _donutKey = GlobalKey<DonutChartState>();
   // cache text measurement results
   Size? _uploadTextSize;
   Size? _downloadTextSize;
@@ -90,12 +88,6 @@ class _TrafficUsageState extends ConsumerState<TrafficUsage> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<PageLabel>(currentPageLabelProvider, (prev, next) {
-      if (next == PageLabel.dashboard && prev != PageLabel.dashboard) {
-        _donutKey.currentState?.replayEntryAnimation();
-      }
-    });
-
     final primaryColor = globalState.theme.darken3PrimaryContainer;
     final secondaryColor = globalState.theme.darken2SecondaryContainer;
     return SizedBox(
@@ -129,7 +121,6 @@ class _TrafficUsageState extends ConsumerState<TrafficUsage> {
                               AspectRatio(
                                 aspectRatio: 1,
                                 child: DonutChart(
-                                  key: _donutKey,
                                   trackColor: context
                                       .colorScheme.surfaceContainerHighest
                                       .withValues(alpha: 0.35),

@@ -361,20 +361,12 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
       FocusManager.instance.primaryFocus?.unfocus();
     }
 
-    final isAnimateToPage = ref.read(appSettingProvider).isAnimateToPage;
     final isMobile = ref.read(isMobileViewProvider);
 
     _currentPageIndex = index;
 
-    if (isMobile && !isAnimateToPage) {
-      if (_pageController.hasClients) {
-        _pageController.jumpToPage(index);
-      }
-      setState(() {});
-      return;
-    }
-
-    if (isAnimateToPage && isMobile && !ignoreAnimateTo) {
+    // 移动端统一使用标准 PageView 平移动画；桌面端保持 0ms 瞬间直切。
+    if (isMobile && !ignoreAnimateTo) {
       if (_pageController.hasClients) {
         await _pageController.animateToPage(
           index,
@@ -403,31 +395,6 @@ class _HomePageViewState extends ConsumerState<_HomePageView> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ref.watch(isMobileViewProvider);
-    final isAnimateToPage = ref.watch(
-      appSettingProvider.select((state) => state.isAnimateToPage),
-    );
-
-    if (isMobile && !isAnimateToPage) {
-      final targetIndex = (_currentPageIndex >= 0 &&
-              _currentPageIndex < widget.navigationItems.length)
-          ? _currentPageIndex
-          : (_pageIndex < 0 ? 0 : _pageIndex);
-
-      return AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        switchInCurve: Curves.easeOutCubic,
-        switchOutCurve: Curves.easeInCubic,
-        transitionBuilder: (child, animation) {
-          return FadeTransition(opacity: animation, child: child);
-        },
-        child: KeyedSubtree(
-          key: ValueKey(widget.navigationItems[targetIndex].label),
-          child: widget.pageBuilder(context, targetIndex),
-        ),
-      );
-    }
-
     return PageView.builder(
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),

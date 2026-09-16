@@ -284,10 +284,60 @@ class EditProfileViewState extends State<EditProfileView> {
     globalState.showCommonDialog(child: const _AgeKeyGeneratorDialog());
   }
 
+  /// 卡内文本输入行的统一内边距：左右 16、上下 6，
+  /// 使输入框与卡片内的分割线之间保持均匀呼吸感，不贴线也不松散。
+  static const _fieldPadding = EdgeInsets.fromLTRB(16, 6, 16, 6);
+
+  /// 卡片内部的分割线（与全站 20px 卡片的细线规范完全一致）
+  Widget _buildDivider() {
+    return Divider(
+      height: 1,
+      thickness: 1,
+      color: context.colorScheme.outlineVariant.withValues(
+        alpha: context.colorScheme.brightness == Brightness.light ? 0.6 : 0.45,
+      ),
+      indent: 16,
+      endIndent: 16,
+    );
+  }
+
+  /// 「配置档案」行：只读信息（大小 · 更新时间）+ 编辑 / 上传 操作
+  Widget _buildProfileFileItem(FileInfo fileInfo) {
+    return ListItem(
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
+      title: Text(appLocalizations.profile),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 4),
+          Text(fileInfo.desc),
+          const SizedBox(height: 10),
+          Wrap(
+            runSpacing: 6,
+            spacing: 12,
+            children: [
+              CommonChip(
+                avatar: const Icon(Icons.edit_rounded),
+                label: appLocalizations.edit,
+                onPressed: _editProfileFile,
+              ),
+              CommonChip(
+                avatar: const Icon(Icons.upload_rounded),
+                label: appLocalizations.upload,
+                onPressed: _uploadProfileFile,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final items = [
+    final items = <Widget>[
       ListItem(
+        padding: _fieldPadding,
         title: TextFormField(
           textInputAction: TextInputAction.next,
           controller: labelController,
@@ -303,7 +353,9 @@ class EditProfileViewState extends State<EditProfileView> {
         ),
       ),
       if (widget.profile.type == ProfileType.url || widget.isNew) ...[
+        _buildDivider(),
         ListItem(
+          padding: _fieldPadding,
           title: TextFormField(
             focusNode: urlFocusNode,
             textInputAction: TextInputAction.next,
@@ -328,7 +380,9 @@ class EditProfileViewState extends State<EditProfileView> {
             },
           ),
         ),
+        _buildDivider(),
         ListItem(
+          padding: _fieldPadding,
           title: TextFormField(
             textInputAction: TextInputAction.next,
             controller: ageSecretKeyController,
@@ -361,6 +415,7 @@ class EditProfileViewState extends State<EditProfileView> {
             },
           ),
         ),
+        _buildDivider(),
         ListItem.switchItem(
           title: Text(appLocalizations.autoUpdate),
           delegate: SwitchDelegate<bool>(
@@ -368,8 +423,10 @@ class EditProfileViewState extends State<EditProfileView> {
             onChanged: _setAutoUpdate,
           ),
         ),
-        if (autoUpdate)
+        if (autoUpdate) ...[
+          _buildDivider(),
           ListItem(
+            padding: _fieldPadding,
             title: TextFormField(
               textInputAction: TextInputAction.next,
               controller: autoUpdateDurationController,
@@ -391,41 +448,23 @@ class EditProfileViewState extends State<EditProfileView> {
               },
             ),
           ),
+        ],
       ],
       if (!widget.isNew)
         ValueListenableBuilder<FileInfo?>(
           valueListenable: fileInfoNotifier,
           builder: (_, fileInfo, _) {
+            if (fileInfo == null) {
+              return const SizedBox.shrink();
+            }
             return FadeThroughBox(
-              child: fileInfo == null
-                  ? Container()
-                  : ListItem(
-                      title: Text(appLocalizations.profile),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 4),
-                          Text(fileInfo.desc),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            runSpacing: 6,
-                            spacing: 12,
-                            children: [
-                              CommonChip(
-                                avatar: const Icon(Icons.edit_rounded),
-                                label: appLocalizations.edit,
-                                onPressed: _editProfileFile,
-                              ),
-                              CommonChip(
-                                avatar: const Icon(Icons.upload_rounded),
-                                label: appLocalizations.upload,
-                                onPressed: _uploadProfileFile,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildDivider(),
+                  _buildProfileFileItem(fileInfo),
+                ],
+              ),
             );
           },
         ),
@@ -470,15 +509,22 @@ class EditProfileViewState extends State<EditProfileView> {
           key: _formKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
-            child: ListView.separated(
+            child: ListView(
               padding: kMaterialListPadding.copyWith(bottom: 72),
-              itemBuilder: (_, index) {
-                return items[index];
-              },
-              separatorBuilder: (_, _) {
-                return const SizedBox(height: 24);
-              },
-              itemCount: items.length,
+              children: [
+                // 整份表单统一由一张 20px 超椭圆卡片承载，
+                // 字段之间用卡内细分割线分隔（与设置页节奏一致）
+                CommonCard(
+                  type: CommonCardType.filled,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: items,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
